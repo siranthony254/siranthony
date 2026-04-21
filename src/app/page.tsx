@@ -3,7 +3,6 @@ import { HeroSection }        from '@/components/sections/HeroSection'
 import { SignatureQuestion }   from '@/components/sections/SignatureQuestion'
 import { FeaturedPosts }       from '@/components/sections/FeaturedPosts'
 import { ServicesPreview }     from '@/components/sections/ServicesPreview'
-import { TestimonialStrip }    from '@/components/sections/TestimonialStrip'
 import { MicdupBanner }        from '@/components/sections/MicdupBanner'
 import { HomeCTA }             from '@/components/sections/HomeCTA'
 import { sanityFetch }         from '@/lib/sanity'
@@ -33,7 +32,6 @@ export default async function HomePage() {
       <SignatureQuestion />
       <FeaturedPosts posts={posts} />
       <ServicesPreview services={services} />
-      <TestimonialStrip testimonials={testimonials} />
       <MicdupBanner />
       <HomeCTA />
     </>
