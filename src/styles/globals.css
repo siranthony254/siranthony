@@ -121,11 +121,13 @@ h1, h2, h3, h4 {
 /* ── Nav link ───────────────────────────────────────── */
 .nav-link {
   position: relative;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(245,240,232,0.65);
   transition: color 0.3s ease;
+  padding: 0.25rem 0;
+  white-space: nowrap;
 }
 .nav-link::after {
   content: '';
