@@ -9,9 +9,9 @@ const NAV_LINKS = [
   { href: '/',              label: 'Home' },
   { href: '/about',         label: 'About' },
   { href: '/conversations', label: 'Conversations' },
+  { href: '/gallery',       label: 'Gallery' },
   { href: '/work',          label: 'Work With Me' },
   { href: '/micdup',        label: "Mic'd Up" },
-  { href: '/contact',       label: 'Contact' },
 ]
 
 export function Navbar() {

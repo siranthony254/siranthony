@@ -63,6 +63,16 @@ export const siteSettingsSchema = defineType({
       description: 'Default social sharing image (1200×630px)',
     }),
     defineField({
+      name: 'workHeroImage',
+      title: 'Work Page Hero Image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', type: 'string', title: 'Alt text' })
+      ],
+      description: 'Background image for Work With Me page hero section',
+    }),
+    defineField({
       name: 'announcementBanner',
       title: 'Announcement Banner',
       type: 'object',

@@ -3,9 +3,10 @@ import Link from 'next/link'
 import { ArrowRight, Mic2, Users, Globe, BookOpen, Check } from 'lucide-react'
 import { AnimatedSection, SectionHeader, GoldLine } from '@/components/ui'
 import { sanityFetch } from '@/lib/sanity'
-import { SPEAKING_TOPICS_QUERY, TESTIMONIALS_QUERY } from '@/lib/queries'
+import { SPEAKING_TOPICS_QUERY, TESTIMONIALS_QUERY, SITE_SETTINGS_QUERY } from '@/lib/queries'
 import { TestimonialStrip } from '@/components/sections/HomeSections'
-import type { SpeakingTopic, Testimonial } from '@/types'
+import { WorkHero } from '@/components/sections/WorkHero'
+import type { SpeakingTopic, Testimonial, SiteSettings } from '@/types'
 
 export const metadata: Metadata = {
   title: 'Work With Me',

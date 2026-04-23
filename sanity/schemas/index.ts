@@ -4,12 +4,14 @@ import { serviceSchema }       from './service'
 import { speakingTopicSchema } from './speakingTopic'
 import { testimonialSchema }   from './testimonial'
 import { micdupEventSchema }   from './micdupEvent'
+import { gallerySchema }       from './gallery'
 import { siteSettingsSchema }  from './siteSettings'
 
 export const schemaTypes = [
   // Content
   postSchema,
   authorSchema,
+  gallerySchema,
   // Services
   serviceSchema,
   speakingTopicSchema,

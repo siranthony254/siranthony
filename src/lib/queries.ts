@@ -19,8 +19,29 @@ export const POST_BY_SLUG_QUERY = `
 
 export const FEATURED_POSTS_QUERY = `
   *[_type == "post" && featured == true] | order(publishedAt desc) [0...3] {
-    _id, title, slug, excerpt, publishedAt, category,
+    _id, title, slug, excerpt, publishedAt, category, featured,
     mainImage { asset->{ _id, url }, alt }
+  }
+`
+
+// Test query to verify Sanity connection
+export const TEST_POSTS_QUERY = `
+  *[_type == "post"][0...3] {
+    _id, title, featured
+  }
+`
+
+// ─── Gallery ───────────────────────────────────────────────
+export const GALLERY_QUERY = `
+  *[_type == "gallery"] | order(order asc) {
+    _id, title, slug, description,
+    heroImage { asset->{ _id, url }, alt },
+    heroTitle, heroSubtitle,
+    images[] {
+      image { asset->{ _id, url }, alt, caption },
+      category, order
+    },
+    seo { metaTitle, metaDescription, ogImage { asset->{ url } } }
   }
 `
 
@@ -59,6 +80,7 @@ export const SITE_SETTINGS_QUERY = `
   *[_type == "siteSettings"][0] {
     siteTitle, tagline, description,
     socialLinks { twitter, linkedin, tiktok, youtube, instagram, facebook },
-    contactEmail, contactPhone, contactPhoneAlt
+    contactEmail, contactPhone, contactPhoneAlt,
+    workHeroImage { asset->{ _id, url }, alt }
   }
 `

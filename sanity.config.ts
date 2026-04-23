@@ -33,6 +33,19 @@ export default defineConfig({
 
             S.divider(),
 
+            // ── Gallery ───────────────────────────────────────────
+            S.listItem()
+              .title('Gallery')
+              .child(
+                S.list()
+                  .title('Gallery')
+                  .items([
+                    S.documentTypeListItem('gallery').title('Gallery Collections'),
+                  ])
+              ),
+
+            S.divider(),
+
             // ── Work With Me ───────────────────────────────────────
             S.listItem()
               .title('Work With Me')

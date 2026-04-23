@@ -205,9 +205,9 @@ h1, h2, h3, h4 {
 }
 
 /* ── Section spacing ────────────────────────────────── */
-.section-pad { padding: 6rem 0; }
-@media (min-width: 768px) { .section-pad { padding: 8rem 0; } }
-@media (min-width: 1280px) { .section-pad { padding: 10rem 0; } }
+.section-pad { padding: 4rem 0; }
+@media (min-width: 768px) { .section-pad { padding: 5rem 0; } }
+@media (min-width: 1280px) { .section-pad { padding: 6rem 0; } }
 
 /* ── Container ──────────────────────────────────────── */
 .container-site {

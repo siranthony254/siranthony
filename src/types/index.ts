@@ -3,6 +3,7 @@ export interface SanitySlug { current: string }
 export interface SanityImage {
   asset: { _id: string; url: string }
   alt?: string
+  caption?: string
 }
 
 // ─── Author ──────────────────────────────────────────────────────
@@ -29,10 +30,36 @@ export interface Post {
   excerpt: string
   publishedAt: string
   category: PostCategory
+  featured?: boolean
   estimatedReadingTime?: number
   mainImage?: SanityImage
   author?: Author
   body?: unknown[] // PortableText
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+    ogImage?: { asset: { url: string } }
+  }
+}
+
+// ─── Gallery ─────────────────────────────────────────────────────
+export type GalleryCategory = 'events' | 'speaking' | 'media' | 'personal' | 'professional'
+
+export interface GalleryImage {
+  image: SanityImage
+  category?: GalleryCategory
+  order?: number
+}
+
+export interface Gallery {
+  _id: string
+  title: string
+  slug: SanitySlug
+  description?: string
+  heroImage: SanityImage
+  heroTitle: string
+  heroSubtitle?: string
+  images: GalleryImage[]
   seo?: {
     metaTitle?: string
     metaDescription?: string
@@ -102,4 +129,5 @@ export interface SiteSettings {
   contactEmail: string
   contactPhone: string
   contactPhoneAlt?: string
+  workHeroImage?: SanityImage
 }

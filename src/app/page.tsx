@@ -10,6 +10,7 @@ import {
   FEATURED_POSTS_QUERY,
   SERVICES_QUERY,
   TESTIMONIALS_QUERY,
+  TEST_POSTS_QUERY,
 } from '@/lib/queries'
 import type { Post, Service, Testimonial } from '@/types'
 
@@ -20,11 +21,21 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const [posts, services, testimonials] = await Promise.all([
+  const [posts, services, testimonials, testPosts] = await Promise.all([
     sanityFetch<Post[]>(FEATURED_POSTS_QUERY),
     sanityFetch<Service[]>(SERVICES_QUERY),
     sanityFetch<Testimonial[]>(TESTIMONIALS_QUERY),
+    sanityFetch<any[]>(TEST_POSTS_QUERY),
   ])
+
+  // Debug: Log the featured posts data
+  console.log('Featured posts data:', posts)
+  console.log('Featured posts count:', posts?.length)
+  console.log('Test posts data:', testPosts)
+  console.log('Sanity config:', {
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  })
 
   return (
     <>
