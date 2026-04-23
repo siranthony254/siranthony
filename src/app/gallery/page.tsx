@@ -13,6 +13,10 @@ export const metadata: Metadata = {
 export default async function GalleryPage() {
   const galleries = await sanityFetch<Gallery[]>(GALLERY_QUERY)
 
+  // Debug: Log gallery data
+  console.log('Gallery data:', galleries)
+  console.log('Gallery count:', galleries?.length)
+
   return (
     <>
       <GalleryHero galleries={galleries} />

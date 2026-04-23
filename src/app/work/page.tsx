@@ -83,36 +83,19 @@ const PROCESS = [
 ]
 
 export default async function WorkPage() {
-  const [topics, testimonials] = await Promise.all([
+  const [topics, testimonials, siteSettings] = await Promise.all([
     sanityFetch<SpeakingTopic[]>(SPEAKING_TOPICS_QUERY),
     sanityFetch<Testimonial[]>(TESTIMONIALS_QUERY),
+    sanityFetch<SiteSettings>(SITE_SETTINGS_QUERY),
   ])
+
+  // Debug: Log site settings data
+  console.log('Site settings data:', siteSettings)
+  console.log('Work hero image:', siteSettings?.workHeroImage)
 
   return (
     <>
-      {/* Header */}
-      <section className="relative pt-36 pb-20 bg-navy overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 60% at 20% 60%, rgba(201,168,76,0.05) 0%, transparent 65%)' }} />
-        <div className="container-site relative z-10">
-          <AnimatedSection>
-            <p className="eyebrow mb-5">Work With Me</p>
-            <GoldLine className="mb-7" />
-            <h1 className="font-display font-semibold text-cream leading-tight mb-6"
-              style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5rem)' }}>
-              Three layers.
-              <br />
-              <em className="text-gold">One integrated mission.</em>
-            </h1>
-            <p className="font-body text-cream/55 text-xl leading-relaxed max-w-2xl">
-              Cultural intelligence. Practical training. Digital architecture.
-              Built together because they are expressions of the same thinking —
-              helping organizations understand how their culture is built and
-              shape it deliberately.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
+      <WorkHero siteSettings={siteSettings} />
 
       {/* Three layers */}
       <section className="section-pad bg-navy/95">

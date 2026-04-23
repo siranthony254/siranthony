@@ -33,8 +33,6 @@ export function WorkHero({ siteSettings }: WorkHeroProps) {
           </h1>
           
           <div className="space-y-4 text-lg md:text-xl text-cream/90 max-w-3xl mx-auto leading-relaxed">
-            <p className="font-medium">Three layers.</p>
-            <p className="font-medium">One integrated mission.</p>
             <p className="font-medium">Cultural intelligence. Practical training. Digital architecture.</p>
             <p className="font-medium">
               Built together because they are expressions of the same thinking — helping organizations understand how their culture is built and shape it deliberately.
