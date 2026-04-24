@@ -15,8 +15,16 @@ export default defineConfig({
 
   auth: {
     providers: [
-      { name: 'google' },
-      { name: 'github' },
+      { 
+        name: 'google',
+        title: 'Google',
+        url: 'https://accounts.google.com'
+      },
+      { 
+        name: 'github',
+        title: 'GitHub', 
+        url: 'https://github.com'
+      },
     ],
   },
 
