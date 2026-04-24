@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { GalleryHero } from '@/components/sections/GalleryHero'
 import { GalleryGrid } from '@/components/sections/GalleryGrid'
 import { sanityFetch } from '@/lib/sanity'
-import { GALLERY_QUERY } from '@/lib/queries'
+import { GALLERY_QUERY, TEST_GALLERY_QUERY } from '@/lib/queries'
 import type { Gallery } from '@/types'
 
 export const metadata: Metadata = {
@@ -11,11 +11,16 @@ export const metadata: Metadata = {
 }
 
 export default async function GalleryPage() {
-  const galleries = await sanityFetch<Gallery[]>(GALLERY_QUERY)
+  const [galleries, testGalleries] = await Promise.all([
+    sanityFetch<Gallery[]>(GALLERY_QUERY),
+    sanityFetch<any[]>(TEST_GALLERY_QUERY),
+  ])
 
   // Debug: Log gallery data
   console.log('Gallery data:', galleries)
   console.log('Gallery count:', galleries?.length)
+  console.log('Test gallery documents:', testGalleries)
+  console.log('Test gallery count:', testGalleries?.length)
 
   return (
     <>

@@ -31,17 +31,23 @@ export const TEST_POSTS_QUERY = `
   }
 `
 
+// Test query to check if gallery documents exist
+export const TEST_GALLERY_QUERY = `
+  *[_type == "gallery"][0...5] {
+    _id, title, "imageCount": count(images)
+  }
+`
+
 // ─── Gallery ───────────────────────────────────────────────
 export const GALLERY_QUERY = `
-  *[_type == "gallery"] | order(order asc) {
+  *[_type == "gallery"] {
     _id, title, slug, description,
     heroImage { asset->{ _id, url }, alt },
     heroTitle, heroSubtitle,
     images[] {
       image { asset->{ _id, url }, alt, caption },
       category, order
-    },
-    seo { metaTitle, metaDescription, ogImage { asset->{ url } } }
+    }
   }
 `
 
