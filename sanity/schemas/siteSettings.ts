@@ -73,6 +73,16 @@ export const siteSettingsSchema = defineType({
       description: 'Background image for Work With Me page hero section',
     }),
     defineField({
+      name: 'homepageHeroImage',
+      title: 'Homepage Hero Branded Image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', type: 'string', title: 'Alt text' })
+      ],
+      description: 'Branded image for homepage hero section (displayed on left side)',
+    }),
+    defineField({
       name: 'announcementBanner',
       title: 'Announcement Banner',
       type: 'object',

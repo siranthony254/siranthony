@@ -38,6 +38,52 @@ export const TEST_GALLERY_QUERY = `
   }
 `
 
+// ─── Author ─────────────────────────────────────────────────
+export const TEST_AUTHOR_QUERY = `
+  *[_type == "author"][0...3] {
+    _id, name, "hasImage": count(image) > 0
+  }
+`
+
+export const AUTHOR_QUERY = `
+  *[_type == "author"][0] {
+    _id, name, slug, bio, role,
+    image { asset->{ _id, url }, alt }
+  }
+`
+
+// ─── Portfolio ───────────────────────────────────────────────
+export const WEB_DEVELOPMENT_QUERY = `
+  *[_type == "webDevProject"] | order(order asc) {
+    _id, title, slug, description, category, projectUrl, githubUrl,
+    technologies, thumbnail { asset->{ _id, url }, alt }, featured, order
+  }
+`
+
+export const CASE_STUDIES_QUERY = `
+  *[_type == "caseStudy"] | order(order asc) {
+    _id, title, slug, client, heroImage { asset->{ _id, url }, alt },
+    challenge, culturalThinking, execution, outcome, projectUrl,
+    additionalResources[] {
+      title, description, url, type
+    }, documentUpload { asset->{ _id, url } }, featured, order
+  }
+`
+
+export const INTELLECTUAL_WORK_QUERY = `
+  *[_type == "intellectualWork"] | order(order asc) {
+    _id, title, slug, category, customCategory, description, content,
+    publishedDate, externalUrl, document { asset->{ _id, url } },
+    thumbnail { asset->{ _id, url }, alt }, featured, order, tags
+  }
+`
+
+export const INTELLECTUAL_WORK_CATEGORIES_QUERY = `
+  *[_type == "intellectualWork"] {
+    category, customCategory
+  } | distinct(category, customCategory)
+`
+
 // ─── Gallery ───────────────────────────────────────────────
 export const GALLERY_QUERY = `
   *[_type == "gallery"] {
@@ -87,6 +133,7 @@ export const SITE_SETTINGS_QUERY = `
     siteTitle, tagline, description,
     socialLinks { twitter, linkedin, tiktok, youtube, instagram, facebook },
     contactEmail, contactPhone, contactPhoneAlt,
-    workHeroImage { asset->{ _id, url }, alt }
+    workHeroImage { asset->{ _id, url }, alt },
+    homepageHeroImage { asset->{ _id, url }, alt }
   }
 `

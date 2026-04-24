@@ -59,6 +59,19 @@ export default defineConfig({
                   ])
               ),
 
+            // ── Portfolio ───────────────────────────────────────────
+            S.listItem()
+              .title('Portfolio')
+              .child(
+                S.list()
+                  .title('Portfolio')
+                  .items([
+                    S.documentTypeListItem('webDevProject').title('Web Development Projects'),
+                    S.documentTypeListItem('caseStudy').title('Case Studies'),
+                    S.documentTypeListItem('intellectualWork').title('Intellectual Work'),
+                  ])
+              ),
+
             S.divider(),
 
             // ── Work With Me ───────────────────────────────────────

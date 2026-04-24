@@ -3,6 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { AnimatedSection, SectionHeader, RippleCircles, GoldLine } from '@/components/ui'
+import { sanityFetch } from '@/lib/sanity'
+import { AUTHOR_QUERY, TEST_AUTHOR_QUERY } from '@/lib/queries'
+import type { Author } from '@/types'
 
 export const metadata: Metadata = {
   title: 'About Sir Anthony',
@@ -38,7 +41,19 @@ const MILESTONES = [
   { year: '2025', event: 'Book in progress: Who Made You Normal? The Cultural Conversation' },
 ]
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [author, testAuthors] = await Promise.all([
+    sanityFetch<Author>(AUTHOR_QUERY),
+    sanityFetch<any[]>(TEST_AUTHOR_QUERY),
+  ])
+
+  console.log('Author data:', author)
+  console.log('Author image URL:', author?.image?.asset?.url)
+  console.log('Author image alt:', author?.image?.alt)
+  console.log('Author name:', author?.name)
+  console.log('Test authors:', testAuthors)
+  console.log('Test authors count:', testAuthors?.length)
+
   return (
     <>
       {/* Hero */}
@@ -77,30 +92,41 @@ export default function AboutPage() {
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-            {/* Photo placeholder */}
-            <AnimatedSection className="lg:col-span-4">
+            {/* Author Photo */}
+            <AnimatedSection className="lg:col-span-5">
               <div className="relative">
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden card-navy flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.05) 0%, rgba(13,27,42,0.8) 100%)' }}>
-                  {/* Replace with actual photo: <Image src="/images/sir-anthony.jpg" fill alt="Sir Anthony" className="object-cover" /> */}
-                  <div className="text-center p-8">
-                    <RippleCircles className="mb-4 mx-auto" />
-                    <p className="font-body text-xs text-cream/30 mt-4 uppercase tracking-widest">
-                      Photo coming soon
-                    </p>
-                  </div>
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden transform scale-130 origin-center">
+                  {author?.image?.asset?.url ? (
+                    <Image
+                      src={author.image.asset.url}
+                      alt={author.image.alt || author.name || 'Sir Anthony'}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center card-navy"
+                      style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.05) 0%, rgba(13,27,42,0.8) 100%)' }}>
+                      <div className="text-center p-8">
+                        <RippleCircles className="mb-4 mx-auto" />
+                        <p className="font-body text-xs text-cream/30 mt-4 uppercase tracking-widest">
+                          Photo coming soon
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 {/* Floating quote */}
-                <div className="absolute -bottom-6 -right-6 card-navy p-4 max-w-[200px]">
-                  <p className="font-display italic text-gold text-sm leading-relaxed">
-                    &ldquo;An idea is an invitation. What are you inviting people toward?&rdquo;
+                <div className="absolute -bottom-8 -right-8 bg-navy p-4 max-w-[220px] rounded-lg shadow-xl border border-gold/20">
+                  <p className="font-display italic text-white text-sm leading-relaxed">
+                    &ldquo;An idea is an invitation to a certain perspective. What are you inviting people toward?&rdquo;
                   </p>
                 </div>
               </div>
             </AnimatedSection>
 
             {/* Bio text */}
-            <AnimatedSection delay={150} className="lg:col-span-8 space-y-7">
+            <AnimatedSection delay={150} className="lg:col-span-7 space-y-7">
               <div>
                 <p className="eyebrow mb-4">The Story</p>
                 <GoldLine className="mb-6" />

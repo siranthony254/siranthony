@@ -10,7 +10,8 @@ export interface SanityImage {
 export interface Author {
   name: string
   bio?: string
-  image?: { asset: { url: string } }
+  image?: { asset: { url: string }; alt?: string }
+  role?: string
 }
 
 // ─── Post ────────────────────────────────────────────────────────
@@ -130,4 +131,59 @@ export interface SiteSettings {
   contactPhone: string
   contactPhoneAlt?: string
   workHeroImage?: SanityImage
+  homepageHeroImage?: SanityImage
+}
+
+// ─── Portfolio Types ───────────────────────────────────────────────
+export interface WebDevelopment {
+  _id: string
+  title: string
+  slug: { _type: 'slug'; current: string }
+  description: string
+  category: 'shipped' | 'demo'
+  projectUrl: string
+  githubUrl?: string
+  technologies: string[]
+  thumbnail?: SanityImage
+  featured: boolean
+  order?: number
+}
+
+export interface CaseStudy {
+  _id: string
+  title: string
+  slug: { _type: 'slug'; current: string }
+  client: string
+  heroImage?: SanityImage
+  challenge: string
+  culturalThinking: string
+  execution: string
+  outcome: string
+  projectUrl?: string
+  additionalResources: {
+    title: string
+    description: string
+    url: string
+    type: 'document' | 'link' | 'video' | 'image'
+  }[]
+  documentUpload?: { asset: { _id: string; url: string } }
+  featured: boolean
+  order?: number
+}
+
+export interface IntellectualWork {
+  _id: string
+  title: string
+  slug: { _type: 'slug'; current: string }
+  category: string
+  customCategory?: string
+  description: string
+  content: string
+  publishedDate: string
+  externalUrl?: string
+  document?: { asset: { _id: string; url: string } }
+  thumbnail?: SanityImage
+  featured: boolean
+  order?: number
+  tags: string[]
 }

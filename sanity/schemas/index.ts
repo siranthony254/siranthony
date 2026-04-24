@@ -6,6 +6,9 @@ import { testimonialSchema }   from './testimonial'
 import { micdupEventSchema }   from './micdupEvent'
 import { gallerySchema }       from './gallery'
 import { siteSettingsSchema }  from './siteSettings'
+import { webDevelopmentSchema } from './webDevelopment'
+import { caseStudySchema }     from './caseStudy'
+import { intellectualWorkSchema } from './intellectualWork'
 
 export const schemaTypes = [
   // Content
@@ -21,4 +24,7 @@ export const schemaTypes = [
   micdupEventSchema,
   // Config
   siteSettingsSchema,
+  webDevelopmentSchema,
+  caseStudySchema,
+  intellectualWorkSchema,
 ]
