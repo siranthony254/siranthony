@@ -13,6 +13,13 @@ export default defineConfig({
   dataset,
   basePath: '/studio',
 
+  auth: {
+    providers: [
+      { name: 'google' },
+      { name: 'github' },
+    ],
+  },
+
   plugins: [
     structureTool({
       structure: (S) =>
