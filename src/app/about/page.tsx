@@ -151,7 +151,7 @@ export default async function AboutPage() {
               </p>
             </AnimatedSection>
 
-            <AnimatedSection delay={250} className="lg:col-span-7 lg:col-start-6 space-y-7">
+            <AnimatedSection delay={250} className="lg:col-span-7 lg:col-start-6 lg:row-start-2 space-y-7">
               <p className="font-body text-cream/70 text-lg leading-relaxed">
                 I thought about the advice I had received before joining. <em className="text-gold italic">Campus corrupts. Don't lose
                 yourself. Don't become immoral.</em> Fear dressed as concern. Joining university was supposed
