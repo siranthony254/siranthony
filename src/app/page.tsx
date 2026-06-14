@@ -14,7 +14,7 @@ import {
 } from '@/lib/queries'
 import type { Post, Service, Testimonial } from '@/types'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = 
   title: 'Sir Anthony — Conversationalist & Cultural Thinker',
   description:
     'Who made you normal? Sir Anthony is a Kenyan cultural thinker, conversationalist, and founder of Mic\'d Up Initiative — helping individuals, organizations, and institutions understand how culture is built and build something deliberately better.',
