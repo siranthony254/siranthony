@@ -136,30 +136,28 @@ export default async function AboutPage() {
                 The question that <span className="text-gold">started everything.</span>
               </h2>
 
-              <p className="font-body text-cream/70 text-lg leading-relaxed">
+              <p className="font-body text-cream/70 text-[0.95rem] leading-relaxed">
                 I remember arriving home after my first year at university. The following morning a
                 friend looked at me and asked, almost immediately: <em className="text-gold italic">"Are you still the same saint-like
                 person we knew — or have you become a drunkard like everyone else who goes
                 there?"</em>
               </p>
 
-              <p className="font-body text-cream/70 text-lg leading-relaxed border-l-2 border-gold/30 pl-6 italic">
+              <p className="font-body text-cream/70 text-[0.95rem] leading-relaxed border-l-2 border-gold/30 pl-6 italic">
                 We laughed. We were used to joking. But the question stayed with me — not the question
                 about me, but the question behind the question. Why had campus become associated with
                 that? With corruption. With the erosion of values. With the kind of person who comes back
                 different in ways that worry the people who love them.
               </p>
-            </AnimatedSection>
 
-            <AnimatedSection delay={250} className="lg:col-span-7 lg:col-start-6 lg:row-start-2 space-y-7">
-              <p className="font-body text-cream/70 text-lg leading-relaxed">
+              <p className="font-body text-cream/70 text-[0.95rem] leading-relaxed">
                 I thought about the advice I had received before joining. <em className="text-gold italic">Campus corrupts. Don't lose
                 yourself. Don't become immoral.</em> Fear dressed as concern. Joining university was supposed
                 to be a dawn signal — a beginning, but somewhere along the way, fear had grown louder than
                 the hope.
               </p>
 
-              <p className="font-body text-cream/70 text-lg leading-relaxed">
+              <p className="font-body text-cream/70 text-[0.95rem] leading-relaxed">
                 What my friend was really asking was whether the campus culture had changed my way of
                 life. And that question became a burden I could not put down. A conversation about culture
                 and formation that I have been carrying ever since.
