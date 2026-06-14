@@ -3,7 +3,7 @@ import { notFound }   from 'next/navigation'
 import Image          from 'next/image'
 import Link           from 'next/link'
 import { ArrowLeft }  from 'lucide-react'
-import { sanityFetch } from '@/lib/sanity'
+import { sanityFetch, urlFor } from '@/lib/sanity'
 import { POST_BY_SLUG_QUERY } from '@/lib/queries'
 import { formatDate }  from '@/lib/utils'
 import { CategoryBadge, AnimatedSection } from '@/components/ui'
@@ -79,13 +79,15 @@ export default async function PostPage({ params }: Props) {
           <div className="container-site max-w-5xl mx-auto">
             <AnimatedSection delay={100}>
               <div className="relative h-72 md:h-[420px] rounded-2xl overflow-hidden">
-                <Image
-                  src={post.mainImage.asset.url}
-                  alt={post.mainImage.alt || post.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
+                  <Image
+                    src={urlFor(post.mainImage).width(1400).auto('format').url()}
+                    alt={post.mainImage.alt || post.title}
+                    fill
+                    sizes="100vw"
+                    quality={75}
+                    className="object-cover"
+                    priority
+                  />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/50 to-transparent" />
               </div>
             </AnimatedSection>
@@ -112,10 +114,11 @@ export default async function PostPage({ params }: Props) {
               <div className="flex items-start gap-5">
                 {post.author.image?.asset?.url && (
                   <Image
-                    src={post.author.image.asset.url}
+                    src={urlFor(post.author.image).width(112).auto('format').url()}
                     alt={post.author.name}
                     width={56}
                     height={56}
+                    quality={70}
                     className="rounded-full flex-shrink-0"
                   />
                 )}

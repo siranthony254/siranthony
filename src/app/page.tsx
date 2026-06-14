@@ -11,8 +11,9 @@ import {
   SERVICES_QUERY,
   TESTIMONIALS_QUERY,
   TEST_POSTS_QUERY,
+  SITE_SETTINGS_QUERY,
 } from '@/lib/queries'
-import type { Post, Service, Testimonial } from '@/types'
+import type { Post, Service, Testimonial, SiteSettings } from '@/types'
 
 export const metadata: Metadata = {
   title: 'Sir Anthony — Conversationalist & Cultural Thinker',
@@ -21,11 +22,12 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const [posts, services, testimonials, testPosts] = await Promise.all([
+  const [posts, services, testimonials, testPosts, siteSettings] = await Promise.all([
     sanityFetch<Post[]>(FEATURED_POSTS_QUERY),
     sanityFetch<Service[]>(SERVICES_QUERY),
     sanityFetch<Testimonial[]>(TESTIMONIALS_QUERY),
     sanityFetch<any[]>(TEST_POSTS_QUERY),
+    sanityFetch<SiteSettings>(SITE_SETTINGS_QUERY),
   ])
 
   // Debug: Log the featured posts data
@@ -39,7 +41,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroSection />
+      <HeroSection siteSettings={siteSettings} />
       <SignatureQuestion />
       <FeaturedPosts posts={posts} />
       <ServicesPreview services={services} />

@@ -6,6 +6,7 @@ import { AnimatedSection, SectionHeader, CategoryBadge, GoldLine } from '@/compo
 import { sanityFetch } from '@/lib/sanity'
 import { ALL_POSTS_QUERY } from '@/lib/queries'
 import { formatDate, CATEGORY_LABELS } from '@/lib/utils'
+import { urlFor } from '@/lib/sanity'
 import type { Post } from '@/types'
 
 export const metadata: Metadata = {
@@ -93,9 +94,11 @@ export default async function ConversationsPage({
                       {post.mainImage?.asset?.url && (
                         <div className="relative h-48 overflow-hidden flex-shrink-0">
                           <Image
-                            src={post.mainImage.asset.url}
+                            src={urlFor(post.mainImage).width(1200).auto('format').url()}
                             alt={post.mainImage.alt || post.title}
                             fill
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            quality={70}
                             className="object-cover group-hover:scale-105 transition-transform duration-700"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent" />

@@ -5,8 +5,7 @@ import { ArrowDown } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { RippleCircles } from '@/components/ui'
-import { sanityFetch } from '@/lib/sanity'
-import { SITE_SETTINGS_QUERY } from '@/lib/queries'
+import { urlFor } from '@/lib/sanity'
 import type { SiteSettings } from '@/types'
 
 const fadeUp = (delay = 0) => ({
@@ -15,18 +14,7 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
 })
 
-export function HeroSection() {
-  const [siteSettings, setSiteSettings] = useState<SiteSettings | null>(null)
-  
-  // Fetch site settings on client side
-  useEffect(() => {
-    sanityFetch<SiteSettings>(SITE_SETTINGS_QUERY).then(data => {
-      if (data) {
-        console.log('Homepage hero image:', data.homepageHeroImage)
-        setSiteSettings(data)
-      }
-    })
-  }, [])
+export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | null }) {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-navy">
       {/* Radial glow */}
@@ -121,9 +109,12 @@ export function HeroSection() {
                 >
                   <div className="relative w-96 h-96 md:w-[28rem] md:h-[28rem] lg:w-[36rem] lg:h-[36rem]">
                     <Image
-                      src={siteSettings.homepageHeroImage.asset.url}
+                      src={urlFor(siteSettings.homepageHeroImage).width(1400).auto('format').url()}
                       alt={siteSettings.homepageHeroImage.alt || 'Sir Anthony'}
                       fill
+                      priority
+                      sizes="(max-width: 1024px) 70vw, 36rem"
+                      quality={70}
                       className="object-cover rounded-2xl shadow-2xl"
                       style={{ objectPosition: 'center' }}
                     />

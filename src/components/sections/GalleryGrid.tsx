@@ -4,12 +4,13 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { X, ZoomIn } from 'lucide-react'
 import { AnimatedSection } from '@/components/ui'
+import { urlFor } from '@/lib/sanity'
 import type { Gallery } from '@/types'
 
 interface GalleryGridProps { galleries: Gallery[] }
 
 export function GalleryGrid({ galleries }: GalleryGridProps) {
-  const [selectedImage, setSelectedImage] = useState<{ url: string; alt: string; caption?: string } | null>(null)
+  const [selectedImage, setSelectedImage] = useState<{ image: any; alt: string; caption?: string } | null>(null)
   
   // Debug: Log gallery data
   console.log('GalleryGrid - galleries:', galleries)
@@ -46,16 +47,18 @@ export function GalleryGrid({ galleries }: GalleryGridProps) {
               <div 
                 className="relative group cursor-pointer overflow-hidden rounded-lg card-navy"
                 onClick={() => setSelectedImage({
-                  url: item.image.asset.url,
+                  image: item.image,
                   alt: item.image.alt || '',
                   caption: item.image.caption
                 })}
               >
                 <div className="aspect-square relative">
                   <Image
-                    src={item.image.asset.url}
+                    src={urlFor(item.image).width(800).auto('format').url()}
                     alt={item.image.alt || ''}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    quality={70}
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/40 transition-all duration-300 flex items-center justify-center">
@@ -79,7 +82,7 @@ export function GalleryGrid({ galleries }: GalleryGridProps) {
           className="fixed inset-0 bg-navy/95 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative max-w-4xl max-h-[90vh] w-full">
+            <div className="relative max-w-4xl max-h-[90vh] w-full">
             <button
               className="absolute top-4 right-4 text-cream hover:text-gold transition-colors z-10"
               onClick={(e) => {
@@ -93,9 +96,11 @@ export function GalleryGrid({ galleries }: GalleryGridProps) {
             </button>
             <div className="relative aspect-video">
               <Image
-                src={selectedImage.url}
+                src={urlFor(selectedImage.image).width(1600).auto('format').url()}
                 alt={selectedImage.alt}
                 fill
+                sizes="100vw"
+                quality={75}
                 className="object-contain"
               />
             </div>
