@@ -95,13 +95,13 @@ export default async function AboutPage() {
             {/* Author Photo */}
             <AnimatedSection className="lg:col-span-5">
               <div className="relative">
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden transform scale-130 origin-center">
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden relative">
                   {author?.image?.asset?.url ? (
                     <Image
                       src={author.image.asset.url}
                       alt={author.image.alt || author.name || 'Sir Anthony'}
                       fill
-                      className="object-cover"
+                      className="object-cover scale-[1.3] origin-center"
                       priority
                     />
                   ) : (
@@ -163,49 +163,6 @@ export default async function AboutPage() {
                 and formation that I have been carrying ever since.
               </p>
             </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* The Story - Full width section */}
-      <section className="section-pad bg-navy/95">
-        <div className="container-site">
-          <div className="space-y-7">
-            <div>
-              <p className="eyebrow mb-4">The Story</p>
-              <GoldLine className="mb-6" />
-            </div>
-
-            <p className="font-body text-cream/70 text-lg leading-relaxed">
-              For a long time, Sir Anthony participated in the same conversations everyone
-              around him was having — about the younger generation, about moral decline, about
-              the distance between the Africa we have and the Africa we imagine. These
-              conversations were passionate. Often correct in their diagnosis. And they never
-              went anywhere.
-            </p>
-
-            <p className="font-body text-cream/70 text-lg leading-relaxed">
-              The day he started asking a different question was the day the conversations
-              became useful. Not <em className="text-cream/90">what is wrong</em> — but{' '}
-              <em className="text-gold">what is producing</em> what we are seeing, and what
-              inputs would need to change to produce something different?
-            </p>
-
-            <p className="font-body text-cream/70 text-lg leading-relaxed">
-              That single shift — from output to input, from complaint to mechanism — is the
-              intellectual foundation of everything Sir Anthony builds. The YouTube channel.
-              The training programs. The book. The Mic&apos;d Up Initiative. The digital strategy
-              work. All of it begins in the same place: the conviction that culture is built
-              in the small ignored things, and understanding how it is built is the first
-              step to building something deliberately better.
-            </p>
-
-            <p className="font-body text-cream/70 text-lg leading-relaxed">
-              Based in Nairobi, Kenya, Sir Anthony works with individuals, organizations,
-              campuses, and institutions across Africa — helping them see the culture they
-              have built, develop the thinking to shape it deliberately, and build the digital
-              infrastructure to communicate it with integrity.
-            </p>
           </div>
         </div>
       </section>
