@@ -83,11 +83,21 @@ const PROCESS = [
 ]
 
 export default async function WorkPage() {
-  const [topics, testimonials, siteSettings] = await Promise.all([
-    sanityFetch<SpeakingTopic[]>(SPEAKING_TOPICS_QUERY),
-    sanityFetch<Testimonial[]>(TESTIMONIALS_QUERY),
-    sanityFetch<SiteSettings>(SITE_SETTINGS_QUERY),
-  ])
+  const WORK_COMBINED_QUERY = `{
+    "topics": ${SPEAKING_TOPICS_QUERY},
+    "testimonials": ${TESTIMONIALS_QUERY},
+    "siteSettings": ${SITE_SETTINGS_QUERY}
+  }`
+
+  const data = await sanityFetch<{
+    topics: SpeakingTopic[]
+    testimonials: Testimonial[]
+    siteSettings: SiteSettings
+  }>(WORK_COMBINED_QUERY)
+
+  const topics = data?.topics || []
+  const testimonials = data?.testimonials || []
+  const siteSettings = data?.siteSettings
 
   // Debug: Log site settings data
   console.log('Site settings data:', siteSettings)

@@ -18,12 +18,24 @@ export const metadata: Metadata = {
 }
 
 export default async function PortfolioPage() {
-  const [webProjects, caseStudies, intellectualWork, siteSettings] = await Promise.all([
-    sanityFetch<WebDevelopment[]>(WEB_DEVELOPMENT_QUERY),
-    sanityFetch<CaseStudy[]>(CASE_STUDIES_QUERY),
-    sanityFetch<IntellectualWork[]>(INTELLECTUAL_WORK_QUERY),
-    sanityFetch<SiteSettings>(SITE_SETTINGS_QUERY),
-  ])
+  const PORTFOLIO_COMBINED_QUERY = `{
+    "webProjects": ${WEB_DEVELOPMENT_QUERY},
+    "caseStudies": ${CASE_STUDIES_QUERY},
+    "intellectualWork": ${INTELLECTUAL_WORK_QUERY},
+    "siteSettings": ${SITE_SETTINGS_QUERY}
+  }`
+
+  const data = await sanityFetch<{
+    webProjects: WebDevelopment[]
+    caseStudies: CaseStudy[]
+    intellectualWork: IntellectualWork[]
+    siteSettings: SiteSettings
+  }>(PORTFOLIO_COMBINED_QUERY)
+
+  const webProjects = data?.webProjects || []
+  const caseStudies = data?.caseStudies || []
+  const intellectualWork = data?.intellectualWork || []
+  const siteSettings = data?.siteSettings
 
   // Separate projects by category
   const shippedProjects = webProjects?.filter(project => project.category === 'shipped') || []

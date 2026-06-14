@@ -22,13 +22,27 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const [posts, services, testimonials, testPosts, siteSettings] = await Promise.all([
-    sanityFetch<Post[]>(FEATURED_POSTS_QUERY),
-    sanityFetch<Service[]>(SERVICES_QUERY),
-    sanityFetch<Testimonial[]>(TESTIMONIALS_QUERY),
-    sanityFetch<any[]>(TEST_POSTS_QUERY),
-    sanityFetch<SiteSettings>(SITE_SETTINGS_QUERY),
-  ])
+  const HOME_COMBINED_QUERY = `{
+    "featuredPosts": ${FEATURED_POSTS_QUERY},
+    "services": ${SERVICES_QUERY},
+    "testimonials": ${TESTIMONIALS_QUERY},
+    "testPosts": ${TEST_POSTS_QUERY},
+    "siteSettings": ${SITE_SETTINGS_QUERY}
+  }`
+
+  const data = await sanityFetch<{
+    featuredPosts: Post[]
+    services: Service[]
+    testimonials: Testimonial[]
+    testPosts: any[]
+    siteSettings: SiteSettings
+  }>(HOME_COMBINED_QUERY)
+
+  const posts = data?.featuredPosts || []
+  const services = data?.services || []
+  const testimonials = data?.testimonials || []
+  const testPosts = data?.testPosts || []
+  const siteSettings = data?.siteSettings
 
   // Debug: Log the featured posts data
   console.log('Featured posts data:', posts)
