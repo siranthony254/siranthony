@@ -1,4 +1,5 @@
 'use client'
+import { urlFor } from '@/lib/sanity'
 // Install: npm install @portabletext/react
 // If not available, this renders a graceful fallback
 
@@ -24,10 +25,12 @@ export function PortableTextRenderer({ value }: PortableTextRendererProps) {
           return <Tag key={block._key}>{text}</Tag>
         }
         if (block._type === 'image' && block.asset?.url) {
+          // Use Sanity URL builder for optimized delivery
+          // eslint-disable-next-line @next/next/no-img-element
+          const src = urlFor(block).width(1200).auto('format').url()
           return (
             <figure key={block._key} className="my-8">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={block.asset.url} alt={block.alt || ''} className="rounded-xl w-full" />
+              <img src={src} alt={block.alt || ''} className="rounded-xl w-full" />
             </figure>
           )
         }

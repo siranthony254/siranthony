@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { AnimatedSection, SectionHeader, RippleCircles, GoldLine } from '@/components/ui'
-import { sanityFetch } from '@/lib/sanity'
+import { sanityFetch, urlFor } from '@/lib/sanity'
 import { AUTHOR_QUERY, TEST_AUTHOR_QUERY } from '@/lib/queries'
 import type { Author } from '@/types'
 
@@ -98,9 +98,11 @@ export default async function AboutPage() {
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden relative">
                   {author?.image?.asset?.url ? (
                     <Image
-                      src={author.image.asset.url}
+                      src={urlFor(author.image).width(1200).auto('format').url()}
                       alt={author.image.alt || author.name || 'Sir Anthony'}
                       fill
+                      sizes="(max-width: 1024px) 70vw, 36rem"
+                      quality={70}
                       className="object-cover scale-[1.3] origin-center"
                       priority
                     />
