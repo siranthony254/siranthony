@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { href: '/portfolio',     label: 'Portfolio' },
   { href: '/conversations', label: 'Conversations' },
   { href: '/gallery',       label: 'Gallery' },
-  { href: '/work',          label: 'Work With Me' },
+  // { href: '/work',          label: 'Work With Me' },
   { href: '/micdup',        label: "Mic'd Up" },
 ]
 

@@ -128,36 +128,39 @@ export default async function AboutPage() {
             {/* Bio text */}
             <AnimatedSection delay={150} className="lg:col-span-7 space-y-7">
               <div>
-                <p className="eyebrow mb-4">The Story</p>
+                <p className="eyebrow mb-4">About Sir Anthony</p>
                 <GoldLine className="mb-6" />
               </div>
 
+              <h2 className="font-display text-3xl md:text-4xl font-semibold text-cream mb-6">
+                The question that <span className="text-gold">started everything.</span>
+              </h2>
+
               <p className="font-body text-cream/70 text-lg leading-relaxed">
-                For a long time, Sir Anthony participated in the same conversations everyone
-                around him was having — about the younger generation, about moral decline, about
-                the distance between the Africa we have and the Africa we imagine. These
-                conversations were passionate. Often correct in their diagnosis. And they never
-                went anywhere.
+                I remember arriving home after my first year at university. The following morning a
+                friend looked at me and asked, almost immediately: <em className="text-gold italic">"Are you still the same saint-like
+                person we knew — or have you become a drunkard like everyone else who goes
+                there?"</em>
               </p>
-              <p className="font-body text-cream/70 text-lg leading-relaxed">
-                The day he started asking a different question was the day the conversations
-                became useful. Not <em className="text-cream/90">what is wrong</em> — but{' '}
-                <em className="text-gold">what is producing</em> what we are seeing, and what
-                inputs would need to change to produce something different?
+
+              <p className="font-body text-cream/70 text-lg leading-relaxed border-l-2 border-gold/30 pl-6 italic">
+                We laughed. We were used to joking. But the question stayed with me — not the question
+                about me, but the question behind the question. Why had campus become associated with
+                that? With corruption. With the erosion of values. With the kind of person who comes back
+                different in ways that worry the people who love them.
               </p>
+
               <p className="font-body text-cream/70 text-lg leading-relaxed">
-                That single shift — from output to input, from complaint to mechanism — is the
-                intellectual foundation of everything Sir Anthony builds. The YouTube channel.
-                The training programs. The book. The Mic&apos;d Up Initiative. The digital strategy
-                work. All of it begins in the same place: the conviction that culture is built
-                in the small ignored things, and understanding how it is built is the first
-                step to building something deliberately better.
+                I thought about the advice I had received before joining. <em className="text-gold italic">Campus corrupts. Don't lose
+                yourself. Don't become immoral.</em> Fear dressed as concern. Joining university was supposed
+                to be a dawn signal — a beginning, but somewhere along the way, fear had grown louder than
+                the hope.
               </p>
+
               <p className="font-body text-cream/70 text-lg leading-relaxed">
-                Based in Nairobi, Kenya, Sir Anthony works with individuals, organizations,
-                campuses, and institutions across Africa — helping them see the culture they
-                have built, develop the thinking to shape it deliberately, and build the digital
-                infrastructure to communicate it with integrity.
+                What my friend was really asking was whether the campus culture had changed my way of
+                life. And that question became a burden I could not put down. A conversation about culture
+                and formation that I have been carrying ever since.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
