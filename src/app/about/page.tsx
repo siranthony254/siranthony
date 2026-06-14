@@ -162,78 +162,122 @@ export default async function AboutPage() {
                 life. And that question became a burden I could not put down. A conversation about culture
                 and formation that I have been carrying ever since.
               </p>
-
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Link href="/work" className="btn-gold">
-                  Work With Me <ArrowRight size={14} />
-                </Link>
-                <Link href="/conversations" className="btn-ghost">
-                  Read the Conversations
-                </Link>
-              </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Values / Philosophy */}
-      <section className="section-pad relative overflow-hidden"
-        style={{ background: 'linear-gradient(180deg, #0D1B2A 0%, #0A2240 50%, #0D1B2A 100%)' }}>
-
+      {/* The Story - Full width section */}
+      <section className="section-pad bg-navy/95">
         <div className="container-site">
-          <SectionHeader
-            eyebrow="Philosophy"
-            title="How the thinking works"
-            subtitle="The principles that run through every conversation, every training, every piece of content Sir Anthony creates."
-            className="mb-14"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {VALUES.map((v, i) => (
-              <AnimatedSection key={v.title} delay={i * 100}>
-                <div className="card-navy p-8">
-                  <p className="font-display text-5xl font-light text-gold/15 mb-4 leading-none">
-                    0{i + 1}
-                  </p>
-                  <h3 className="font-display text-xl font-semibold text-cream mb-4">
-                    {v.title}
-                  </h3>
-                  <div className="w-6 h-px bg-gold/40 mb-4" />
-                  <p className="font-body text-sm text-cream/55 leading-relaxed">{v.body}</p>
-                </div>
-              </AnimatedSection>
-            ))}
+          <div className="space-y-7">
+            <div>
+              <p className="eyebrow mb-4">The Story</p>
+              <GoldLine className="mb-6" />
+            </div>
+
+            <p className="font-body text-cream/70 text-lg leading-relaxed">
+              For a long time, Sir Anthony participated in the same conversations everyone
+              around him was having — about the younger generation, about moral decline, about
+              the distance between the Africa we have and the Africa we imagine. These
+              conversations were passionate. Often correct in their diagnosis. And they never
+              went anywhere.
+            </p>
+
+            <p className="font-body text-cream/70 text-lg leading-relaxed">
+              The day he started asking a different question was the day the conversations
+              became useful. Not <em className="text-cream/90">what is wrong</em> — but{' '}
+              <em className="text-gold">what is producing</em> what we are seeing, and what
+              inputs would need to change to produce something different?
+            </p>
+
+            <p className="font-body text-cream/70 text-lg leading-relaxed">
+              That single shift — from output to input, from complaint to mechanism — is the
+              intellectual foundation of everything Sir Anthony builds. The YouTube channel.
+              The training programs. The book. The Mic&apos;d Up Initiative. The digital strategy
+              work. All of it begins in the same place: the conviction that culture is built
+              in the small ignored things, and understanding how it is built is the first
+              step to building something deliberately better.
+            </p>
+
+            <p className="font-body text-cream/70 text-lg leading-relaxed">
+              Based in Nairobi, Kenya, Sir Anthony works with individuals, organizations,
+              campuses, and institutions across Africa — helping them see the culture they
+              have built, develop the thinking to shape it deliberately, and build the digital
+              infrastructure to communicate it with integrity.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="section-pad bg-navy">
+      {/* Profile Section */}
+      <section className="section-pad bg-navy border-t border-gold/10">
         <div className="container-site">
-          <SectionHeader
-            eyebrow="Journey"
-            title="How it unfolded"
-            className="mb-14"
-          />
-          <div className="relative max-w-2xl">
-            {/* Vertical line */}
-            <div className="absolute left-[3.5rem] top-0 bottom-0 w-px bg-gradient-to-b from-gold/30 via-gold/10 to-transparent" />
+          <AnimatedSection>
+            <div className="space-y-6 mb-10">
+              <h2 className="font-display text-3xl md:text-4xl font-semibold text-cream">
+                Anthony Munene
+              </h2>
+              <p className="eyebrow">Sir Anthony · Conversationalist & Cultural Architect</p>
+              <div className="flex gap-2 max-w-2xl">
+                <div className="w-1 h-1 rounded-full bg-gold mt-3 flex-shrink-0" />
+                <p className="font-body text-cream text-lg md:text-xl leading-relaxed">
+                  <em>I lead conversations that <strong>disturb the comfortable</strong> — and <strong>comfort the disturbed.</strong></em>
+                </p>
+              </div>
+            </div>
 
-            <div className="space-y-8">
-              {MILESTONES.map((m, i) => (
-                <AnimatedSection key={m.year} delay={i * 80}>
-                  <div className="flex items-start gap-8">
-                    <div className="flex-shrink-0 w-14 text-right">
-                      <span className="font-display text-gold text-sm font-semibold">{m.year}</span>
-                    </div>
-                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-gold mt-1.5 relative z-10" />
-                    <p className="font-body text-cream/60 text-sm leading-relaxed pt-0.5">
-                      {m.event}
-                    </p>
-                  </div>
-                </AnimatedSection>
+            <div className="flex flex-wrap gap-3 mb-12">
+              {['Cultural Thinker', 'Conversationalist', 'Keynote Speaker', 'Cultural Trainer', 'Digital Strategist', 'Nairobi, Kenya'].map((tag) => (
+                <span key={tag} className="px-4 py-2 rounded-full border border-gold/30 text-gold text-sm font-body">
+                  {tag}
+                </span>
               ))}
             </div>
-          </div>
+          </AnimatedSection>
+
+          {/* The Work */}
+          <AnimatedSection delay={100}>
+            <div className="space-y-6 mb-12">
+              <p className="eyebrow">The Work</p>
+              <p className="font-body text-cream/70 text-lg leading-relaxed max-w-3xl">
+                My work begins with a single observation: culture is not what your tribe did. It is what you do —
+                every day, in the small ignored things nobody is examining. The way a campus forms a student. The
+                way an organisation rewards its people. The way a family transmits its values without knowing it is
+                doing so.
+              </p>
+              <p className="font-body text-cream/70 text-lg leading-relaxed max-w-3xl">
+                These small things compound. By the time anyone notices — the culture has already been built.
+                Without intention. Without examination. Often without consent. <strong className="text-cream">I exist to start the
+                conversations that change that.</strong>
+              </p>
+            </div>
+          </AnimatedSection>
+
+          {/* Where I Work */}
+          <AnimatedSection delay={150}>
+            <div className="space-y-6 mb-12">
+              <p className="eyebrow">Where I Work</p>
+              <p className="font-body text-cream/70 text-lg leading-relaxed max-w-3xl">
+                Based in Nairobi, Kenya, I work with individuals, organisations, campuses, and institutions across
+                Africa — helping them see the culture they have built, develop the thinking to shape it deliberately,
+                and build the digital infrastructure to communicate it with integrity.
+              </p>
+              <p className="font-body text-cream/70 text-lg leading-relaxed max-w-3xl">
+                I am also the founder of <strong className="text-cream">Mic'd Up Initiative</strong> — a campus-centred movement committed to
+                discovering voices, shaping leaders, and building responsible cultural influence among the youngest
+                and most formative generation on the continent.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          {/* Closing Quote */}
+          <AnimatedSection delay={200} className="mt-16 pt-12 border-t border-gold/10">
+            <p className="font-display italic text-gold text-2xl md:text-3xl leading-relaxed max-w-2xl">
+              "Who made you normal? That is the question. That is the work."
+            </p>
+            <p className="eyebrow mt-6">— Sir Anthony</p>
+          </AnimatedSection>
         </div>
       </section>
 
