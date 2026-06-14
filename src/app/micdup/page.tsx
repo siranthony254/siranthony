@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import { AnimatedSection, SectionHeader, GoldLine, RippleCircles } from '@/components/ui'
-import { sanityFetch } from '@/lib/sanity'
+import { sanityFetch, urlFor } from '@/lib/sanity'
 import { MICDUP_EVENTS_QUERY } from '@/lib/queries'
 import { formatDateShort } from '@/lib/utils'
 import type { MicdupEvent } from '@/types'
@@ -174,9 +174,13 @@ export default async function MicdupPage() {
                     {event.image?.asset?.url && (
                       <div className="relative h-44 overflow-hidden flex-shrink-0">
                         <Image
-                          src={event.image.asset.url}
+                          src={urlFor(event.image).width(1200).auto('format').url()}
                           alt={event.image.alt || event.title}
                           fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          quality={70}
+                          placeholder="blur"
+                          blurDataURL={urlFor(event.image).width(20).auto('format').url()}
                           className="object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { urlFor } from '@/lib/sanity'
 import type { Gallery } from '@/types'
 
 interface GalleryHeroProps { galleries: Gallery[] }
@@ -13,9 +14,13 @@ export function GalleryHero({ galleries }: GalleryHeroProps) {
       {heroGallery?.heroImage?.asset?.url && (
         <div className="absolute inset-0">
           <Image
-            src={heroGallery.heroImage.asset.url}
+            src={urlFor(heroGallery.heroImage).width(1600).auto('format').url()}
             alt={heroGallery.heroImage.alt || heroGallery.heroTitle}
             fill
+            sizes="100vw"
+            quality={75}
+            placeholder="blur"
+            blurDataURL={urlFor(heroGallery.heroImage).width(20).auto('format').url()}
             className="object-cover"
             priority
           />

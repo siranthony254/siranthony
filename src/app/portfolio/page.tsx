@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ExternalLink, Github, Download, Mail } from 'lucide-react'
 import { AnimatedSection, SectionHeader, GoldLine } from '@/components/ui'
-import { sanityFetch } from '@/lib/sanity'
+import { sanityFetch, urlFor } from '@/lib/sanity'
 import {
   WEB_DEVELOPMENT_QUERY,
   CASE_STUDIES_QUERY,
@@ -75,10 +76,15 @@ export default async function PortfolioPage() {
                 <div className="card-navy overflow-hidden h-full group">
                   {project.thumbnail?.asset?.url && (
                     <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={project.thumbnail.asset.url}
+                      <Image
+                        src={urlFor(project.thumbnail).width(1000).auto('format').url()}
                         alt={project.thumbnail.alt || project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        quality={70}
+                        placeholder="blur"
+                        blurDataURL={urlFor(project.thumbnail).width(20).auto('format').url()}
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
                     </div>
@@ -157,10 +163,15 @@ export default async function PortfolioPage() {
                 <div className="card-navy overflow-hidden h-full group">
                   {project.thumbnail?.asset?.url && (
                     <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={project.thumbnail.asset.url}
+                      <Image
+                        src={urlFor(project.thumbnail).width(1000).auto('format').url()}
                         alt={project.thumbnail.alt || project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        quality={70}
+                        placeholder="blur"
+                        blurDataURL={urlFor(project.thumbnail).width(20).auto('format').url()}
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
                     </div>
@@ -236,10 +247,15 @@ export default async function PortfolioPage() {
                 <div className="card-navy overflow-hidden">
                   {study.heroImage?.asset?.url && (
                     <div className="relative h-64 overflow-hidden">
-                      <img
-                        src={study.heroImage.asset.url}
+                      <Image
+                        src={urlFor(study.heroImage).width(1400).auto('format').url()}
                         alt={study.heroImage.alt || study.title}
-                        className="w-full h-full object-cover"
+                        fill
+                        sizes="100vw"
+                        quality={75}
+                        placeholder="blur"
+                        blurDataURL={urlFor(study.heroImage).width(20).auto('format').url()}
+                        className="object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-navy/90 to-transparent" />
                       <div className="absolute bottom-6 left-6 right-6">

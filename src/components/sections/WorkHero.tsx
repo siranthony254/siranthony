@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { urlFor } from '@/lib/sanity'
 import type { SiteSettings } from '@/types'
 
 interface WorkHeroProps { siteSettings: SiteSettings | null }
@@ -10,9 +11,13 @@ export function WorkHero({ siteSettings }: WorkHeroProps) {
       {siteSettings?.workHeroImage?.asset?.url && (
         <div className="absolute inset-0">
           <Image
-            src={siteSettings.workHeroImage.asset.url}
+            src={urlFor(siteSettings.workHeroImage).width(1600).auto('format').url()}
             alt={siteSettings.workHeroImage.alt || 'Work With Me'}
             fill
+            sizes="100vw"
+            quality={75}
+            placeholder="blur"
+            blurDataURL={urlFor(siteSettings.workHeroImage).width(20).auto('format').url()}
             className="object-cover"
             priority
           />
