@@ -187,7 +187,7 @@ export default async function AboutPage() {
             </div>
 
             <div className="flex flex-wrap gap-3 mb-12">
-              {['Cultural Thinker', 'Conversationalist', 'Keynote Speaker', 'Cultural Trainer', 'Digital Strategist', 'Nairobi, Kenya'].map((tag) => (
+              {['Cultural Thinker', 'Conversationalist', 'Cultural Trainer', 'Digital Strategist', 'Nairobi, Kenya'].map((tag) => (
                 <span key={tag} className="px-4 py-2 rounded-full border border-gold/30 text-gold text-sm font-body">
                   {tag}
                 </span>
