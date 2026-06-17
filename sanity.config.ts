@@ -2,6 +2,7 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool }    from '@sanity/vision'
 import { schemaTypes }   from './sanity/schemas'
+import { deleteWithRevalidation } from './sanity/plugins/deleteWithRevalidation'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
 const dataset   = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
@@ -29,6 +30,7 @@ export default defineConfig({
   },
 
   plugins: [
+    deleteWithRevalidation(),
     structureTool({
       structure: (S) =>
         S.list()

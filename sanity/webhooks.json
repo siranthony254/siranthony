@@ -1,0 +1,27 @@
+{
+  "webhooks": [
+    {
+      "id": "revalidate-on-change",
+      "name": "Revalidate Site on Content Change",
+      "description": "Triggers Next.js revalidation when documents are created, updated, or deleted",
+      "url": "https://your-domain.com/api/revalidate",
+      "triggers": [
+        "publishDocument",
+        "deleteDocument",
+        "updateDocument"
+      ],
+      "filter": {
+        "query": "*[]",
+        "projection": "{ _type }"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "httpMethod": "POST",
+      "disabled": false
+    }
+  ]
+}
