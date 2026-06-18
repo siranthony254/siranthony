@@ -92,7 +92,7 @@ export function ShareButton({ post, baseUrl }: ShareButtonProps) {
           />
           
           {/* Menu */}
-          <div className="absolute right-0 mt-2 w-56 bg-navy border border-gold/20 rounded-xl shadow-2xl z-50 p-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="absolute right-0 mt-2 w-56 bg-navy border border-gold/20 rounded-xl shadow-2xl z-[100] p-2 animate-in fade-in slide-in-from-top-2 duration-200">
             <div className="space-y-1">
               {shareButtons.map((button) => (
                 <button

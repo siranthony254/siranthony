@@ -37,20 +37,22 @@ export default async function ConversationsPage({
           style={{ background: 'radial-gradient(ellipse 60% 70% at 80% 20%, rgba(201,168,76,0.05) 0%, transparent 65%)' }} />
         <div className="container-site relative z-10">
           <AnimatedSection>
-            <p className="eyebrow mb-5">Conversations</p>
-            <GoldLine className="mb-7" />
-            <h1
-              className="font-display font-semibold text-cream mb-6"
-              style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
-            >
-              The questions
-              <br />
-              <em className="text-gold">nobody is asking.</em>
-            </h1>
-            <p className="font-body text-cream/55 text-lg leading-relaxed max-w-xl">
-              Cultural observations and examined perspectives on culture, identity,
-              leadership, and the ideas quietly shaping how we live.
-            </p>
+            <div className="text-center max-w-3xl mx-auto">
+              <p className="eyebrow mb-5">Conversations</p>
+              <GoldLine className="mb-7 mx-auto" />
+              <h1
+                className="font-display font-semibold text-cream mb-6"
+                style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
+              >
+                The questions
+                <br />
+                <em className="text-gold">nobody is asking.</em>
+              </h1>
+              <p className="font-body text-cream/55 text-lg leading-relaxed max-w-xl mx-auto">
+                Cultural observations and examined perspectives on culture, identity,
+                leadership, and the ideas quietly shaping how we live.
+              </p>
+            </div>
           </AnimatedSection>
         </div>
       </section>
