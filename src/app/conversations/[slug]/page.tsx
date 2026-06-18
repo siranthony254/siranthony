@@ -50,7 +50,7 @@ export default async function PostPage({ params }: Props) {
 
       {/* Hero */}
       <section className="bg-navy pb-0 pt-8">
-        <div className="container-site max-w-3xl mx-auto px-6 md:px-12">
+        <div className="container-site max-w-4xl mx-auto px-6 md:px-12 lg:px-24">
           <AnimatedSection>
             <div className="flex items-center gap-3 mb-5">
               <CategoryBadge category={post.category} />
@@ -76,7 +76,7 @@ export default async function PostPage({ params }: Props) {
 
         {/* Feature image */}
         {post.mainImage?.asset?.url && (
-          <div className="container-site max-w-4xl mx-auto px-6 md:px-12">
+          <div className="container-site max-w-4xl mx-auto px-6 md:px-12 lg:px-24">
             <AnimatedSection delay={100}>
               <div className="relative h-72 md:h-[420px] rounded-2xl overflow-hidden">
                   <Image
@@ -97,59 +97,62 @@ export default async function PostPage({ params }: Props) {
 
       {/* Body */}
       <section className="section-pad bg-navy/95">
-        <div className="container-site max-w-2xl mx-auto px-6 md:px-12">
-          <AnimatedSection>
-            {post.body ? (
-              <div className="prose-navy">
-                <PortableTextRenderer value={post.body} />
-              </div>
-            ) : (
-              <p className="font-body text-cream/40 italic">Content coming soon.</p>
-            )}
-          </AnimatedSection>
-
-          {/* Author card */}
-          {post.author && (
-            <AnimatedSection delay={200} className="mt-16 pt-10 border-t border-gold/10">
-              <div className="flex items-start gap-5">
-                {post.author.image?.asset?.url && (
-                  <Image
-                    src={urlFor(post.author.image).width(112).auto('format').url()}
-                    alt={post.author.name}
-                    width={56}
-                    height={56}
-                    quality={70}
-                    className="rounded-full flex-shrink-0"
-                  />
-                )}
-                <div>
-                  <p className="font-body text-xs text-gold uppercase tracking-widest mb-1">Written by</p>
-                  <p className="font-display text-lg font-semibold text-cream">{post.author.name}</p>
-                  {post.author.bio && (
-                    <p className="font-body text-sm text-cream/50 mt-1 leading-relaxed">{post.author.bio}</p>
-                  )}
+        <div className="container-site max-w-4xl mx-auto px-6 md:px-12 lg:px-24">
+          {/* Gold border container for content */}
+          <div className="border-l-2 border-r-2 border-gold/30 px-6 md:px-12 py-8">
+            <AnimatedSection>
+              {post.body ? (
+                <div className="prose-navy">
+                  <PortableTextRenderer value={post.body} />
                 </div>
+              ) : (
+                <p className="font-body text-cream/40 italic">Content coming soon.</p>
+              )}
+            </AnimatedSection>
+
+            {/* Author card */}
+            {post.author && (
+              <AnimatedSection delay={200} className="mt-16 pt-10 border-t border-gold/10">
+                <div className="flex items-start gap-5">
+                  {post.author.image?.asset?.url && (
+                    <Image
+                      src={urlFor(post.author.image).width(112).auto('format').url()}
+                      alt={post.author.name}
+                      width={56}
+                      height={56}
+                      quality={70}
+                      className="rounded-full flex-shrink-0"
+                    />
+                  )}
+                  <div>
+                    <p className="font-body text-xs text-gold uppercase tracking-widest mb-1">Written by</p>
+                    <p className="font-display text-lg font-semibold text-cream">{post.author.name}</p>
+                    {post.author.bio && (
+                      <p className="font-body text-sm text-cream/50 mt-1 leading-relaxed">{post.author.bio}</p>
+                    )}
+                  </div>
+                </div>
+              </AnimatedSection>
+            )}
+
+            {/* CTA */}
+            <AnimatedSection delay={300} className="mt-16 card-navy p-8 text-center">
+              <p className="font-display italic text-gold text-lg mb-4">
+                &ldquo;The person who understands how culture is made is the person who can help shape it.&rdquo;
+              </p>
+              <p className="font-body text-xs text-cream/40 uppercase tracking-widest mb-6">
+                — Sir Anthony
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link href="/conversations" className="btn-ghost text-xs">
+                  More Conversations
+                </Link>
+                <Link href="/work" className="btn-gold text-xs">
+                  Work With Sir Anthony
+                </Link>
               </div>
             </AnimatedSection>
-          )}
-
-          {/* CTA */}
-          <AnimatedSection delay={300} className="mt-16 card-navy p-8 text-center">
-            <p className="font-display italic text-gold text-lg mb-4">
-              &ldquo;The person who understands how culture is made is the person who can help shape it.&rdquo;
-            </p>
-            <p className="font-body text-xs text-cream/40 uppercase tracking-widest mb-6">
-              — Sir Anthony
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/conversations" className="btn-ghost text-xs">
-                More Conversations
-              </Link>
-              <Link href="/work" className="btn-gold text-xs">
-                Work With Sir Anthony
-              </Link>
-            </div>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
     </>
