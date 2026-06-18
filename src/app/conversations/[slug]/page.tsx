@@ -50,7 +50,7 @@ export default async function PostPage({ params }: Props) {
 
       {/* Hero */}
       <section className="bg-navy pb-0 pt-8">
-        <div className="container-site max-w-4xl mx-auto">
+        <div className="container-site max-w-3xl mx-auto px-6 md:px-12">
           <AnimatedSection>
             <div className="flex items-center gap-3 mb-5">
               <CategoryBadge category={post.category} />
@@ -76,7 +76,7 @@ export default async function PostPage({ params }: Props) {
 
         {/* Feature image */}
         {post.mainImage?.asset?.url && (
-          <div className="container-site max-w-5xl mx-auto">
+          <div className="container-site max-w-4xl mx-auto px-6 md:px-12">
             <AnimatedSection delay={100}>
               <div className="relative h-72 md:h-[420px] rounded-2xl overflow-hidden">
                   <Image
@@ -97,7 +97,7 @@ export default async function PostPage({ params }: Props) {
 
       {/* Body */}
       <section className="section-pad bg-navy/95">
-        <div className="container-site max-w-3xl mx-auto">
+        <div className="container-site max-w-2xl mx-auto px-6 md:px-12">
           <AnimatedSection>
             {post.body ? (
               <div className="prose-navy">

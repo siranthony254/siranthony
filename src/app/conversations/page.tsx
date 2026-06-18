@@ -105,7 +105,12 @@ export default async function ConversationsPage({
                         </div>
                       )}
                       <div className="p-6 flex flex-col flex-1">
-                        <div className="flex items-center gap-2 mb-3">
+                        <div className="flex items-center gap-2 mb-3 flex-wrap">
+                          {post.featured && (
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gold/20 text-gold border border-gold/30 uppercase tracking-wider">
+                              Featured
+                            </span>
+                          )}
                           <CategoryBadge category={post.category} />
                           <span className="font-body text-xs text-cream/30">
                             {formatDate(post.publishedAt)}

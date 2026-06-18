@@ -1,7 +1,7 @@
 // ─── Posts / Conversations ──────────────────────────────────────
 export const ALL_POSTS_QUERY = `
   *[_type == "post"] | order(publishedAt desc) {
-    _id, title, slug, excerpt, publishedAt, category,
+    _id, title, slug, excerpt, publishedAt, category, featured,
     "estimatedReadingTime": round(length(pt::text(body)) / 5 / 200),
     mainImage { asset->{ _id, url }, alt },
     author->{ name, image { asset->{ url } } }
