@@ -100,7 +100,7 @@ export default async function PostPage({ params }: Props) {
         <div className="container-site max-w-4xl mx-auto px-6 md:px-12 lg:px-24">
           {/* Gold border container for content */}
           <div className="border-l-2 border-r-2 border-gold/30 px-6 md:px-12 py-8">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-[87.5%] mx-auto">
             <AnimatedSection>
               {post.body ? (
                 <div className="prose-navy">
