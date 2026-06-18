@@ -6,7 +6,7 @@ import { ArrowLeft }  from 'lucide-react'
 import { sanityFetch, urlFor } from '@/lib/sanity'
 import { POST_BY_SLUG_QUERY } from '@/lib/queries'
 import { formatDate }  from '@/lib/utils'
-import { CategoryBadge, AnimatedSection } from '@/components/ui'
+import { CategoryBadge, AnimatedSection, ShareButton } from '@/components/ui'
 import { PortableTextRenderer } from '@/components/ui/PortableTextRenderer'
 import type { Post } from '@/types'
 
@@ -70,6 +70,9 @@ export default async function PostPage({ params }: Props) {
             <p className="font-body text-cream/55 text-xl leading-relaxed mb-8 max-w-2xl">
               {post.excerpt}
             </p>
+            <div className="flex items-center gap-4 mb-8">
+              <ShareButton post={post} baseUrl={process.env.NEXT_PUBLIC_SITE_URL || ''} />
+            </div>
             <div className="w-10 h-px bg-gradient-to-r from-gold to-transparent mb-10" />
           </AnimatedSection>
         </div>

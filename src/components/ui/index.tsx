@@ -115,3 +115,6 @@ export function SectionHeader({
     </div>
   )
 }
+
+// ── ShareButton ────────────────────────────────────────────────────
+export { ShareButton } from './ShareButton'
