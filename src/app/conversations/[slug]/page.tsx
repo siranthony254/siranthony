@@ -70,9 +70,6 @@ export default async function PostPage({ params }: Props) {
             <p className="font-body text-cream/55 text-xl leading-relaxed mb-8 max-w-2xl">
               {post.excerpt}
             </p>
-            <div className="flex items-center gap-4 mb-8">
-              <ShareButton post={post} baseUrl={process.env.NEXT_PUBLIC_SITE_URL || ''} />
-            </div>
             <div className="w-10 h-px bg-gradient-to-r from-gold to-transparent mb-10" />
           </AnimatedSection>
         </div>
@@ -114,30 +111,37 @@ export default async function PostPage({ params }: Props) {
               )}
             </AnimatedSection>
 
-            {/* Author card */}
-            {post.author && (
-              <AnimatedSection delay={200} className="mt-16 pt-10 border-t border-gold/10">
-                <div className="flex items-start gap-5">
-                  {post.author.image?.asset?.url && (
-                    <Image
-                      src={urlFor(post.author.image).width(112).auto('format').url()}
-                      alt={post.author.name}
-                      width={56}
-                      height={56}
-                      quality={70}
-                      className="rounded-full flex-shrink-0"
-                    />
-                  )}
-                  <div>
-                    <p className="font-body text-xs text-gold uppercase tracking-widest mb-1">Written by</p>
-                    <p className="font-display text-lg font-semibold text-cream">{post.author.name}</p>
-                    {post.author.bio && (
-                      <p className="font-body text-sm text-cream/50 mt-1 leading-relaxed">{post.author.bio}</p>
+            {/* Author card and Share button row */}
+            <AnimatedSection delay={200} className="mt-16 pt-10 border-t border-gold/10">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                {/* Author card */}
+                {post.author && (
+                  <div className="flex items-start gap-5">
+                    {post.author.image?.asset?.url && (
+                      <Image
+                        src={urlFor(post.author.image).width(112).auto('format').url()}
+                        alt={post.author.name}
+                        width={56}
+                        height={56}
+                        quality={70}
+                        className="rounded-full flex-shrink-0"
+                      />
                     )}
+                    <div>
+                      <p className="font-body text-xs text-gold uppercase tracking-widest mb-1">Written by</p>
+                      <p className="font-display text-lg font-semibold text-cream">{post.author.name}</p>
+                      {post.author.bio && (
+                        <p className="font-body text-sm text-cream/50 mt-1 leading-relaxed">{post.author.bio}</p>
+                      )}
+                    </div>
                   </div>
+                )}
+                {/* Share button - opposite the author */}
+                <div className="flex-shrink-0">
+                  <ShareButton post={post} baseUrl={process.env.NEXT_PUBLIC_SITE_URL || ''} />
                 </div>
-              </AnimatedSection>
-            )}
+              </div>
+            </AnimatedSection>
 
             {/* CTA */}
             <AnimatedSection delay={300} className="mt-16 card-navy p-8 text-center">
