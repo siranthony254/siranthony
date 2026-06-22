@@ -10,36 +10,22 @@ const ICON_MAP: Record<string, React.ComponentType<{ size?: number | string; cla
 const FALLBACK_SERVICES = [
   {
     _id: '1', icon: 'Mic2', order: 1,
-    title: 'Cultural Conversations & Talks',
+    title: 'Conversations & Talks',
     description:
-      'Keynotes, panels, and facilitated conversations that help audiences understand how culture is actually built — and what that means for how they lead, parent, teach, and live.',
-    features: ['Keynote speaking', 'Panel facilitation', 'Community forums', 'University lectures'],
+      'Panels, and facilitated conversations that help audiences understand how culture is actually built — and what that means for how they lead, parent, teach, and live.',
+    features: ['Panel facilitation', 'Community forums', 'University Events'],
     cta: 'Book a Talk',
   },
+ 
   {
-    _id: '2', icon: 'Users', order: 2,
-    title: 'Cultural Training for Organizations',
-    description:
-      'Structured multi-session engagements that equip leadership teams and staff with the frameworks to understand and deliberately build their culture.',
-    features: ['Cultural audit', 'Leadership workshops', 'Staff formation', 'Ongoing advisory'],
-    cta: 'Start Training',
-  },
-  {
-    _id: '3', icon: 'Globe', order: 3,
+    _id: '2', icon: 'Globe', order: 3,
     title: 'Digital Strategy & Web Development',
     description:
       'Building digital presences that actually reflect what an organization stands for — websites, content strategy, and personal brand development built on cultural clarity.',
-    features: ['Web development', 'Content strategy', 'Personal branding', 'Digital consulting'],
+    features: ['Web development', 'Content strategy',  'Digital consulting'],
     cta: 'Build Together',
   },
-  {
-    _id: '4', icon: 'BookOpen', order: 4,
-    title: 'Cultural Consulting & Advisory',
-    description:
-      'Ongoing advisory relationships with organizations actively building or rebuilding their culture — thinking partnership at the intersection of culture and strategy.',
-    features: ['Ongoing retainer', 'Strategic advisory', 'Cultural design', 'Executive coaching'],
-    cta: 'Explore Advisory',
-  },
+  
 ]
 
 interface ServicesPreviewProps { services: Service[] }
