@@ -70,13 +70,15 @@ export default async function AboutPage() {
                 className="font-display font-semibold text-cream leading-tight mb-6"
                 style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)' }}
               >
-                The person at
+                conversations that disturb the comfortable
                 <br />
-                <em className="text-gold">the window.</em>
+                <em className="text-gold">and comfort the disturbed.</em>
               </h1>
               <p className="font-body text-cream/55 text-xl leading-relaxed max-w-lg">
-                Watching. Thinking. Naming what is happening before most people
-                notice it has begun. That is the brand. That is the invitation.
+                Conversations that have range and courage — that start with observation, not instruction. 
+                That are not afraid to examine the perspectives behind the perspectives. 
+                That are built by ordinary people, not extraordinary experts. 
+                That understand both floors of the building — how culture is built, and how to build it deliberately.
               </p>
             </AnimatedSection>
 
