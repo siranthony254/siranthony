@@ -42,7 +42,7 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
           {/* Left — Text */}
           <div className="space-y-8 lg:py-32">
             <motion.div {...fadeUp(0.1)}>
-              <span className="eyebrow">Conversationalist · Cultural Thinker · Digital Strategist · Creator · Kenya</span>
+              <span className="eyebrow">Conversationalist · Cultural Thinker · Digital Strategist· Kenya</span>
             </motion.div>
 
             <motion.div {...fadeUp(0.25)} className="space-y-3">
