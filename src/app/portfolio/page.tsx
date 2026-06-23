@@ -246,7 +246,8 @@ export default async function PortfolioPage() {
         </div>
       </section>
 
-      {/* Case Studies */}
+      {/* Case Studies - Deactivated for now */}
+      {/*
       <section className="section-pad bg-navy">
         <div className="container-site">
           <SectionHeader
@@ -358,6 +359,7 @@ export default async function PortfolioPage() {
           )}
         </div>
       </section>
+      */}
 
       {/* Intellectual Work */}
       <section className="section-pad bg-navy/95">
