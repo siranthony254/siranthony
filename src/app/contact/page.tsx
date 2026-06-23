@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { AnimatedSection, GoldLine } from '@/components/ui'
-import { ContactForm } from '@/components/sections/ContactForm'
-import { Phone, Mail, Globe, MapPin } from 'lucide-react'
+import { Phone, Globe, MapPin } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -116,12 +115,90 @@ export default function ContactPage() {
               </div>
             </AnimatedSection>
 
-            {/* Right — form */}
-            <AnimatedSection delay={150} className="lg:col-span-3">
-              <div className="card-navy p-8 md:p-10">
-                <p className="eyebrow mb-4">Send a Message</p>
-                <div className="w-6 h-px bg-gradient-to-r from-gold to-transparent mb-7" />
-                <ContactForm />
+            {/* Right — call scheduling */}
+            <AnimatedSection delay={150} className="lg:col-span-3 space-y-8">
+              <div>
+                <p className="eyebrow mb-4">Schedule a Session</p>
+                <div className="w-6 h-px bg-gradient-to-r from-gold to-transparent mb-6" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {/* 30 Mins Free Call */}
+                <div className="card-navy p-6 flex flex-col justify-between group border border-gold/10 hover:border-gold/30 transition-all duration-300">
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-start">
+                      <span className="text-xs font-body text-gold bg-gold/10 px-2.5 py-1 rounded-full border border-gold/25">
+                        Discovery
+                      </span>
+                      <span className="font-display font-semibold text-lg text-cream">
+                        Free
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-display text-xl font-semibold text-cream group-hover:text-gold transition-colors">
+                        Free Call
+                      </h3>
+                      <p className="font-body text-xs text-cream/40 mt-1">
+                        30 minutes · Online Meeting
+                      </p>
+                    </div>
+                    <p className="font-body text-cream/60 text-sm leading-relaxed">
+                      A discovery conversation — understanding your context, challenge, and how we might work together.
+                    </p>
+                  </div>
+                  <div className="pt-6">
+                    <a
+                      href="https://calendly.com/officialsiranthony/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-gold text-sm w-full flex items-center justify-center gap-2"
+                    >
+                      Book Free Call
+                    </a>
+                  </div>
+                </div>
+
+                {/* 1 Hour Paid Call */}
+                <div className="card-navy p-6 flex flex-col justify-between group border border-gold/15 hover:border-gold/45 transition-all duration-300 relative overflow-hidden">
+                  {/* Subtle featured badge */}
+                  <div className="absolute top-0 right-0 h-16 w-16 pointer-events-none">
+                    <div className="absolute transform rotate-45 bg-gold text-[9px] font-body text-navy text-center font-bold py-1 right-[-35px] top-[15px] w-[120px]">
+                      POPULAR
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-start">
+                      <span className="text-xs font-body text-gold bg-gold/10 px-2.5 py-1 rounded-full border border-gold/25">
+                        Strategy
+                      </span>
+                      <span className="font-display font-semibold text-lg text-cream">
+                        $10
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-display text-xl font-semibold text-cream group-hover:text-gold transition-colors">
+                        Strategic Session
+                      </h3>
+                      <p className="font-body text-xs text-cream/40 mt-1">
+                        1 hour · Custom Venue
+                      </p>
+                    </div>
+                    <p className="font-body text-cream/60 text-sm leading-relaxed">
+                      An intensive strategic deep dive. Focus on cultural alignment, brand architecture, or personal advisory.
+                    </p>
+                  </div>
+                  <div className="pt-6">
+                    <a
+                      href="https://calendly.com/officialsiranthony/1-hour-meeting"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-gold text-sm w-full flex items-center justify-center gap-2"
+                    >
+                      Book Session ($10)
+                    </a>
+                  </div>
+                </div>
+
               </div>
             </AnimatedSection>
           </div>
