@@ -16,10 +16,12 @@ import {
 import type { Post, Service, Testimonial, SiteSettings } from '@/types'
 
 export const metadata: Metadata = {
-  title: 'Sir Anthony — Conversationalist & Cultural Thinker',
+  title: 'Sir Anthony — Conversationalist, Cultural Architect & Digital Content Strategist',
   description:
-    'Who made you normal? Sir Anthony is a Kenyan cultural thinker, conversationalist, and founder of Mic\'d Up Initiative — helping individuals, organizations, and institutions understand how culture is built and build something deliberately better.',
+    'Who made you normal? Sir Anthony is a Digtal Content Strategist, Conversationalist, and Cultural Architect, helping individuals, organizations, and institutions understand how culture is built through the smallest and almost ignored repeated choices and ultimately build something deliberately better. He is also the founder of Mic\'d Up Initiative, an that seeks to influence the culture around young people in institutions of higher learning through conversations, mentorship, community building and purposeful media.',
+    
 }
+
 
 export default async function HomePage() {
   const HOME_COMBINED_QUERY = `{

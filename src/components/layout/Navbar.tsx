@@ -10,8 +10,8 @@ const NAV_LINKS = [
   { href: '/about',         label: 'About' },
   { href: '/portfolio',     label: 'Portfolio' },
   { href: '/conversations', label: 'Conversations' },
-  { href: '/gallery',       label: 'Gallery' },
-  // { href: '/work',          label: 'Work With Me' },
+  //{ href: '/gallery',       label: 'Gallery' },
+  { href: '/work',          label: 'Work With Me' },
   { href: '/micdup',        label: "Mic'd Up" },
 ]
 

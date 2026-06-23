@@ -84,7 +84,7 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
                 >
                   Mic&apos;d Up Initiative
                 </a>
-                {' '}· Cultural Training · Digital Strategy
+                {' '}· Cultural Conversations · Digital Strategy
               </p>
             </motion.div>
           </div>

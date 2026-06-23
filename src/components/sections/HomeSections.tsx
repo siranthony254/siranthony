@@ -166,7 +166,7 @@ export function HomeCTA() {
               Read the Conversations
             </Link>
             <Link href="/contact" className="btn-ghost">
-              Bring Sir Anthony to Your Context
+              Talk to Sir Anthony
             </Link>
           </div>
         </AnimatedSection>
@@ -174,10 +174,8 @@ export function HomeCTA() {
         {/* Bottom signature */}
         <AnimatedSection delay={300} className="mt-16 pt-12 border-t border-gold/10">
           <p className="font-display italic text-cream/30 text-lg">
-            &ldquo;Culture is built in the small ignored things. And the most important thing
-            I know about Africa is that there are millions of people doing those small things
-            faithfully, daily, without recognition. They are the architects.
-            The continent is their project.&rdquo;
+           Culture isn't handed down by elites alone. It's a living negotiation between millions of ordinary people, played out one choice at a time. 
+           Every habit you normalize, every story you tell, every value you model in your daily life is a small vote for what the world becomes next.
           </p>
           <p className="font-body text-gold/50 text-xs uppercase tracking-widest mt-4">
             — Sir Anthony

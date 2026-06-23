@@ -45,7 +45,7 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
           <SectionHeader
             eyebrow="Work With Me"
-            title="Three Layers of Work"
+            title="Layers of Work"
             subtitle="Cultural intelligence. Practical training. Digital architecture. Built together because they are expressions of the same thinking."
           />
           <AnimatedSection delay={200}>
