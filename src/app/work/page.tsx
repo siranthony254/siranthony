@@ -11,7 +11,7 @@ import type { SpeakingTopic, Testimonial, SiteSettings, Service } from '@/types'
 export const metadata: Metadata = {
   title: 'Work With Me',
   description:
-    'Cultural training, speaking, consulting, and digital strategy. Sir Anthony works with individuals, organizations, and institutions across three integrated layers of engagement.',
+    'Conversations, Cultural Engagements, Speaking, Consulting, and Digital Strategy..',
 }
 
 const iconMap: Record<string, React.ComponentType<any>> = {
@@ -26,7 +26,7 @@ const FALLBACK_SERVICES: Service[] = [
     _id: 'fallback-1',
     title: 'Cultural Intelligence',
     description:
-      'Every keynote, panel, talk, and community forum. Sir Anthony brings the cultural conversation directly into your context — equipping audiences to see what they have been building without knowing it, and introducing the frameworks for building something deliberately better.',
+      'Every conversation, panel, talk, and community forum. It is my job to bring the cultural conversation directly into your context — equipping audiences to see what they have been building without knowing it, and introducing the frameworks for building something deliberately better.',
     icon: 'Mic2',
     features: [
       'Keynote addresses (60–90 minutes)',
@@ -249,8 +249,8 @@ export default async function WorkPage() {
                 <em className="text-gold block">to your context?</em>
               </h2>
               <p className="font-body text-cream/55 text-lg leading-relaxed mb-8">
-                Whether you want a keynote, a full cultural training program, a digital
-                strategy engagement, or are not yet sure which layer fits your need —
+                Whether you want a conversation facilitated by Sir Anthony, a digital content
+                strategy engagement, or web development or are not yet sure which layer fits your need —
                 the conversation starts the same way. A real exchange about context.
               </p>
               <div className="flex flex-wrap gap-4">

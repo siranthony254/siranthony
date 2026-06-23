@@ -4,37 +4,12 @@ import { AnimatedSection, SectionHeader } from '@/components/ui'
 import type { Testimonial } from '@/types'
 
 // ── TestimonialStrip ─────────────────────────────────────────────
-const FALLBACK_TESTIMONIALS: Testimonial[] = [
-  {
-    _id: '1', order: 1,
-    quote:
-      'Sir Anthony does not just speak about culture — he makes you feel the weight of what you have been building without knowing it. Our leadership team left the session seeing things we had been walking past for years.',
-    author: 'Dr. Wanjiku M.',
-    role: 'Vice Chancellor',
-    organization: 'Kenyan University',
-  },
-  {
-    _id: '2', order: 2,
-    quote:
-      'The cultural audit changed how we understood ourselves as an organization. The gap between what we said we valued and what we actually rewarded was uncomfortable — and exactly what we needed to see.',
-    author: 'James O.',
-    role: 'CEO',
-    organization: 'Nairobi Tech Company',
-  },
-  {
-    _id: '3', order: 3,
-    quote:
-      'Every campus should have this conversation. Mic\'d Up gave our students a framework for understanding the culture forming them — and the courage to think about what they want to build instead.',
-    author: 'Pastor Samuel K.',
-    role: 'Campus Chaplain',
-    organization: 'University of Nairobi',
-  },
-]
-
 interface TestimonialStripProps { testimonials: Testimonial[] }
 
 export function TestimonialStrip({ testimonials }: TestimonialStripProps) {
-  const items = testimonials?.length ? testimonials : FALLBACK_TESTIMONIALS
+  if (!testimonials || testimonials.length === 0) {
+    return null
+  }
 
   return (
     <section className="section-pad bg-navy border-y border-gold/10">
@@ -46,7 +21,7 @@ export function TestimonialStrip({ testimonials }: TestimonialStripProps) {
           className="mb-14"
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {items.slice(0, 3).map((t, i) => (
+          {testimonials.slice(0, 3).map((t, i) => (
             <AnimatedSection key={t._id} delay={i * 120}>
               <div className="card-navy p-7 h-full flex flex-col">
                 <Quote size={24} className="text-gold/25 mb-4 flex-shrink-0" />
