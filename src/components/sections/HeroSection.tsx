@@ -59,15 +59,18 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
               <div className="w-12 h-px bg-gradient-to-r from-gold to-transparent mb-6" />
               <p className="font-body text-cream/60 text-lg md:text-xl leading-relaxed max-w-lg">
                 Most of us never asked. Almost nothing about the way we live was our
-                original idea — someone gave it to us. That is the question.
-                That is the work.
+                original idea — someone gave it to us. 
+                <em className="text-gold">I help{' '}
+              <span className="underline decoration-gold/40 underline-offset-4">
+                people, organizations, and movements
+              </span>{' '}
+              understand culture, shape meaningful conversations, and build influence intentionally.</em>
+
               </p>
             </motion.div>
 
             <motion.div {...fadeUp(0.55)} className="flex flex-col sm:flex-row gap-4">
-              <Link href="/conversations" className="btn-gold">
-                Start the Conversation
-              </Link>
+            
               <Link href="/work" className="btn-ghost">
                 Work With Me
               </Link>
