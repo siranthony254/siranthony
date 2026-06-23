@@ -61,7 +61,7 @@ export default async function HomePage() {
       <SignatureQuestion />
       <FeaturedPosts posts={posts} />
       <ServicesPreview services={services} />
-      <MicdupBanner />
+      {/* <MicdupBanner /> */}
       <HomeCTA />
     </>
   )
