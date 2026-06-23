@@ -3,10 +3,10 @@ import Link from 'next/link'
 import { ArrowRight, Mic2, Users, Globe, BookOpen, Check } from 'lucide-react'
 import { AnimatedSection, SectionHeader, GoldLine } from '@/components/ui'
 import { sanityFetch } from '@/lib/sanity'
-import { SPEAKING_TOPICS_QUERY, TESTIMONIALS_QUERY, SITE_SETTINGS_QUERY } from '@/lib/queries'
+import { SERVICES_QUERY, SPEAKING_TOPICS_QUERY, TESTIMONIALS_QUERY, SITE_SETTINGS_QUERY } from '@/lib/queries'
 import { TestimonialStrip } from '@/components/sections/HomeSections'
 import { WorkHero } from '@/components/sections/WorkHero'
-import type { SpeakingTopic, Testimonial, SiteSettings } from '@/types'
+import type { SpeakingTopic, Testimonial, SiteSettings, Service } from '@/types'
 
 export const metadata: Metadata = {
   title: 'Work With Me',
@@ -14,15 +14,21 @@ export const metadata: Metadata = {
     'Cultural training, speaking, consulting, and digital strategy. Sir Anthony works with individuals, organizations, and institutions across three integrated layers of engagement.',
 }
 
-const LAYERS = [
+const iconMap: Record<string, React.ComponentType<any>> = {
+  Mic2,
+  Users,
+  Globe,
+  BookOpen,
+}
+
+const FALLBACK_SERVICES: Service[] = [
   {
-    icon: Mic2,
-    num: '01',
+    _id: 'fallback-1',
     title: 'Cultural Intelligence',
-    subtitle: 'The Public Layer',
     description:
       'Every keynote, panel, talk, and community forum. Sir Anthony brings the cultural conversation directly into your context — equipping audiences to see what they have been building without knowing it, and introducing the frameworks for building something deliberately better.',
-    includes: [
+    icon: 'Mic2',
+    features: [
       'Keynote addresses (60–90 minutes)',
       'Panel facilitation and moderation',
       'University lectures and campus talks',
@@ -32,16 +38,15 @@ const LAYERS = [
       'Conference and summit appearances',
     ],
     cta: 'Book a Talk',
-    highlight: false,
+    order: 1,
   },
   {
-    icon: Users,
-    num: '02',
+    _id: 'fallback-2',
     title: 'Cultural Training',
-    subtitle: 'The Institutional Layer',
     description:
       'Multi-session, structured engagements with leadership teams, staff bodies, student populations, or congregations. The work begins with a cultural audit — what culture actually exists versus what is intended — and builds through facilitated sessions toward deliberate cultural design.',
-    includes: [
+    icon: 'Users',
+    features: [
       'Organizational cultural audit',
       'Leadership team workshops (3–6 sessions)',
       'Full staff cultural formation programs',
@@ -51,16 +56,15 @@ const LAYERS = [
       'Post-engagement implementation support',
     ],
     cta: 'Start the Training',
-    highlight: true,
+    order: 2,
   },
   {
-    icon: Globe,
-    num: '03',
+    _id: 'fallback-3',
     title: 'Digital Culture',
-    subtitle: 'The Architecture Layer',
     description:
       'Building the digital presence that honestly reflects what an organization actually is. Websites, content strategies, and personal brand development — all built on the cultural clarity developed in Layer 2. Every website is a cultural statement. This work ensures it says the right thing.',
-    includes: [
+    icon: 'Globe',
+    features: [
       'Website strategy and development',
       'Content strategy and editorial planning',
       'Personal brand development for leaders',
@@ -70,7 +74,7 @@ const LAYERS = [
       'Brand identity and positioning',
     ],
     cta: 'Build Together',
-    highlight: false,
+    order: 3,
   },
 ]
 
@@ -84,17 +88,21 @@ const PROCESS = [
 
 export default async function WorkPage() {
   const WORK_COMBINED_QUERY = `{
+    "services": ${SERVICES_QUERY},
     "topics": ${SPEAKING_TOPICS_QUERY},
     "testimonials": ${TESTIMONIALS_QUERY},
     "siteSettings": ${SITE_SETTINGS_QUERY}
   }`
 
   const data = await sanityFetch<{
+    services: Service[]
     topics: SpeakingTopic[]
     testimonials: Testimonial[]
     siteSettings: SiteSettings
   }>(WORK_COMBINED_QUERY)
 
+  const rawServices = data?.services || []
+  const services = rawServices.length > 0 ? rawServices : FALLBACK_SERVICES
   const topics = data?.topics || []
   const testimonials = data?.testimonials || []
   const siteSettings = data?.siteSettings
@@ -110,12 +118,22 @@ export default async function WorkPage() {
       {/* Three layers */}
       <section className="section-pad bg-navy/95">
         <div className="container-site space-y-8">
-          {LAYERS.map((layer, i) => {
-            const Icon = layer.icon
+          {services.map((service, i) => {
+            const num = String(i + 1).padStart(2, '0')
+            const Icon = iconMap[service.icon] || BookOpen
+            const subtitles = [
+              'The Public Layer',
+              'The Institutional Layer',
+              'The Architecture Layer',
+            ]
+            const subtitle = subtitles[i] || 'Special Engagement'
+            const highlight = i === 1 // Layer 2 is highlighted (Cultural Training)
+            const features = service.features || []
+
             return (
-              <AnimatedSection key={layer.num} delay={i * 100}>
-                <div className={`card-navy p-8 md:p-10 grid grid-cols-1 lg:grid-cols-3 gap-8 ${layer.highlight ? 'border-gold/30' : ''}`}>
-                  {layer.highlight && (
+              <AnimatedSection key={service._id} delay={i * 100}>
+                <div className={`card-navy p-8 md:p-10 grid grid-cols-1 lg:grid-cols-3 gap-8 ${highlight ? 'border-gold/30' : ''}`}>
+                  {highlight && (
                     <div className="lg:col-span-3 -mt-2 mb-4">
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/15 text-gold text-xs font-body font-medium border border-gold/25">
                         Most Requested
@@ -130,24 +148,24 @@ export default async function WorkPage() {
                       </div>
                       <div>
                         <p className="font-body text-xs text-gold uppercase tracking-widest mb-0.5">
-                          Layer {layer.num} · {layer.subtitle}
+                          Layer {num} · {subtitle}
                         </p>
                         <h2 className="font-display text-2xl font-semibold text-cream">
-                          {layer.title}
+                          {service.title}
                         </h2>
                       </div>
                     </div>
                     <p className="font-body text-cream/60 leading-relaxed">
-                      {layer.description}
+                      {service.description}
                     </p>
-                    <Link href="/contact" className={layer.highlight ? 'btn-gold inline-flex' : 'btn-ghost inline-flex'}>
-                      {layer.cta} <ArrowRight size={14} />
+                    <Link href="/contact" className={highlight ? 'btn-gold inline-flex' : 'btn-ghost inline-flex'}>
+                      {service.cta || 'Learn More'} <ArrowRight size={14} />
                     </Link>
                   </div>
                   {/* Includes */}
                   <div className="space-y-2.5">
                     <p className="eyebrow mb-4">What&apos;s included</p>
-                    {layer.includes.map(item => (
+                    {features.map(item => (
                       <div key={item} className="flex items-start gap-2.5">
                         <Check size={13} className="text-gold mt-0.5 flex-shrink-0" />
                         <span className="font-body text-xs text-cream/55 leading-relaxed">{item}</span>
@@ -244,8 +262,8 @@ export default async function WorkPage() {
             <AnimatedSection delay={150}>
               <div className="space-y-4">
                 {[
-                  { label: 'Conversations & Speaking', phone: '+254 741 518 589' },
-                  { label: 'Digital Strategy & Web', phone: '+254 727 974 516' },
+                  { label: 'Conversations & Speaking', phone: siteSettings?.contactPhone || '+254 741 518 589' },
+                  { label: 'Digital Strategy & Web', phone: siteSettings?.contactPhoneAlt || '+254 727 974 516' },
                 ].map(c => (
                   <div key={c.label} className="card-navy p-6">
                     <p className="eyebrow mb-2">{c.label}</p>

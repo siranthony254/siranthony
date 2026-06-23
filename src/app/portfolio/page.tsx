@@ -372,13 +372,18 @@ export default async function PortfolioPage() {
                 <div className="card-navy overflow-hidden h-full group">
                   {work.thumbnail?.asset?.url && (
                     <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={work.thumbnail.asset.url}
+                      <Image
+                        src={urlFor(work.thumbnail).width(1000).auto('format').url()}
                         alt={work.thumbnail.alt || work.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        quality={70}
+                        placeholder="blur"
+                        blurDataURL={urlFor(work.thumbnail).width(20).auto('format').url()}
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
-                      <div className="absolute top-4 left-4">
+                      <div className="absolute top-4 left-4 z-10">
                         <span className="text-xs font-body text-gold bg-gold/10 px-2 py-1 rounded">
                           {work.customCategory || work.category}
                         </span>
@@ -521,7 +526,7 @@ export default async function PortfolioPage() {
               Your testimonial helps others understand the value of this work.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="mailto:officialsiranthony@gmail.com?subject=Testimonial%20Request" className="btn-gold flex items-center gap-2">
+              <Link href={`mailto:${siteSettings?.contactEmail || 'officialsiranthony@gmail.com'}?subject=Testimonial%20Request`} className="btn-gold flex items-center gap-2">
                 <Mail size={16} />
                 Share Testimonial
               </Link>
