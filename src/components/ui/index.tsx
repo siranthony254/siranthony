@@ -118,3 +118,7 @@ export function SectionHeader({
 
 // ── ShareButton ────────────────────────────────────────────────────
 export { ShareButton } from './ShareButton'
+
+// ── BlogCount ──────────────────────────────────────────────────────
+export { BlogCount } from './BlogCount'
+

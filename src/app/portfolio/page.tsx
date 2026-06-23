@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ExternalLink, Github, Download, Mail } from 'lucide-react'
-import { AnimatedSection, SectionHeader, GoldLine } from '@/components/ui'
+import { AnimatedSection, SectionHeader, GoldLine, BlogCount } from '@/components/ui'
 import { sanityFetch, urlFor } from '@/lib/sanity'
 import {
   WEB_DEVELOPMENT_QUERY,
@@ -22,7 +22,8 @@ export default async function PortfolioPage() {
     "webProjects": ${WEB_DEVELOPMENT_QUERY},
     "caseStudies": ${CASE_STUDIES_QUERY},
     "intellectualWork": ${INTELLECTUAL_WORK_QUERY},
-    "siteSettings": ${SITE_SETTINGS_QUERY}
+    "siteSettings": ${SITE_SETTINGS_QUERY},
+    "blogCount": count(*[_type == "post"])
   }`
 
   const data = await sanityFetch<{
@@ -30,12 +31,14 @@ export default async function PortfolioPage() {
     caseStudies: CaseStudy[]
     intellectualWork: IntellectualWork[]
     siteSettings: SiteSettings
+    blogCount: number
   }>(PORTFOLIO_COMBINED_QUERY)
 
   const webProjects = data?.webProjects || []
   const caseStudies = data?.caseStudies || []
   const intellectualWork = data?.intellectualWork || []
   const siteSettings = data?.siteSettings
+  const blogCount = data?.blogCount || 0
 
   // Separate projects by category
   const shippedProjects = webProjects?.filter(project => project.category === 'shipped') || []
@@ -367,8 +370,45 @@ export default async function PortfolioPage() {
           />
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Conversations card fetching blog stats */}
+            <AnimatedSection delay={0}>
+              <div className="card-navy overflow-hidden h-full group flex flex-col justify-between">
+                <div>
+                  <div className="relative h-48 overflow-hidden bg-gold/5 flex items-center justify-center border-b border-gold/10">
+                    <span className="text-xs font-body text-gold bg-gold/10 px-2 py-1 rounded absolute top-4 left-4 z-10">
+                      Category: Conversations
+                    </span>
+                    <svg className="w-16 h-16 text-gold/30 group-hover:scale-105 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-display text-xl font-semibold text-cream mb-3 group-hover:text-gold transition-colors">
+                      Conversations
+                    </h3>
+                    <p className="font-body text-cream/60 text-sm leading-relaxed mb-4">
+                      Thought-provoking articles, essays, and dialogues exploring culture, identity, and deliberate change.
+                    </p>
+                    <div className="mt-4 p-4 rounded-lg bg-navy/50 border border-gold/10 flex items-center justify-between">
+                      <span className="text-xs font-body text-cream/45 uppercase tracking-wider">Blogs Published</span>
+                      <BlogCount initialCount={blogCount} />
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6 pt-0">
+                  <Link
+                    href="/conversations"
+                    className="btn-gold text-sm flex items-center gap-2 w-max"
+                  >
+                    Read Conversations <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+            </AnimatedSection>
+
             {intellectualWork?.map((work, index) => (
-              <AnimatedSection key={work._id} delay={index * 100}>
+              <AnimatedSection key={work._id} delay={(index + 1) * 100}>
                 <div className="card-navy overflow-hidden h-full group">
                   {work.thumbnail?.asset?.url && (
                     <div className="relative h-48 overflow-hidden">
@@ -438,12 +478,6 @@ export default async function PortfolioPage() {
               </AnimatedSection>
             ))}
           </div>
-
-          {(!intellectualWork || intellectualWork.length === 0) && (
-            <AnimatedSection className="text-center py-12">
-              <p className="text-cream/60 text-lg">Intellectual work coming soon.</p>
-            </AnimatedSection>
-          )}
         </div>
       </section>
 
