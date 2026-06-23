@@ -123,18 +123,6 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
                   </div>
                 </motion.div>
               )}
-
-              {/* Stats card - positioned over image corner */}
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
-                className="absolute top-4 right-4 bg-navy p-4 z-10 rounded-lg shadow-xl border border-gold/20"
-              >
-                <p className="eyebrow mb-1 text-[0.65rem]">Mic&apos;d Up Initiative</p>
-                <p className="font-display text-2xl font-semibold text-gold">400M+</p>
-                <p className="font-body text-[0.8rem] text-cream/50">African youth aged 15–35</p>
-              </motion.div>
             </div>
           </motion.div>
         </div>
