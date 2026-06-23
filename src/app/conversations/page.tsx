@@ -4,10 +4,11 @@ import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { AnimatedSection, SectionHeader, CategoryBadge, GoldLine } from '@/components/ui'
 import { sanityFetch } from '@/lib/sanity'
-import { ALL_POSTS_QUERY } from '@/lib/queries'
+import { ALL_POSTS_QUERY, FAQ_QUERY } from '@/lib/queries'
 import { formatDate, CATEGORY_LABELS } from '@/lib/utils'
 import { urlFor } from '@/lib/sanity'
-import type { Post } from '@/types'
+import { FaqAccordion } from '@/components/sections/FaqAccordion'
+import type { Post, Faq } from '@/types'
 
 export const metadata: Metadata = {
   title: 'Conversations',
@@ -22,12 +23,27 @@ export default async function ConversationsPage({
 }: {
   searchParams: { category?: string }
 }) {
-  const posts = await sanityFetch<Post[]>(ALL_POSTS_QUERY)
+  const CONVERSATIONS_COMBINED_QUERY = `{
+    "posts": ${ALL_POSTS_QUERY},
+    "faqs": ${FAQ_QUERY}
+  }`
+
+  const data = await sanityFetch<{
+    posts: Post[]
+    faqs: Faq[]
+  }>(CONVERSATIONS_COMBINED_QUERY)
+
+  const posts = data?.posts || []
+  const faqs = data?.faqs || []
   const active = searchParams.category || 'all'
 
-  const filtered = active === 'all'
+  const filteredPosts = active === 'all'
     ? posts
     : posts.filter(p => p.category === active)
+
+  const filteredFaqs = active === 'all'
+    ? faqs
+    : faqs.filter(f => f.category === active)
 
   return (
     <>
@@ -81,7 +97,7 @@ export default async function ConversationsPage({
       {/* Posts grid */}
       <section className="section-pad bg-navy/95">
         <div className="container-site">
-          {filtered.length === 0 ? (
+          {filteredPosts.length === 0 ? (
             <div className="text-center py-20">
               <p className="font-display text-2xl text-cream/30 italic">
                 No conversations in this category yet. Check back soon.
@@ -89,7 +105,7 @@ export default async function ConversationsPage({
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filtered.map((post, i) => (
+              {filteredPosts.map((post, i) => (
                 <AnimatedSection key={post._id} delay={i * 60}>
                   <Link href={`/conversations/${post.slug.current}`} className="group block h-full">
                     <div className="card-navy overflow-hidden h-full flex flex-col">
@@ -143,6 +159,26 @@ export default async function ConversationsPage({
           )}
         </div>
       </section>
+
+      {/* FAQ Section */}
+      {filteredFaqs.length > 0 && (
+        <section className="section-pad bg-navy border-t border-gold/10">
+          <div className="container-site">
+            <SectionHeader
+              eyebrow="FAQ"
+              title="Common Questions"
+              subtitle={
+                active === 'all'
+                  ? 'Insights into cultural intelligence, content strategy, and systemic change.'
+                  : `Frequently asked questions about ${CATEGORY_LABELS[active] || active}.`
+              }
+              centered
+              className="mb-14"
+            />
+            <FaqAccordion faqs={filteredFaqs} />
+          </div>
+        </section>
+      )}
     </>
   )
 }

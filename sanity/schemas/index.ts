@@ -9,12 +9,14 @@ import { siteSettingsSchema }  from './siteSettings'
 import { webDevelopmentSchema } from './webDevelopment'
 import { caseStudySchema }     from './caseStudy'
 import { intellectualWorkSchema } from './intellectualWork'
+import { faqSchema }             from './faq'
 
 export const schemaTypes = [
   // Content
   postSchema,
   authorSchema,
   gallerySchema,
+  faqSchema,
   // Services
   serviceSchema,
   speakingTopicSchema,

@@ -45,6 +45,7 @@ export default defineConfig({
                   .items([
                     S.documentTypeListItem('post').title('All Posts'),
                     S.documentTypeListItem('author').title('Authors'),
+                    S.documentTypeListItem('faq').title('FAQs'),
                   ])
               ),
 

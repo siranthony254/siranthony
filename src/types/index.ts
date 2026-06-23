@@ -187,3 +187,13 @@ export interface IntellectualWork {
   order?: number
   tags: string[]
 }
+
+// ─── FAQ ─────────────────────────────────────────────────────────
+export interface Faq {
+  _id: string
+  question: string
+  answer: string
+  category: string
+  order: number
+}
+

@@ -137,3 +137,11 @@ export const SITE_SETTINGS_QUERY = `
     homepageHeroImage { asset->{ _id, url }, alt }
   }
 `
+
+// ─── FAQ ─────────────────────────────────────────────────────────
+export const FAQ_QUERY = `
+  *[_type == "faq"] | order(order asc) {
+    _id, question, answer, category, order
+  }
+`
+
