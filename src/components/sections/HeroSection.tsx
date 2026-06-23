@@ -69,7 +69,7 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
               </p>
             </motion.div>
 
-            <motion.div {...fadeUp(0.55)} className="flex flex-col sm:flex-row gap-4">
+            <motion.div {...fadeUp(0.55)} className="flex flex-col sm:flex-row gap-4 hover:gap-6 items-center">
             
               <Link href="/work" className="btn-ghost">
                 Work With Me
