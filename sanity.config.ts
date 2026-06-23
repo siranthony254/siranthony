@@ -105,14 +105,30 @@ export default defineConfig({
 
             S.divider(),
 
-            // ── Settings (singleton) ───────────────────────────────
+            // ── Settings (singletons) ──────────────────────────────
             S.listItem()
-              .title('Site Settings')
+              .title('Settings')
               .child(
-                S.document()
-                  .schemaType('siteSettings')
-                  .documentId('siteSettings')
-                  .title('Site Settings')
+                S.list()
+                  .title('Settings')
+                  .items([
+                    S.listItem()
+                      .title('Site Settings')
+                      .child(
+                        S.document()
+                          .schemaType('siteSettings')
+                          .documentId('siteSettings')
+                          .title('Site Settings')
+                      ),
+                    S.listItem()
+                      .title('Impact Numbers')
+                      .child(
+                        S.document()
+                          .schemaType('impactNumbers')
+                          .documentId('impactNumbers')
+                          .title('Impact Numbers')
+                      ),
+                  ])
               ),
           ]),
     }),
