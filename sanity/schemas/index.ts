@@ -10,6 +10,7 @@ import { webDevelopmentSchema } from './webDevelopment'
 import { caseStudySchema }     from './caseStudy'
 import { intellectualWorkSchema } from './intellectualWork'
 import { faqSchema }             from './faq'
+import { impactNumbersSchema }   from './impactNumbers'
 
 export const schemaTypes = [
   // Content
@@ -26,6 +27,7 @@ export const schemaTypes = [
   micdupEventSchema,
   // Config
   siteSettingsSchema,
+  impactNumbersSchema,
   webDevelopmentSchema,
   caseStudySchema,
   intellectualWorkSchema,

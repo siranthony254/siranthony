@@ -3,14 +3,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ExternalLink, Github, Download, Mail } from 'lucide-react'
 import { AnimatedSection, SectionHeader, GoldLine, BlogCount } from '@/components/ui'
+import { ImpactNumbersSection } from '@/components/sections/ImpactNumbers'
 import { sanityFetch, urlFor } from '@/lib/sanity'
 import {
   WEB_DEVELOPMENT_QUERY,
   CASE_STUDIES_QUERY,
   INTELLECTUAL_WORK_QUERY,
   SITE_SETTINGS_QUERY,
+  IMPACT_NUMBERS_QUERY,
 } from '@/lib/queries'
-import type { WebDevelopment, CaseStudy, IntellectualWork, SiteSettings } from '@/types'
+import type { WebDevelopment, CaseStudy, IntellectualWork, SiteSettings, ImpactNumbers } from '@/types'
 
 export const metadata: Metadata = {
   title: 'Portfolio - Sir Anthony',
@@ -23,7 +25,8 @@ export default async function PortfolioPage() {
     "caseStudies": ${CASE_STUDIES_QUERY},
     "intellectualWork": ${INTELLECTUAL_WORK_QUERY},
     "siteSettings": ${SITE_SETTINGS_QUERY},
-    "blogCount": count(*[_type == "post"])
+    "blogCount": count(*[_type == "post"]),
+    "impactNumbers": ${IMPACT_NUMBERS_QUERY}
   }`
 
   const data = await sanityFetch<{
@@ -32,13 +35,15 @@ export default async function PortfolioPage() {
     intellectualWork: IntellectualWork[]
     siteSettings: SiteSettings
     blogCount: number
+    impactNumbers: ImpactNumbers
   }>(PORTFOLIO_COMBINED_QUERY)
 
-  const webProjects = data?.webProjects || []
-  const caseStudies = data?.caseStudies || []
+  const webProjects     = data?.webProjects || []
+  const caseStudies     = data?.caseStudies || []
   const intellectualWork = data?.intellectualWork || []
-  const siteSettings = data?.siteSettings
-  const blogCount = data?.blogCount || 0
+  const siteSettings    = data?.siteSettings
+  const blogCount       = data?.blogCount || 0
+  const impactNumbers   = data?.impactNumbers
 
   // Separate projects by category
   const shippedProjects = webProjects?.filter(project => project.category === 'shipped') || []
@@ -74,6 +79,9 @@ export default async function PortfolioPage() {
           </div>
         </div>
       </section>
+
+      {/* Impact Numbers */}
+      <ImpactNumbersSection data={impactNumbers} />
 
       {/* Shipped Products */}
       <section className="section-pad bg-navy/95">

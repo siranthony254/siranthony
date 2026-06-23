@@ -145,3 +145,16 @@ export const FAQ_QUERY = `
   }
 `
 
+// ─── Impact Numbers ───────────────────────────────────────────────
+export const IMPACT_NUMBERS_QUERY = `
+  *[_type == "impactNumbers"][0] {
+    speaking {
+      speakingEngagements, eventsFacilitated, campusesEngaged,
+      workshopsFacilitated, conversationsDone
+    },
+    projects {
+      websitesLaunched, brandsSupported, demoProjects
+    },
+    impactMovements[] { label, value }
+  }
+`

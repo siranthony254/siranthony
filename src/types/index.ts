@@ -197,3 +197,24 @@ export interface Faq {
   order: number
 }
 
+// ─── Impact Numbers ───────────────────────────────────────────────
+export interface ImpactMovementStat {
+  label: string
+  value: number
+}
+
+export interface ImpactNumbers {
+  speaking?: {
+    speakingEngagements?: number
+    eventsFacilitated?: number
+    campusesEngaged?: number
+    workshopsFacilitated?: number
+    conversationsDone?: number
+  }
+  projects?: {
+    websitesLaunched?: number
+    brandsSupported?: number
+    demoProjects?: number
+  }
+  impactMovements?: ImpactMovementStat[]
+}

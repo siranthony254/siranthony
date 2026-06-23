@@ -55,6 +55,31 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
               </h1>
             </motion.div>
 
+            {/* Mobile-only hero image — shown between h1 and body text */}
+            {siteSettings?.homepageHeroImage?.asset?.url && (
+              <motion.div
+                {...fadeUp(0.35)}
+                className="lg:hidden relative w-full overflow-hidden rounded-2xl shadow-2xl"
+                style={{ maxHeight: '55vw' }}
+              >
+                <div className="relative w-full" style={{ paddingBottom: '85%' }}>
+                  <Image
+                    src={urlFor(siteSettings.homepageHeroImage).width(900).auto('format').url()}
+                    alt={siteSettings.homepageHeroImage.alt || 'Sir Anthony'}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 95vw, 0px"
+                    quality={75}
+                    className="object-cover object-top"
+                  />
+                  {/* Gold gradient overlay — bottom fade */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-navy/70 via-transparent to-transparent pointer-events-none" />
+                  {/* Subtle gold border glow */}
+                  <div className="absolute inset-0 rounded-2xl ring-1 ring-gold/20 pointer-events-none" />
+                </div>
+              </motion.div>
+            )}
+
             <motion.div {...fadeUp(0.4)}>
               <div className="w-12 h-px bg-gradient-to-r from-gold to-transparent mb-6" />
               <p className="font-body text-cream/60 text-lg md:text-xl leading-relaxed max-w-lg">
