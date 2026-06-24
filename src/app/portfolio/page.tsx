@@ -19,6 +19,8 @@ export const metadata: Metadata = {
   description: 'Web development projects, case studies, and intellectual work by Sir Anthony - cultural thinker and digital strategist.',
 }
 
+export const revalidate = 60
+
 export default async function PortfolioPage() {
   const PORTFOLIO_COMBINED_QUERY = `{
     "webProjects": ${WEB_DEVELOPMENT_QUERY},

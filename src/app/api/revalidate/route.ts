@@ -31,7 +31,8 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { type, documentId, documentType } = body
+    const { type, documentId } = body
+    const documentType = body.documentType || body._type || body.type
 
     console.log(`Revalidation triggered: ${type} for ${documentType} (${documentId})`)
 
@@ -47,6 +48,7 @@ export async function POST(request: NextRequest) {
       webDevProject: ['/portfolio', '/'],
       caseStudy: ['/portfolio', '/'],
       intellectualWork: ['/portfolio', '/'],
+      impactNumbers: ['/', '/portfolio'],
       siteSettings: ['/', '/about', '/contact'],
     }
 

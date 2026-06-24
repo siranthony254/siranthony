@@ -23,6 +23,8 @@ export const metadata: Metadata = {
     "Who made you normal? Sir Anthony is a Digital Content Strategist, Conversationalist, and Cultural Architect, helping individuals, organizations, and institutions understand how culture is built through the smallest and almost ignored repeated choices and ultimately build something deliberately better. He is also the founder of Mic'd Up Initiative, which seeks to influence the culture around young people in institutions of higher learning through conversations, mentorship, community building and purposeful media.",
 }
 
+export const revalidate = 60
+
 export default async function HomePage() {
   const HOME_COMBINED_QUERY = `{
     "featuredPosts": ${FEATURED_POSTS_QUERY},
