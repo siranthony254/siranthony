@@ -1,22 +1,58 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
-import { AnimatedSection, SectionHeader, CategoryBadge, GoldLine } from '@/components/ui'
-import { sanityFetch } from '@/lib/sanity'
-import { ALL_POSTS_QUERY, FAQ_QUERY } from '@/lib/queries'
+import { ChevronRight } from 'lucide-react'
+import { AnimatedSection, SectionHeader } from '@/components/ui'
+import { sanityFetch, urlFor } from '@/lib/sanity'
+import { ALL_POSTS_QUERY, FAQ_QUERY, VIDEO_CONVERSATIONS_QUERY } from '@/lib/queries'
 import { formatDate, CATEGORY_LABELS } from '@/lib/utils'
-import { urlFor } from '@/lib/sanity'
 import { FaqAccordion } from '@/components/sections/FaqAccordion'
-import type { Post, Faq } from '@/types'
+import { VideoConversations } from '@/components/sections/VideoConversations'
+import { PostsExplorer, type PostCardData } from '@/components/sections/PostsExplorer'
+import { BlogSidebar, type SidebarSection } from '@/components/sections/BlogSidebar'
+import type { Post, Faq, VideoConversation } from '@/types'
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://siranthony.com'
 
 export const metadata: Metadata = {
   title: 'Conversations',
   description:
-    'Cultural observations, examined perspectives, and the questions worth asking — from Sir Anthony, cultural thinker and conversationalist.',
+    'Talks, essays, and the questions I keep coming back to — on culture, identity, leadership, and the things we call normal without checking.',
+  alternates: {
+    canonical: `${SITE_URL}/conversations`,
+    types: { 'application/rss+xml': `${SITE_URL}/conversations/rss.xml` },
+  },
 }
 
-const CATEGORIES = ['all', 'culture', 'individual', 'leadership', 'education', 'ideas', 'family', 'political']
+const CATEGORY_ORDER = [
+  'culture',
+  'individual',
+  'leadership',
+  'education',
+  'ideas',
+  'family',
+  'political',
+]
+
+// Server-side so the Sanity image builder never enters the client bundle.
+function toCardData(post: Post): PostCardData {
+  return {
+    id: post._id,
+    title: post.title,
+    slug: post.slug.current,
+    excerpt: post.excerpt || '',
+    category: post.category,
+    dateLabel: formatDate(post.publishedAt),
+    readingTime: post.estimatedReadingTime,
+    imageUrl: post.mainImage?.asset?.url
+      ? urlFor(post.mainImage).width(1200).auto('format').url()
+      : undefined,
+    blurUrl: post.mainImage?.asset?.url
+      ? urlFor(post.mainImage).width(20).auto('format').url()
+      : undefined,
+    authorName: post.author?.name,
+    featured: post.featured,
+  }
+}
 
 export default async function ConversationsPage({
   searchParams,
@@ -25,142 +61,155 @@ export default async function ConversationsPage({
 }) {
   const CONVERSATIONS_COMBINED_QUERY = `{
     "posts": ${ALL_POSTS_QUERY},
-    "faqs": ${FAQ_QUERY}
+    "faqs": ${FAQ_QUERY},
+    "videos": ${VIDEO_CONVERSATIONS_QUERY}
   }`
 
   const data = await sanityFetch<{
     posts: Post[]
     faqs: Faq[]
+    videos: VideoConversation[]
   }>(CONVERSATIONS_COMBINED_QUERY)
 
   const posts = data?.posts || []
   const faqs = data?.faqs || []
-  const active = searchParams.category || 'all'
+  const videos = data?.videos || []
 
-  const filteredPosts = active === 'all'
-    ? posts
-    : posts.filter(p => p.category === active)
+  const requested = searchParams.category
+  const active = requested && CATEGORY_ORDER.includes(requested) ? requested : 'all'
 
-  const filteredFaqs = active === 'all'
-    ? faqs
-    : faqs.filter(f => f.category === active)
+  const filteredPosts = active === 'all' ? posts : posts.filter(p => p.category === active)
+  const filteredVideos = active === 'all' ? videos : videos.filter(v => v.category === active)
+  const filteredFaqs = active === 'all' ? faqs : faqs.filter(f => f.category === active)
+
+  // Sections, with counts. Empty ones are left out rather than shown at zero.
+  const sections: SidebarSection[] = CATEGORY_ORDER.map(key => ({
+    key,
+    label: CATEGORY_LABELS[key] || key,
+    count: posts.filter(p => p.category === key).length,
+  })).filter(s => s.count > 0)
+
+  const cards = filteredPosts.map(toCardData)
+  const lead = cards.find(c => c.featured) || cards[0]
+
+  const recent = posts.slice(0, 5).map(p => ({
+    id: p._id,
+    title: p.title,
+    slug: p.slug.current,
+    dateLabel: formatDate(p.publishedAt),
+  }))
+
+  const activeLabel = active === 'all' ? null : CATEGORY_LABELS[active] || active
 
   return (
     <>
       {/* Header */}
-      <section className="relative pt-36 pb-20 bg-navy overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 60% 70% at 80% 20%, rgba(201,168,76,0.05) 0%, transparent 65%)' }} />
-        <div className="container-site relative z-10">
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto">
-              <p className="eyebrow mb-5">Conversations</p>
-              <GoldLine className="mb-7 mx-auto" />
-              <h1
-                className="font-display font-semibold text-cream mb-6"
-                style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
-              >
-                The questions
-                <br />
-                <em className="text-gold">nobody is asking.</em>
+      <section className="pt-32 pb-10 bg-navy">
+        <div className="container-site">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex items-center gap-2 font-body text-xs text-cream/35">
+              <li>
+                <Link href="/" className="hover:text-gold transition-colors">
+                  Home
+                </Link>
+              </li>
+              <ChevronRight size={12} className="text-gold/25" />
+              <li>
+                {activeLabel ? (
+                  <Link href="/conversations" className="hover:text-gold transition-colors">
+                    Conversations
+                  </Link>
+                ) : (
+                  <span className="text-cream/55">Conversations</span>
+                )}
+              </li>
+              {activeLabel && (
+                <>
+                  <ChevronRight size={12} className="text-gold/25" />
+                  <li className="text-cream/55">{activeLabel}</li>
+                </>
+              )}
+            </ol>
+          </nav>
+
+          <AnimatedSection direction="in">
+            <div className="max-w-2xl">
+              <h1 className="font-display font-semibold text-cream text-3xl md:text-4xl mb-4 leading-tight">
+                {activeLabel ? (
+                  <>
+                    Conversations on <em className="text-gold">{activeLabel.toLowerCase()}.</em>
+                  </>
+                ) : (
+                  <>
+                    The questions <em className="text-gold">nobody is asking.</em>
+                  </>
+                )}
               </h1>
-              <p className="font-body text-cream/55 text-lg leading-relaxed max-w-xl mx-auto">
-                Cultural observations and examined perspectives on culture, identity,
-                leadership, and the ideas quietly shaping how we live.
+              <p className="font-body text-cream/60 leading-relaxed">
+                Everything I have said out loud and written down — on culture, identity,
+                leadership, and the things we call normal without ever checking.
               </p>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Category filter */}
-      <div className="sticky top-16 z-30 bg-navy/95 backdrop-blur-md border-b border-gold/10">
-        <div className="container-site py-4 overflow-x-auto">
+      {/* Section chips — the mobile equivalent of the sidebar index */}
+      <div className="lg:hidden sticky top-16 z-30 bg-navy/95 backdrop-blur-md border-y border-gold/10">
+        <div className="container-site py-3 overflow-x-auto">
           <div className="flex gap-2 min-w-max">
-            {CATEGORIES.map(cat => (
+            <Link
+              href="/conversations"
+              className={`px-4 py-1.5 rounded-full font-body text-xs uppercase tracking-wider border transition-all duration-200 ${
+                active === 'all'
+                  ? 'bg-gold text-navy border-gold font-medium'
+                  : 'text-cream/50 border-gold/15 hover:border-gold/35 hover:text-cream/80'
+              }`}
+            >
+              All
+            </Link>
+            {sections.map(section => (
               <Link
-                key={cat}
-                href={cat === 'all' ? '/conversations' : `/conversations?category=${cat}`}
+                key={section.key}
+                href={`/conversations?category=${section.key}`}
                 className={`px-4 py-1.5 rounded-full font-body text-xs uppercase tracking-wider border transition-all duration-200 ${
-                  active === cat
+                  active === section.key
                     ? 'bg-gold text-navy border-gold font-medium'
                     : 'text-cream/50 border-gold/15 hover:border-gold/35 hover:text-cream/80'
                 }`}
               >
-                {cat === 'all' ? 'All' : CATEGORY_LABELS[cat]}
+                {section.label}
               </Link>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Posts grid */}
+      {/* Posts + sidebar */}
       <section className="section-pad bg-navy/95">
         <div className="container-site">
-          {filteredPosts.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="font-display text-2xl text-cream/30 italic">
-                No conversations in this category yet. Check back soon.
-              </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-14">
+            <div className="lg:col-span-8">
+              <PostsExplorer posts={cards} lead={lead} />
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPosts.map((post, i) => (
-                <AnimatedSection key={post._id} delay={i * 60}>
-                  <Link href={`/conversations/${post.slug.current}`} className="group block h-full">
-                    <div className="card-navy overflow-hidden h-full flex flex-col">
-                      {post.mainImage?.asset?.url && (
-                        <div className="relative h-48 overflow-hidden flex-shrink-0">
-                          <Image
-                            src={urlFor(post.mainImage).width(1200).auto('format').url()}
-                            alt={post.mainImage.alt || post.title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 33vw"
-                            quality={70}
-                            className="object-cover group-hover:scale-105 transition-transform duration-700"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent" />
-                        </div>
-                      )}
-                      <div className="p-6 flex flex-col flex-1">
-                        <div className="flex items-center gap-2 mb-3 flex-wrap">
-                          {post.featured && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gold/20 text-gold border border-gold/30 uppercase tracking-wider">
-                              Featured
-                            </span>
-                          )}
-                          <CategoryBadge category={post.category} />
-                          <span className="font-body text-xs text-cream/30">
-                            {formatDate(post.publishedAt)}
-                          </span>
-                        </div>
-                        <h2 className="font-display text-xl font-semibold text-cream group-hover:text-gold transition-colors duration-300 mb-3 leading-snug flex-1">
-                          {post.title}
-                        </h2>
-                        <p className="font-body text-sm text-cream/50 leading-relaxed line-clamp-2 mb-5">
-                          {post.excerpt}
-                        </p>
-                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-gold/10">
-                          <span className="inline-flex items-center gap-2 text-gold text-xs font-body group-hover:gap-3 transition-all duration-200">
-                            Read <ArrowRight size={12} />
-                          </span>
-                          {post.estimatedReadingTime && (
-                            <span className="font-body text-xs text-cream/25">
-                              {post.estimatedReadingTime} min
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </AnimatedSection>
-              ))}
+            <div className="lg:col-span-4">
+              <BlogSidebar
+                sections={sections}
+                recent={recent}
+                active={active}
+                total={posts.length}
+                shareUrl={`${SITE_URL}/conversations`}
+              />
             </div>
-          )}
+          </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* Video conversations */}
+      <VideoConversations videos={filteredVideos} />
+
+      {/* FAQ */}
       {filteredFaqs.length > 0 && (
         <section className="section-pad bg-navy border-t border-gold/10">
           <div className="container-site">
@@ -169,8 +218,8 @@ export default async function ConversationsPage({
               title="Common Questions"
               subtitle={
                 active === 'all'
-                  ? 'Insights into cultural intelligence, content strategy, and systemic change.'
-                  : `Frequently asked questions about ${CATEGORY_LABELS[active] || active}.`
+                  ? 'The things people ask me most often, answered plainly.'
+                  : `What people ask about ${activeLabel?.toLowerCase() || active}.`
               }
               centered
               className="mb-14"

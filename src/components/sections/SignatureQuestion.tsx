@@ -77,8 +77,8 @@ export function SignatureQuestion() {
             transition={{ duration: 0.7, delay: 0.35 }}
             className="font-body text-cream/55 text-lg leading-relaxed"
           >
-            Sir Anthony helps individuals, organizations, and institutions understand
-            how culture is built — and develop the thinking to shape it deliberately.
+            I work with people, organisations, and campuses on seeing what they have
+            already built — and on building the next part on purpose.
           </motion.p>
         </div>
 

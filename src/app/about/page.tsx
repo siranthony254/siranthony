@@ -4,19 +4,19 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { AnimatedSection, SectionHeader, RippleCircles, GoldLine } from '@/components/ui'
 import { sanityFetch, urlFor } from '@/lib/sanity'
-import { AUTHOR_QUERY, TEST_AUTHOR_QUERY } from '@/lib/queries'
+import { AUTHOR_QUERY } from '@/lib/queries'
 import type { Author } from '@/types'
 
 export const metadata: Metadata = {
   title: 'About Sir Anthony',
   description:
-    'Sir Anthony is a Kenyan cultural thinker, conversationalist, writer, and founder of Mic\'d Up Initiative. His work sits at the intersection of culture, identity, leadership, and the ideas quietly shaping how we live.',
+    'I am a Kenyan conversationalist, cultural thinker, and writer, and the founder of Mic\'d Up Initiative. My work sits where culture, identity, and leadership meet — in the ideas quietly shaping how we live.',
 }
 
 const VALUES = [
   {
     title: 'Observation before instruction',
-    body: 'Sir Anthony notices before he concludes. He describes what he sees before drawing lessons — making him feel like a thinker reasoning out loud alongside his audience, not above them.',
+    body: 'I notice before I conclude. I would rather describe what I am seeing and reason out loud beside you than hand down a lesson from somewhere above you.',
   },
   {
     title: 'The examined perspective',
@@ -32,27 +32,21 @@ const VALUES = [
   },
 ]
 
+// TODO (Anthony): these are true but still general. Each one marked below gets
+// much stronger with a single real detail — name the campus, the organisation,
+// the room, the person. "Cultural training engagements begin" is a category;
+// "Two days with the leadership team at <organisation>" is a memory.
 const MILESTONES = [
-  { year: '2018', event: 'Personal development and motivation content across social platforms' },
-  { year: '2020', event: 'First conversations on culture shift — observing what nobody was naming' },
-  { year: '2022', event: 'Launch of Mic\'d Up Initiative — campus-centered voice development across Africa' },
-  { year: '2023', event: 'Cultural training engagements with organizations and institutions begin' },
-  { year: '2024', event: 'Brand crystallised — Sir Anthony, Voice of Transformation' },
-  { year: '2025', event: 'Book in progress: Who Made You Normal? The Cultural Conversation' },
+  { year: '2018', event: 'Started putting motivation and personal-development content online' },
+  { year: '2020', event: 'Stopped giving advice and started asking why campus had come to mean what it meant' },
+  { year: '2022', event: "Founded Mic'd Up Initiative — finding and shaping student voices on campuses" },
+  { year: '2023', event: 'First organisations asked me in to look at their own culture' }, // TODO: name one
+  { year: '2024', event: 'Settled on the name, and on the question I keep asking underneath it' },
+  { year: '2025', event: 'Began the book — Who Made You Normal? The Cultural Conversation' },
 ]
 
 export default async function AboutPage() {
-  const [author, testAuthors] = await Promise.all([
-    sanityFetch<Author>(AUTHOR_QUERY),
-    sanityFetch<any[]>(TEST_AUTHOR_QUERY),
-  ])
-
-  console.log('Author data:', author)
-  console.log('Author image URL:', author?.image?.asset?.url)
-  console.log('Author image alt:', author?.image?.alt)
-  console.log('Author name:', author?.name)
-  console.log('Test authors:', testAuthors)
-  console.log('Test authors count:', testAuthors?.length)
+  const author = await sanityFetch<Author>(AUTHOR_QUERY)
 
   return (
     <>
@@ -94,11 +88,11 @@ export default async function AboutPage() {
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-            {/* Author Photo */}
-            <AnimatedSection className="lg:col-span-5">
-              <div className="relative">
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden relative">
-                  {author?.image?.asset?.url ? (
+            {/* Author Photo — rendered only when there is one */}
+            {author?.image?.asset?.url && (
+              <AnimatedSection className="lg:col-span-5">
+                <div className="relative">
+                  <div className="aspect-[3/4] rounded-2xl overflow-hidden relative">
                     <Image
                       src={urlFor(author.image).width(1200).auto('format').url()}
                       alt={author.image.alt || author.name || 'Sir Anthony'}
@@ -108,31 +102,24 @@ export default async function AboutPage() {
                       className="object-cover scale-[1.3] origin-center"
                       priority
                     />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center card-navy"
-                      style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.05) 0%, rgba(13,27,42,0.8) 100%)' }}>
-                      <div className="text-center p-8">
-                        <RippleCircles className="mb-4 mx-auto" />
-                        <p className="font-body text-xs text-cream/30 mt-4 uppercase tracking-widest">
-                          Photo coming soon
-                        </p>
-                      </div>
-                    </div>
-                  )}
+                  </div>
+                  {/* Floating quote */}
+                  <div className="absolute -bottom-8 -right-8 bg-navy p-4 max-w-[220px] rounded-lg shadow-xl border border-gold/20">
+                    <p className="font-display italic text-white text-sm leading-relaxed">
+                      &ldquo;An idea is an invitation to a certain perspective. What are you inviting people toward?&rdquo;
+                    </p>
+                  </div>
                 </div>
-                {/* Floating quote */}
-                <div className="absolute -bottom-8 -right-8 bg-navy p-4 max-w-[220px] rounded-lg shadow-xl border border-gold/20">
-                  <p className="font-display italic text-white text-sm leading-relaxed">
-                    &ldquo;An idea is an invitation to a certain perspective. What are you inviting people toward?&rdquo;
-                  </p>
-                </div>
-              </div>
-            </AnimatedSection>
+              </AnimatedSection>
+            )}
 
             {/* Bio text */}
-            <AnimatedSection delay={150} className="lg:col-span-7 space-y-7">
+            <AnimatedSection
+              delay={150}
+              className={author?.image?.asset?.url ? 'lg:col-span-7 space-y-7' : 'lg:col-span-9 space-y-7'}
+            >
               <div>
-                <p className="eyebrow mb-4">About Sir Anthony</p>
+                <p className="eyebrow mb-4">How I got here</p>
                 <GoldLine className="mb-6" />
               </div>
 
@@ -189,7 +176,7 @@ export default async function AboutPage() {
             </div>
 
             <div className="flex flex-wrap gap-3 mb-12">
-              {['Cultural Thinker', 'Conversationalist', 'Cultural Trainer', 'Digital Strategist', 'Nairobi, Kenya'].map((tag) => (
+              {['Cultural Thinker', 'Conversationalist', 'Cultural Trainer', 'Writer', 'Nairobi, Kenya'].map((tag) => (
                 <span key={tag} className="px-4 py-2 rounded-full border border-gold/30 text-gold text-sm font-body">
                   {tag}
                 </span>
@@ -222,13 +209,50 @@ export default async function AboutPage() {
               <p className="font-body text-cream/70 text-lg leading-relaxed max-w-3xl">
                 Based in Nairobi, Kenya, I work with individuals, organisations, campuses, and institutions across
                 Africa — helping them see the culture they have built, develop the thinking to shape it deliberately,
-                and build the digital infrastructure to communicate it with integrity.
+                and find the language to carry it with integrity.
               </p>
               <p className="font-body text-cream/70 text-lg leading-relaxed max-w-3xl">
                 I am also the founder of <strong className="text-cream">Mic'd Up Initiative</strong> — a campus-centred movement committed to
                 discovering voices, shaping leaders, and building responsible cultural influence among the youngest
                 and most formative generation on the continent.
               </p>
+            </div>
+          </AnimatedSection>
+
+          {/* How I work — plain rows, no cards, no icons */}
+          <AnimatedSection delay={150} direction="in">
+            <div className="mb-14">
+              <p className="eyebrow mb-8">How I work</p>
+              <div className="space-y-7 max-w-3xl">
+                {VALUES.map(value => (
+                  <div key={value.title} className="border-l border-gold/20 pl-6">
+                    <h3 className="font-display text-lg font-semibold text-cream mb-2">
+                      {value.title}
+                    </h3>
+                    <p className="font-body text-cream/60 leading-relaxed">{value.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Timeline — typographic and quiet, not a card wall */}
+          <AnimatedSection delay={200} direction="in">
+            <div className="mb-4">
+              <p className="eyebrow mb-8">How it went</p>
+              <div className="max-w-3xl">
+                {MILESTONES.map(m => (
+                  <div
+                    key={m.year}
+                    className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-8 py-4 border-b border-gold/10 last:border-0"
+                  >
+                    <span className="font-display text-xl text-gold/70 tabular-nums shrink-0 w-16">
+                      {m.year}
+                    </span>
+                    <span className="font-body text-cream/65 leading-relaxed">{m.event}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </AnimatedSection>
 
@@ -251,8 +275,8 @@ export default async function AboutPage() {
               Start the conversation.
             </h2>
             <p className="font-body text-cream/55 text-lg max-w-xl mx-auto mb-10">
-              Whether you want to read, to bring Sir Anthony to your organization,
-              or to build something together — the door is open.
+              Whether you want to read, to bring me into your organisation,
+              or to bring this conversation to your context — the door is open.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact" className="btn-gold">Get in Touch <ArrowRight size={14} /></Link>

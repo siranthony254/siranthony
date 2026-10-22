@@ -39,13 +39,11 @@ export async function POST(request: NextRequest) {
     // Revalidate specific paths based on document type
     const pathMap: Record<string, string[]> = {
       post: ['/conversations', '/'],
+      videoConversation: ['/conversations', '/'],
       author: ['/conversations', '/about'],
       gallery: ['/gallery'],
-      service: ['/work', '/'],
-      speakingTopic: ['/work'],
-      testimonial: ['/work', '/'],
       micdupEvent: ['/micdup', '/'],
-      webDevProject: ['/portfolio', '/'],
+      ebook: ['/portfolio'],
       caseStudy: ['/portfolio', '/'],
       intellectualWork: ['/portfolio', '/'],
       impactNumbers: ['/', '/portfolio'],

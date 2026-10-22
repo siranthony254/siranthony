@@ -7,6 +7,7 @@ export function GET() {
 Allow: /
 Disallow: /studio/
 Disallow: /api/
+Disallow: /access/
 
 Sitemap: ${SITE_URL}/sitemap.xml`
 

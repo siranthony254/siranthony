@@ -45,7 +45,7 @@ export const testimonialSchema = defineType({
         list: [
           { title: 'Keynote / Talk',    value: 'keynote' },
           { title: 'Cultural Training', value: 'training' },
-          { title: 'Digital Strategy',  value: 'digital' },
+          { title: 'Cultural Advisory', value: 'advisory' },
           { title: "Mic'd Up",         value: 'micdup' },
           { title: 'General',          value: 'general' },
         ],

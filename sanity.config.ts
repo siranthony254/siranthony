@@ -44,6 +44,7 @@ export default defineConfig({
                   .title('Conversations')
                   .items([
                     S.documentTypeListItem('post').title('All Posts'),
+                    S.documentTypeListItem('videoConversation').title('Video Conversations'),
                     S.documentTypeListItem('author').title('Authors'),
                     S.documentTypeListItem('faq').title('FAQs'),
                   ])
@@ -61,15 +62,14 @@ export default defineConfig({
                     S.documentTypeListItem('gallery').title('Gallery Collections'),
                   ])
               ),
-
-            // ── Portfolio ───────────────────────────────────────────
+            // ── Body of Work ──────────────────────
             S.listItem()
-              .title('Portfolio')
+              .title('Body of Work')
               .child(
                 S.list()
-                  .title('Portfolio')
+                  .title('Body of Work')
                   .items([
-                    S.documentTypeListItem('webDevProject').title('Web Development Projects'),
+                    S.documentTypeListItem('ebook').title('Ebooks'),
                     S.documentTypeListItem('caseStudy').title('Case Studies'),
                     S.documentTypeListItem('intellectualWork').title('Intellectual Work'),
                   ])
@@ -87,6 +87,19 @@ export default defineConfig({
                     S.documentTypeListItem('service').title('Services'),
                     S.documentTypeListItem('speakingTopic').title('Speaking Topics'),
                     S.documentTypeListItem('testimonial').title('Testimonials'),
+                  ])
+              ),
+
+            S.divider(),
+
+            // ── Sales ────────────────────────────
+            S.listItem()
+              .title('Sales')
+              .child(
+                S.list()
+                  .title('Sales')
+                  .items([
+                    S.documentTypeListItem('purchase').title('Purchases'),
                   ])
               ),
 

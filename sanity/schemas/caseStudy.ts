@@ -55,7 +55,7 @@ export const caseStudySchema = defineType({
       type: 'text',
       rows: 4,
       validation: r => r.required(),
-      description: 'The technical and design decisions. The content architecture. The user journey.',
+      description: 'The decisions made. How the thinking was carried into the room, the language, and the practice.',
     }),
     defineField({
       name: 'outcome',

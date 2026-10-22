@@ -27,11 +27,12 @@ export const metadata: Metadata = {
     template: '%s | Sir Anthony',
   },
   description:
-    'Sir Anthony helps individuals, organizations, and institutions understand how culture is built, develop the thinking to shape it deliberately, and build the digital infrastructure to communicate it with integrity.',
+    'I work with people, organisations, and campuses on seeing the culture they have already built — and on building the next part on purpose. Conversationalist and cultural thinker, Nairobi.',
   keywords: [
     'Sir Anthony', 'cultural thinker', 'conversationalist', 'Africa leadership',
     'Who Made You Normal', "Mic'd Up Initiative", 'cultural training', 'Kenya',
     'organizational culture', 'thought leadership', 'cultural intelligence',
+    'responsible influence', 'campus culture', 'public speaking Africa',
   ],
   authors: [{ name: 'Sir Anthony' }],
   creator: 'Sir Anthony',
@@ -78,26 +79,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   "name": "Anthony Munene",
                   "alternateName": "Sir Anthony",
                   "url": "https://siranthony.online",
-                  "image": "https://siranthony.onlinepath-to-your-photo.jpg",
+                  "image": "https://siranthony.online/og-image.jpg",
                   "jobTitle": [
-                    "Frontend Web Developer",
-                    "Web Content Strategist",
                     "Cultural Thinker",
-                    "Conversationalist"
+                    "Conversationalist",
+                    "Speaker",
+                    "Writer"
                   ],
                   "knowsAbout": [
                     "Cultural Intelligence",
-                    "Frontend Web Development",
-                    "Content Strategy",
-                    "Personal Development",
-                    "React",
-                    "Next.js"
+                    "Cultural Formation",
+                    "Responsible Influence",
+                    "Conversation Facilitation",
+                    "Leadership Development",
+                    "Personal Development"
                   ],
                   "contactPoint": [
                     {
                       "@type": "ContactPoint",
                       "telephone": "+254727974516",
-                      "contactType": "Web Development and Strategy Support"
+                      "contactType": "Bookings and Partnerships"
                     },
                     {
                       "@type": "ContactPoint",
@@ -115,7 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   "@type": "WebSite",
                   "@id": "https://siranthony.online#website",
                   "url": "https://siranthony.online",
-                  "name": "Sir Anthony | Cultural Intelligence & Digital Infrastructure",
+                  "name": "Sir Anthony | Conversationalist & Cultural Thinker",
                   "publisher": {
                     "@id": "https://siranthony.online"
                   }
@@ -129,26 +130,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   "mainEntity": [
                     {
                       "@type": "Question",
-                      "name": "What is a conscious brand, and why do they need specialized digital strategy?",
+                      "name": "What does Sir Anthony mean by culture?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "A conscious brand is an ethical startup, sustainable business, or impact-driven organization that prioritizes social values alongside economic value. They need specialized digital strategy because generic marketing often focuses purely on transactional metrics. A values-driven strategy transforms digital touchpoints into an authentic reflection of the brand’s deeper cultural mission and community impact."
+                        "text": "Culture is not only heritage, tribe, and tradition. It is the shared beliefs, values, behaviours, and norms that a people gradually accept as normal — carried in everyday habits, unwritten rules, and repeated choices far more than in ceremonies and celebrations. Sir Anthony’s work begins by making that everyday culture visible, so that it can be examined and shaped deliberately rather than simply inherited."
                       }
                     },
                     {
                       "@type": "Question",
-                      "name": "Why should a thought leader or ethical startup choose custom code over a website template?",
+                      "name": "What is responsible influence?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Thought leaders and ethical startups should choose custom code because generic templates restrict unique storytelling and carry bloated code. Custom-coded digital architecture using frameworks like React and Next.js ensures zero design limitations, faster page performance, and enhanced digital accessibility. Furthermore, lightweight, bespoke code uses less server energy, lowering the brand's digital carbon footprint and matching its sustainability metrics."
+                        "text": "Responsible influence is the use of your voice with an awareness that it shapes people, culture, and society — and therefore the exercise of truth, integrity, stewardship, and long-term thinking in what you communicate. It does not require a large platform or institutional authority. Every voice already influences someone; the only real question is whether it is influencing on purpose."
                       }
                     },
                     {
                       "@type": "Question",
-                      "name": "How does cultural intelligence improve business content strategy?",
+                      "name": "How does cultural intelligence change the way an organisation communicates?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Cultural intelligence improves content strategy by analyzing the normalized daily choices and systemic habits of a target audience. Instead of creating generic content to satisfy search engine algorithms, a culturally intelligent strategy builds highly intentional content pillars. This specific alignment builds immediate trust with conscious consumers and positions the brand or leader as an authentic authority."
+                        "text": "Cultural intelligence changes communication by examining the normalised daily choices and systemic habits of the people involved — what an organisation actually rewards, tolerates, and repeats. Instead of publishing statements that describe an aspiration, a culturally intelligent approach names the culture that already exists and builds the language and rituals that carry the intended one. People trust that alignment because they recognise it as true."
                       }
                     },
                     {

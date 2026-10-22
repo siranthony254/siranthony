@@ -17,6 +17,15 @@ export const POST_BY_SLUG_QUERY = `
   }
 `
 
+export const RELATED_POSTS_QUERY = `
+  *[_type == "post" && category == $category && slug.current != $slug]
+    | order(publishedAt desc) [0...3] {
+    _id, title, slug, excerpt, publishedAt, category,
+    "estimatedReadingTime": round(length(pt::text(body)) / 5 / 200),
+    mainImage { asset->{ _id, url }, alt }
+  }
+`
+
 export const FEATURED_POSTS_QUERY = `
   *[_type == "post" && featured == true] | order(publishedAt desc) [0...3] {
     _id, title, slug, excerpt, publishedAt, category, featured,
@@ -24,27 +33,15 @@ export const FEATURED_POSTS_QUERY = `
   }
 `
 
-// Test query to verify Sanity connection
-export const TEST_POSTS_QUERY = `
-  *[_type == "post"][0...3] {
-    _id, title, featured
-  }
-`
-
-// Test query to check if gallery documents exist
-export const TEST_GALLERY_QUERY = `
-  *[_type == "gallery"][0...5] {
-    _id, title, "imageCount": count(images)
+// ─── Video Conversations ──────────────────────────
+export const VIDEO_CONVERSATIONS_QUERY = `
+  *[_type == "videoConversation"] | order(order asc, publishedAt desc) {
+    _id, title, embedLink, description, category, recordedAt,
+    publishedAt, featured, order
   }
 `
 
 // ─── Author ─────────────────────────────────────────────────
-export const TEST_AUTHOR_QUERY = `
-  *[_type == "author"][0...3] {
-    _id, name, "hasImage": count(image) > 0
-  }
-`
-
 export const AUTHOR_QUERY = `
   *[_type == "author"][0] {
     _id, name, slug, bio, role,
@@ -52,14 +49,7 @@ export const AUTHOR_QUERY = `
   }
 `
 
-// ─── Portfolio ───────────────────────────────────────────────
-export const WEB_DEVELOPMENT_QUERY = `
-  *[_type == "webDevProject"] | order(order asc) {
-    _id, title, slug, description, category, projectUrl, githubUrl,
-    technologies, thumbnail { asset->{ _id, url }, alt }, featured, order
-  }
-`
-
+// ─── Body of Work ──────────────────────────────
 export const CASE_STUDIES_QUERY = `
   *[_type == "caseStudy"] | order(order asc) {
     _id, title, slug, client, heroImage { asset->{ _id, url }, alt },
@@ -82,6 +72,29 @@ export const INTELLECTUAL_WORK_CATEGORIES_QUERY = `
   *[_type == "intellectualWork"] {
     category, customCategory
   } | distinct(category, customCategory)
+`
+
+// ─── Ebooks ──────────────────────────────────
+// The `pdf` field is never projected into anything the browser can see.
+// It is read server-side only, in src/lib/purchases.ts.
+export const EBOOKS_QUERY = `
+  *[_type == "ebook"] | order(order asc, publishedDate desc) {
+    _id, title, slug, subtitle, description, priceKes, forSale,
+    pageCount, publishedDate, featured, order,
+    coverImage { asset->{ _id, url }, alt }
+  }
+`
+
+export const EBOOK_BY_SLUG_QUERY = `
+  *[_type == "ebook" && slug.current == $slug][0] {
+    _id, title, slug, subtitle, description, priceKes, forSale,
+    pageCount, publishedDate, contents, preview,
+    coverImage { asset->{ _id, url }, alt }
+  }
+`
+
+export const EBOOK_SLUGS_QUERY = `
+  *[_type == "ebook" && defined(slug.current)].slug.current
 `
 
 // ─── Gallery ───────────────────────────────────────────────
@@ -151,9 +164,6 @@ export const IMPACT_NUMBERS_QUERY = `
     speaking {
       speakingEngagements, eventsFacilitated, campusesEngaged,
       workshopsFacilitated, conversationsDone
-    },
-    projects {
-      websitesLaunched, brandsSupported, demoProjects
     },
     impactMovements[] { label, value }
   }

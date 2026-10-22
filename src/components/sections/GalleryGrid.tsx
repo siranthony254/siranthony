@@ -12,13 +12,8 @@ interface GalleryGridProps { galleries: Gallery[] }
 export function GalleryGrid({ galleries }: GalleryGridProps) {
   const [selectedImage, setSelectedImage] = useState<{ image: any; alt: string; caption?: string } | null>(null)
   
-  // Debug: Log gallery data
-  console.log('GalleryGrid - galleries:', galleries)
-  console.log('GalleryGrid - galleries count:', galleries?.length)
-  
   // Flatten all images from all galleries
   const allImages = galleries?.flatMap(gallery => {
-    console.log(`Gallery "${gallery.title}" has ${gallery.images?.length || 0} images`)
     return gallery.images?.map((img, index) => ({
       ...img,
       galleryTitle: gallery.title,
@@ -26,8 +21,6 @@ export function GalleryGrid({ galleries }: GalleryGridProps) {
     })) || []
   }) || []
   
-  console.log('GalleryGrid - allImages count:', allImages.length)
-
   if (!allImages.length) {
     return (
       <section className="section-pad">

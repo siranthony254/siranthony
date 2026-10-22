@@ -1,22 +1,40 @@
 import Link from 'next/link'
-import { Youtube, Instagram, Facebook, Linkedin } from 'lucide-react'
+import { Youtube, Instagram, Facebook, Linkedin, Twitter, Music2 } from 'lucide-react'
+import { sanityFetch } from '@/lib/sanity'
+import { SITE_SETTINGS_QUERY } from '@/lib/queries'
+import type { SiteSettings } from '@/types'
 
 const NAV = [
   { href: '/about',         label: 'About' },
   { href: '/conversations', label: 'Conversations' },
-  { href: '/work',          label: 'Work With Me' },
+  { href: '/gallery',       label: 'Gallery' },
+  { href: '/portfolio',     label: 'Body of Work' },
   { href: '/micdup',        label: "Mic'd Up Initiative" },
   { href: '/contact',       label: 'Contact' },
 ]
 
-const SOCIAL = [
-  { href: 'https://linkedin.com', icon: Linkedin,  label: 'LinkedIn' },
-  { href: 'https://youtube.com',  icon: Youtube,   label: 'YouTube' },
-  { href: 'https://instagram.com',icon: Instagram, label: 'Instagram' },
-  { href: 'https://facebook.com', icon: Facebook,  label: 'Facebook' },
-]
+// Icons are only rendered for links that actually exist in Site Settings.
+// A social icon that goes to a platform's front page is worse than no icon.
+const SOCIAL_ICONS = [
+  { key: 'linkedin',  icon: Linkedin,  label: 'LinkedIn' },
+  { key: 'youtube',   icon: Youtube,   label: 'YouTube' },
+  { key: 'instagram', icon: Instagram, label: 'Instagram' },
+  { key: 'facebook',  icon: Facebook,  label: 'Facebook' },
+  { key: 'twitter',   icon: Twitter,   label: 'X' },
+  { key: 'tiktok',    icon: Music2,    label: 'TikTok' },
+] as const
 
-export function Footer() {
+export async function Footer() {
+  const settings = await sanityFetch<SiteSettings | null>(SITE_SETTINGS_QUERY).catch(() => null)
+
+  const socials = SOCIAL_ICONS.map(s => ({
+    ...s,
+    href: settings?.socialLinks?.[s.key],
+  })).filter((s): s is typeof s & { href: string } => Boolean(s.href))
+
+  const phone = settings?.contactPhone || '+254 741 518 589'
+  const phoneAlt = settings?.contactPhoneAlt
+
   return (
     <footer className="border-t border-gold/10 bg-navy">
       <div className="container-site py-16">
@@ -28,7 +46,7 @@ export function Footer() {
               <span className="font-display text-2xl font-semibold text-cream">SIR ANTHONY</span>
               <span className="block eyebrow mt-1">Voice of Transformation</span>
             </Link>
-            <p className="font-body text-sm text-cream/50 leading-relaxed max-w-xs italic font-display text-base">
+            <p className="font-display italic text-base text-cream/50 leading-relaxed max-w-xs">
               &ldquo;Who made you normal? That&apos;s the question. That&apos;s the work.&rdquo;
             </p>
           </div>
@@ -51,30 +69,50 @@ export function Footer() {
           <div className="space-y-4">
             <p className="eyebrow mb-4">Connect</p>
             <div className="space-y-2 text-sm text-cream/50 font-body">
-              <p>Conversations & Speaking</p>
-              <a href="tel:+254741518589" className="block text-gold hover:text-gold-light transition-colors">
-                +254 741 518 589
+              <p>Conversations &amp; Speaking</p>
+              <a
+                href={`tel:${phone.replace(/\s/g, '')}`}
+                className="block text-gold hover:text-gold-light transition-colors"
+              >
+                {phone}
               </a>
-              <p className="mt-3">Digital Strategy & Web</p>
-              <a href="tel:+254727974516" className="block text-gold hover:text-gold-light transition-colors">
-                +254 727 974 516
-              </a>
-            </div>
-            {/* Social */}
-            <div className="flex gap-3 pt-2">
-              {SOCIAL.map(({ href, icon: Icon, label }) => (
+              {phoneAlt && (
+                <>
+                  <p className="mt-3">Bookings &amp; Partnerships</p>
+                  <a
+                    href={`tel:${phoneAlt.replace(/\s/g, '')}`}
+                    className="block text-gold hover:text-gold-light transition-colors"
+                  >
+                    {phoneAlt}
+                  </a>
+                </>
+              )}
+              {settings?.contactEmail && (
                 <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-full border border-gold/20 flex items-center justify-center text-cream/40 hover:text-gold hover:border-gold/50 transition-all duration-200"
+                  href={`mailto:${settings.contactEmail}`}
+                  className="block text-cream/50 hover:text-gold transition-colors mt-3"
                 >
-                  <Icon size={15} />
+                  {settings.contactEmail}
                 </a>
-              ))}
+              )}
             </div>
+
+            {socials.length > 0 && (
+              <div className="flex gap-3 pt-2">
+                {socials.map(({ href, icon: Icon, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-9 h-9 rounded-full border border-gold/20 flex items-center justify-center text-cream/40 hover:text-gold hover:border-gold/50 transition-all duration-200"
+                  >
+                    <Icon size={15} />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 

@@ -127,24 +127,16 @@ export function ImpactNumbersSection({ data }: { data?: ImpactNumbers | null }) 
     { label: 'Conversations Done', value: data.speaking?.conversationsDone ?? 0 },
   ].filter(s => s.value > 0)
 
-  const projectStats: { label: string; value: number }[] = [
-    { label: 'Websites Launched', value: data.projects?.websitesLaunched ?? 0 },
-    { label: 'Brands Supported', value: data.projects?.brandsSupported ?? 0 },
-    { label: 'Demo Projects', value: data.projects?.demoProjects ?? 0 },
-  ].filter(s => s.value > 0)
-
   const movementStats: { label: string; value: number }[] = (data.impactMovements ?? []).filter(
     s => s.value > 0,
   )
 
   // If absolutely no data, render nothing
-  const hasAnyData =
-    speakingStats.length > 0 || projectStats.length > 0 || movementStats.length > 0
+  const hasAnyData = speakingStats.length > 0 || movementStats.length > 0
   if (!hasAnyData) return null
 
   const categories = [
-    { title: 'Speaking', icon: '🎤', stats: speakingStats },
-    { title: 'Projects', icon: '🛠️', stats: projectStats },
+    { title: 'Speaking & Conversations', icon: '🎤', stats: speakingStats },
     { title: 'Impact Movements & Initiatives', icon: '🌱', stats: movementStats },
   ].filter(c => c.stats.length > 0)
 
@@ -180,7 +172,7 @@ export function ImpactNumbersSection({ data }: { data?: ImpactNumbers | null }) 
             <em className="text-gold not-italic">measured.</em>
           </h2>
           <p className="font-body text-cream/50 text-base md:text-lg mt-4 max-w-xl mx-auto leading-relaxed">
-            Every number represents a conversation started, a site shipped, or a community moved.
+            Every number represents a conversation started, a room changed, or a community moved.
           </p>
         </motion.div>
 

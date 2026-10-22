@@ -8,7 +8,7 @@ const INQUIRY_TYPES = [
   'Speaking / Keynote',
   'Cultural Training (Organization)',
   'Cultural Training (School/Church)',
-  'Digital Strategy / Web Development',
+  'Cultural Advisory / Consulting',
   "Mic'd Up Initiative Partnership",
   'Book / Writing',
   'General Inquiry',
@@ -49,7 +49,7 @@ export function ContactForm() {
           Message received.
         </h3>
         <p className="font-body text-cream/55 leading-relaxed max-w-md">
-          Thank you for reaching out. Sir Anthony will be in touch within 48 hours.
+          Thank you for reaching out. I&apos;ll be in touch within 48 hours.
           The conversation is just beginning.
         </p>
       </div>
@@ -128,7 +128,7 @@ export function ContactForm() {
         <textarea
           id="message" name="message" required rows={6}
           value={form.message} onChange={handleChange}
-          placeholder="Tell Sir Anthony about your context — your organization, what you are trying to accomplish, and what kind of engagement you have in mind..."
+          placeholder="Tell me about your context — where you are, what you are trying to do, and what you have already tried..."
           className={`${inputClass} resize-none`}
         />
       </div>

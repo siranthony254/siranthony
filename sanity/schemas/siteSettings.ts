@@ -40,7 +40,7 @@ export const siteSettingsSchema = defineType({
       name: 'contactPhoneAlt',
       title: 'Secondary Contact Phone',
       type: 'string',
-      description: 'Digital Strategy & Web',
+      description: 'Bookings & Partnerships',
       initialValue: '+254 727 974 516',
     }),
     defineField({

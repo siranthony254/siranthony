@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { AnimatedSection, GoldLine } from '@/components/ui'
+import { AnimatedSection } from '@/components/ui'
 import { Phone, Globe, MapPin } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Get in touch with Sir Anthony for speaking engagements, cultural training, digital strategy, or to bring the conversation to your context.',
+    'Get in touch with Sir Anthony for speaking engagements, cultural training, cultural advisory, or to bring the conversation to your context.',
 }
 
 const CONTACT_ITEMS = [
@@ -17,7 +17,7 @@ const CONTACT_ITEMS = [
   },
   {
     icon: Phone,
-    label: 'Digital Strategy & Web',
+    label: 'Bookings & Partnerships',
     value: '+254 727 974 516',
     href: 'tel:+254727974516',
   },
@@ -39,23 +39,19 @@ const CONTACT_ITEMS = [
 export default function ContactPage() {
   return (
     <>
-      {/* Header */}
-      <section className="relative pt-36 pb-20 bg-navy overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 30%, rgba(201,168,76,0.05) 0%, transparent 65%)' }} />
-        <div className="container-site relative z-10 text-center">
-          <AnimatedSection>
-            <p className="eyebrow mb-5">Contact</p>
-            <GoldLine className="mb-7 mx-auto" />
-            <h1 className="font-display font-semibold text-cream mb-6"
-              style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}>
-              Start the
-              <em className="text-gold"> conversation.</em>
-            </h1>
-            <p className="font-body text-cream/55 text-xl leading-relaxed max-w-xl mx-auto">
-              Whether you want a keynote, a training program, a digital strategy
-              engagement, or you are simply not yet sure — the conversation starts here.
-            </p>
+      {/* Header — quiet on purpose. Nobody needs a billboard to say hello. */}
+      <section className="pt-32 pb-12 bg-navy">
+        <div className="container-site">
+          <AnimatedSection direction="in">
+            <div className="max-w-2xl">
+              <h1 className="font-display font-semibold text-cream text-3xl md:text-4xl mb-4 leading-tight">
+                Start the <em className="text-gold">conversation.</em>
+              </h1>
+              <p className="font-body text-cream/60 leading-relaxed">
+                A talk, a training programme, something ongoing, or you are not yet sure
+                what you need — all of it starts the same way. Tell me where you are.
+              </p>
+            </div>
           </AnimatedSection>
         </div>
       </section>
@@ -115,91 +111,56 @@ export default function ContactPage() {
               </div>
             </AnimatedSection>
 
-            {/* Right — call scheduling */}
-            <AnimatedSection delay={150} className="lg:col-span-3 space-y-8">
+            {/* Right — two ways to talk. Plainly described, not tiered. */}
+            <AnimatedSection delay={150} direction="in" className="lg:col-span-3 space-y-8">
               <div>
-                <p className="eyebrow mb-4">Schedule a Session</p>
+                <p className="eyebrow mb-4">Book a Time</p>
                 <div className="w-6 h-px bg-gradient-to-r from-gold to-transparent mb-6" />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                {/* 30 Mins Free Call */}
-                <div className="card-navy p-6 flex flex-col justify-between group border border-gold/10 hover:border-gold/30 transition-all duration-300">
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-start">
-                      <span className="text-xs font-body text-gold bg-gold/10 px-2.5 py-1 rounded-full border border-gold/25">
-                        Discovery
-                      </span>
-                      <span className="font-display font-semibold text-lg text-cream">
-                        Free
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="font-display text-xl font-semibold text-cream group-hover:text-gold transition-colors">
-                        Free Call
-                      </h3>
-                      <p className="font-body text-xs text-cream/40 mt-1">
-                        30 minutes · Online Meeting
-                      </p>
-                    </div>
-                    <p className="font-body text-cream/60 text-sm leading-relaxed">
-                      A discovery conversation — understanding your context, challenge, and how we might work together.
-                    </p>
-                  </div>
-                  <div className="pt-6">
-                    <a
-                      href="https://calendly.com/officialsiranthony/30min"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-gold text-sm w-full flex items-center justify-center gap-2"
-                    >
-                      Book Free Call
-                    </a>
-                  </div>
+              <div className="space-y-6">
+                <div className="border-l-2 border-gold/30 pl-6 py-1">
+                  <h3 className="font-display text-2xl font-semibold text-cream mb-2">
+                    A first conversation
+                  </h3>
+                  <p className="font-body text-cream/60 leading-relaxed mb-4">
+                    Half an hour, online, no charge. You tell me where you are and what you
+                    are actually trying to do. If I am not the right person for it, I will
+                    say so and point you somewhere better.
+                  </p>
+                  <a
+                    href="https://calendly.com/officialsiranthony/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-sm text-gold hover:text-gold-light transition-colors border-b border-gold/30 hover:border-gold pb-0.5"
+                  >
+                    Find a time →
+                  </a>
                 </div>
 
-                {/* 1 Hour Paid Call */}
-                <div className="card-navy p-6 flex flex-col justify-between group border border-gold/15 hover:border-gold/45 transition-all duration-300 relative overflow-hidden">
-                  {/* Subtle featured badge */}
-                  <div className="absolute top-0 right-0 h-16 w-16 pointer-events-none">
-                    <div className="absolute transform rotate-45 bg-gold text-[9px] font-body text-navy text-center font-bold py-1 right-[-35px] top-[15px] w-[120px]">
-                      POPULAR
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-start">
-                      <span className="text-xs font-body text-gold bg-gold/10 px-2.5 py-1 rounded-full border border-gold/25">
-                        Strategy
-                      </span>
-                      <span className="font-display font-semibold text-lg text-cream">
-                        $10
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="font-display text-xl font-semibold text-cream group-hover:text-gold transition-colors">
-                        Strategic Session
-                      </h3>
-                      <p className="font-body text-xs text-cream/40 mt-1">
-                        1 hour · Custom Venue
-                      </p>
-                    </div>
-                    <p className="font-body text-cream/60 text-sm leading-relaxed">
-                      An intensive strategic deep dive. Focus on cultural alignment, brand architecture, or personal advisory.
-                    </p>
-                  </div>
-                  <div className="pt-6">
-                    <a
-                      href="https://calendly.com/officialsiranthony/1-hour-meeting"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-gold text-sm w-full flex items-center justify-center gap-2"
-                    >
-                      Book Session ($10)
-                    </a>
-                  </div>
+                <div className="border-l-2 border-gold/15 pl-6 py-1">
+                  <h3 className="font-display text-2xl font-semibold text-cream mb-2">
+                    A longer working session
+                  </h3>
+                  <p className="font-body text-cream/60 leading-relaxed mb-4">
+                    A full hour, $10, for when you already know the problem and want to go
+                    at it properly — the culture inside a team, the language a brand is
+                    using, a decision you keep circling. We work, we do not present.
+                  </p>
+                  <a
+                    href="https://calendly.com/officialsiranthony/1-hour-meeting"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-sm text-gold hover:text-gold-light transition-colors border-b border-gold/30 hover:border-gold pb-0.5"
+                  >
+                    Find a time →
+                  </a>
                 </div>
-
               </div>
+
+              <p className="font-body text-sm text-cream/40 leading-relaxed pt-2">
+                If neither fits, call or write. I read everything that comes in.
+              </p>
             </AnimatedSection>
           </div>
         </div>

@@ -1,6 +1,6 @@
 # Sir Anthony — Personal Brand Site
 
-A production-grade personal brand site for Sir Anthony, cultural thinker and conversationalist. Built with Next.js 14 App Router, TypeScript, Tailwind CSS, Framer Motion, and Sanity CMS.
+A production-grade personal brand site for Sir Anthony — conversationalist and cultural thinker. Built with Next.js 14 App Router, TypeScript, Tailwind CSS, Framer Motion, and Sanity CMS.
 
 ---
 
@@ -22,11 +22,12 @@ A production-grade personal brand site for Sir Anthony, cultural thinker and con
 
 | Route            | Description                                    |
 |------------------|------------------------------------------------|
-| `/`              | Home — hero, pillars, posts, services, CTA    |
+| `/`              | Home — hero, impact numbers, posts, services  |
 | `/about`         | Biography, philosophy, timeline                |
 | `/conversations` | All posts with category filter                |
 | `/conversations/[slug]` | Individual post with PortableText body  |
-| `/work`          | Three service layers + speaking topics         |
+| `/portfolio`     | Body of Work — essays, scripts, poetry, books |
+| `/gallery`       | Photo collections                              |
 | `/micdup`        | Mic'd Up Initiative — events, pillars, CTA    |
 | `/contact`       | Contact form + direct phone contacts           |
 | `/studio`        | Sanity CMS (protected in production)           |
@@ -86,6 +87,10 @@ The Sanity Studio at `/studio` manages all content:
 - Create posts with title, slug, category, body, featured image
 - Mark posts as Featured to show on the home page
 - Categories: Culture, Individual, Leadership, Education, Ideas, Family, Political Culture
+
+### Body of Work
+- **Intellectual Work** — essays, scripts, poetry, and books
+- **Case Studies** — long-form accounts of cultural engagements
 
 ### Work With Me
 - **Services** — the three service layers with icons, features, and CTAs
@@ -249,7 +254,13 @@ siranthony/
 
 ## The Brand
 
-**Sir Anthony** — Conversationalist · Cultural Thinker · Voice of Transformation
+**Sir Anthony** — Conversationalist · Cultural Thinker · Writer · Voice of Transformation
+
+The brand is a cultural one, end to end. Sir Anthony works in three layers: **Cultural
+Intelligence** (talks, panels, public conversations), **Cultural Training** (multi-session
+work with organisations, campuses, and congregations), and **Cultural Architecture**
+(long-term advisory, language, and deliberate culture design). There is no technology
+or web-services offering in this brand.
 
 *Who made you normal? That's the question. That's the work.*
 

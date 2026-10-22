@@ -8,9 +8,9 @@ export const impactNumbersSchema = defineType({
     // ─── Speaking ────────────────────────────────────────────────
     defineField({
       name: 'speaking',
-      title: 'Speaking',
+      title: 'Speaking & Conversations',
       type: 'object',
-      description: 'Stats related to speaking engagements and events',
+      description: 'Stats related to speaking engagements, conversations, and events',
       fields: [
         defineField({
           name: 'speakingEngagements',
@@ -46,33 +46,6 @@ export const impactNumbersSchema = defineType({
     }),
 
     // ─── Projects ────────────────────────────────────────────────
-    defineField({
-      name: 'projects',
-      title: 'Projects',
-      type: 'object',
-      description: 'Stats related to digital and brand projects',
-      fields: [
-        defineField({
-          name: 'websitesLaunched',
-          title: 'Websites Launched',
-          type: 'number',
-          description: 'Total websites built and launched',
-        }),
-        defineField({
-          name: 'brandsSupported',
-          title: 'Brands Supported',
-          type: 'number',
-          description: 'Total brands supported',
-        }),
-        defineField({
-          name: 'demoProjects',
-          title: 'Demo Projects',
-          type: 'number',
-          description: 'Total demo / experimental projects',
-        }),
-      ],
-    }),
-
     // ─── Impact Movements & Initiatives ──────────────────────────
     defineField({
       name: 'impactMovements',

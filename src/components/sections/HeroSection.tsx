@@ -42,7 +42,7 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
           {/* Left — Text */}
           <div className="space-y-8 lg:py-32">
             <motion.div {...fadeUp(0.1)}>
-              <span className="eyebrow">Conversationalist · Cultural Thinker · Digital Strategist· Kenya</span>
+              <span className="eyebrow">Conversationalist · Cultural Thinker · Writer · Kenya</span>
             </motion.div>
 
             <motion.div {...fadeUp(0.25)} className="space-y-3">
@@ -89,15 +89,15 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
               <span className="underline decoration-gold/40 underline-offset-4">
                 people, organizations, and movements
               </span>{' '}
-              understand culture, shape meaningful conversations, and build influence intentionally.</em>
+              understand culture, shape meaningful conversations, and build influence responsibly.</em>
 
               </p>
             </motion.div>
 
             <motion.div {...fadeUp(0.55)} className="flex flex-col sm:flex-row gap-4 hover:gap-6 items-center">
             
-              <Link href="/work" className="btn-ghost">
-                Work With Me
+              <Link href="/contact" className="btn-ghost">
+                Start a conversation
               </Link>
             </motion.div>
 
@@ -112,7 +112,7 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
                 >
                   Mic&apos;d Up Initiative
                 </a>
-                {' '}· Cultural Conversations · Digital Strategy
+                {' '}· Cultural Conversations · Campus Movements
               </p>
             </motion.div>
           </div>

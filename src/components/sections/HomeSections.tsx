@@ -141,7 +141,7 @@ export function HomeCTA() {
               Read the Conversations
             </Link>
             <Link href="/contact" className="btn-ghost">
-              Talk to Sir Anthony
+              Talk to me
             </Link>
           </div>
         </AnimatedSection>

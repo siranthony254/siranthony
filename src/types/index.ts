@@ -43,6 +43,37 @@ export interface Post {
   }
 }
 
+// ─── Video Conversation ──────────────────────────────
+export interface VideoConversation {
+  _id: string
+  title: string
+  embedLink: string
+  description?: string
+  category?: PostCategory
+  recordedAt?: string
+  publishedAt?: string
+  featured?: boolean
+  order?: number
+}
+
+// ─── Ebook ───────────────────────────────────
+export interface Ebook {
+  _id: string
+  title: string
+  slug: SanitySlug
+  subtitle?: string
+  description: string
+  priceKes: number
+  forSale?: boolean
+  pageCount?: number
+  publishedDate?: string
+  featured?: boolean
+  order?: number
+  contents?: string[]
+  preview?: unknown[] // PortableText
+  coverImage?: SanityImage
+}
+
 // ─── Gallery ─────────────────────────────────────────────────────
 export type GalleryCategory = 'events' | 'speaking' | 'media' | 'personal' | 'professional'
 
@@ -134,21 +165,7 @@ export interface SiteSettings {
   homepageHeroImage?: SanityImage
 }
 
-// ─── Portfolio Types ───────────────────────────────────────────────
-export interface WebDevelopment {
-  _id: string
-  title: string
-  slug: { _type: 'slug'; current: string }
-  description: string
-  category: 'shipped' | 'demo'
-  projectUrl: string
-  githubUrl?: string
-  technologies: string[]
-  thumbnail?: SanityImage
-  featured: boolean
-  order?: number
-}
-
+// ─── Body of Work Types ────────────────────────
 export interface CaseStudy {
   _id: string
   title: string
@@ -210,11 +227,6 @@ export interface ImpactNumbers {
     campusesEngaged?: number
     workshopsFacilitated?: number
     conversationsDone?: number
-  }
-  projects?: {
-    websitesLaunched?: number
-    brandsSupported?: number
-    demoProjects?: number
   }
   impactMovements?: ImpactMovementStat[]
 }

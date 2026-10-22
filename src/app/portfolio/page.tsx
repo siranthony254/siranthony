@@ -1,29 +1,29 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, ExternalLink, Github, Download, Mail } from 'lucide-react'
+import { ArrowRight, ExternalLink, Download, Mail } from 'lucide-react'
 import { AnimatedSection, SectionHeader, GoldLine, BlogCount } from '@/components/ui'
 import { ImpactNumbersSection } from '@/components/sections/ImpactNumbers'
 import { sanityFetch, urlFor } from '@/lib/sanity'
 import {
-  WEB_DEVELOPMENT_QUERY,
+  EBOOKS_QUERY,
   CASE_STUDIES_QUERY,
   INTELLECTUAL_WORK_QUERY,
   SITE_SETTINGS_QUERY,
   IMPACT_NUMBERS_QUERY,
 } from '@/lib/queries'
-import type { WebDevelopment, CaseStudy, IntellectualWork, SiteSettings, ImpactNumbers } from '@/types'
+import type { CaseStudy, Ebook, IntellectualWork, SiteSettings, ImpactNumbers } from '@/types'
 
 export const metadata: Metadata = {
-  title: 'Portfolio - Sir Anthony',
-  description: 'Web development projects, case studies, and intellectual work by Sir Anthony - cultural thinker and digital strategist.',
+  title: 'Body of Work',
+  description: 'Essays, scripts, poetry, and published conversations by Sir Anthony — conversationalist and cultural thinker.',
 }
 
 export const revalidate = 60
 
 export default async function PortfolioPage() {
   const PORTFOLIO_COMBINED_QUERY = `{
-    "webProjects": ${WEB_DEVELOPMENT_QUERY},
+    "ebooks": ${EBOOKS_QUERY},
     "caseStudies": ${CASE_STUDIES_QUERY},
     "intellectualWork": ${INTELLECTUAL_WORK_QUERY},
     "siteSettings": ${SITE_SETTINGS_QUERY},
@@ -32,7 +32,7 @@ export default async function PortfolioPage() {
   }`
 
   const data = await sanityFetch<{
-    webProjects: WebDevelopment[]
+    ebooks: Ebook[]
     caseStudies: CaseStudy[]
     intellectualWork: IntellectualWork[]
     siteSettings: SiteSettings
@@ -40,18 +40,12 @@ export default async function PortfolioPage() {
     impactNumbers: ImpactNumbers
   }>(PORTFOLIO_COMBINED_QUERY)
 
-  const webProjects     = data?.webProjects || []
+  const ebooks          = data?.ebooks || []
   const caseStudies     = data?.caseStudies || []
   const intellectualWork = data?.intellectualWork || []
   const siteSettings    = data?.siteSettings
   const blogCount       = data?.blogCount || 0
   const impactNumbers   = data?.impactNumbers
-
-  // Separate projects by category
-  const shippedProjects = webProjects?.filter(project => project.category === 'shipped') || []
-  const demoProjects = webProjects?.filter(project => project.category === 'demo') || []
-
-  console.log('Portfolio data:', { webProjects, shippedProjects, demoProjects, caseStudies, intellectualWork })
 
   return (
     <>
@@ -63,7 +57,7 @@ export default async function PortfolioPage() {
         <div className="container-site pb-20 relative z-10">
           <div className="max-w-4xl">
             <AnimatedSection>
-              <p className="eyebrow mb-5">Portfolio</p>
+              <p className="eyebrow mb-5">Body of Work</p>
               <GoldLine className="mb-7" />
               <h1
                 className="font-display font-semibold text-cream leading-tight mb-6"
@@ -74,8 +68,9 @@ export default async function PortfolioPage() {
                 <em className="text-gold">Action.</em>
               </h1>
               <p className="font-body text-cream/55 text-xl leading-relaxed max-w-2xl">
-                From digital architecture to cultural thinking, these projects represent the intersection 
-                of technology and transformation. Each piece tells a story of building something deliberately better.
+                Essays, scripts, poetry, and the conversations they came from. Each piece is a different
+                facet of the same question — how culture is actually built, and how it might be built
+                deliberately better.
               </p>
             </AnimatedSection>
           </div>
@@ -84,177 +79,6 @@ export default async function PortfolioPage() {
 
       {/* Impact Numbers */}
       <ImpactNumbersSection data={impactNumbers} />
-
-      {/* Shipped Products */}
-      <section className="section-pad bg-navy/95">
-        <div className="container-site">
-          <SectionHeader
-            eyebrow="Web Development"
-            title="Shipped Products"
-            subtitle="Production-ready digital solutions deployed and serving real users. These projects represent completed work that's making an impact."
-            className="mb-14"
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {shippedProjects?.map((project, index) => (
-              <AnimatedSection key={project._id} delay={index * 100}>
-                <div className="card-navy overflow-hidden h-full group">
-                  {project.thumbnail?.asset?.url && (
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={urlFor(project.thumbnail).width(1000).auto('format').url()}
-                        alt={project.thumbnail.alt || project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        quality={70}
-                        placeholder="blur"
-                        blurDataURL={urlFor(project.thumbnail).width(20).auto('format').url()}
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
-                    </div>
-                  )}
-                  <div className="p-6">
-                    <h3 className="font-display text-xl font-semibold text-cream mb-3 group-hover:text-gold transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="font-body text-cream/60 text-sm leading-relaxed mb-4 line-clamp-3">
-                      {project.description}
-                    </p>
-                    {project.technologies && project.technologies.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.technologies.slice(0, 3).map((tech, i) => (
-                          <span key={i} className="text-xs font-body text-gold/60 bg-gold/10 px-2 py-1 rounded">
-                            {tech}
-                          </span>
-                        ))}
-                        {project.technologies.length > 3 && (
-                          <span className="text-xs font-body text-cream/40">
-                            +{project.technologies.length - 3}
-                          </span>
-                        )}
-                      </div>
-                    )}
-                    <div className="flex gap-3">
-                      <Link
-                        href={project.projectUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-gold text-sm flex items-center gap-2"
-                      >
-                        View Project <ExternalLink size={14} />
-                      </Link>
-                      {project.githubUrl && (
-                        <Link
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-ghost text-sm flex items-center gap-2"
-                        >
-                          <Github size={14} />
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-
-          {shippedProjects.length === 0 && (
-            <AnimatedSection className="text-center py-12">
-              <p className="text-cream/60 text-lg mb-6">Shipped products coming soon.</p>
-              <Link href="/work" className="btn-ghost">
-                See What I Can Do For You <ArrowRight size={14} />
-              </Link>
-            </AnimatedSection>
-          )}
-        </div>
-      </section>
-
-      {/* Demo Projects */}
-      <section className="section-pad bg-navy">
-        <div className="container-site">
-          <SectionHeader
-            eyebrow="Web Development"
-            title="Demo Projects"
-            subtitle="Experimental work and proof-of-concept projects. These showcase capabilities and explore new ideas in web development."
-            className="mb-14"
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {demoProjects?.map((project, index) => (
-              <AnimatedSection key={project._id} delay={index * 100}>
-                <div className="card-navy overflow-hidden h-full group">
-                  {project.thumbnail?.asset?.url && (
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={urlFor(project.thumbnail).width(1000).auto('format').url()}
-                        alt={project.thumbnail.alt || project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        quality={70}
-                        placeholder="blur"
-                        blurDataURL={urlFor(project.thumbnail).width(20).auto('format').url()}
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
-                    </div>
-                  )}
-                  <div className="p-6">
-                    <h3 className="font-display text-xl font-semibold text-cream mb-3 group-hover:text-gold transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="font-body text-cream/60 text-sm leading-relaxed mb-4 line-clamp-3">
-                      {project.description}
-                    </p>
-                    {project.technologies && project.technologies.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.technologies.slice(0, 3).map((tech, i) => (
-                          <span key={i} className="text-xs font-body text-gold/60 bg-gold/10 px-2 py-1 rounded">
-                            {tech}
-                          </span>
-                        ))}
-                        {project.technologies.length > 3 && (
-                          <span className="text-xs font-body text-cream/40">
-                            +{project.technologies.length - 3}
-                          </span>
-                        )}
-                      </div>
-                    )}
-                    <div className="flex gap-3">
-                      <Link
-                        href={project.projectUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-gold text-sm flex items-center gap-2"
-                      >
-                        View Demo <ExternalLink size={14} />
-                      </Link>
-                      {project.githubUrl && (
-                        <Link
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-ghost text-sm flex items-center gap-2"
-                        >
-                          <Github size={14} />
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-
-          {demoProjects.length === 0 && (
-            <AnimatedSection className="text-center py-12">
-              <p className="text-cream/60 text-lg">Demo projects coming soon.</p>
-            </AnimatedSection>
-          )}
-        </div>
-      </section>
 
       {/* Case Studies - Deactivated for now */}
       {/*
@@ -371,8 +195,69 @@ export default async function PortfolioPage() {
       </section>
       */}
 
+      {/* Ebooks — hidden entirely until there is one */}
+      {ebooks.length > 0 && (
+        <section className="section-pad bg-navy/95 border-t border-gold/10">
+          <div className="container-site">
+            <SectionHeader
+              eyebrow="Ebooks"
+              title="Longer pieces"
+              subtitle="Read the opening for nothing. If you want the rest, it comes as a PDF with your name on it."
+              className="mb-14"
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {ebooks.map((ebook, index) => (
+                <AnimatedSection key={ebook._id} delay={index * 90}>
+                  <Link href={`/portfolio/${ebook.slug.current}`} className="group block h-full">
+                    <article className="card-navy overflow-hidden h-full flex flex-col">
+                      {ebook.coverImage?.asset?.url && (
+                        <div className="relative aspect-[3/2] overflow-hidden">
+                          <Image
+                            src={urlFor(ebook.coverImage).width(900).auto('format').url()}
+                            alt={ebook.coverImage.alt || ebook.title}
+                            fill
+                            sizes="(max-width: 640px) 100vw, 33vw"
+                            quality={70}
+                            className="object-cover group-hover:scale-105 transition-transform duration-700"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent" />
+                        </div>
+                      )}
+                      <div className="p-6 flex flex-col flex-1">
+                        <h3 className="font-display text-xl font-semibold text-cream group-hover:text-gold transition-colors mb-2 leading-snug">
+                          {ebook.title}
+                        </h3>
+                        {ebook.subtitle && (
+                          <p className="font-display italic text-gold/70 text-sm mb-3">
+                            {ebook.subtitle}
+                          </p>
+                        )}
+                        <p className="font-body text-sm text-cream/50 leading-relaxed line-clamp-3 mb-5 flex-1">
+                          {ebook.description}
+                        </p>
+                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-gold/10">
+                          <span className="font-display text-lg font-semibold text-gold">
+                            {ebook.forSale === false
+                              ? 'Coming soon'
+                              : `KES ${ebook.priceKes?.toLocaleString?.() ?? ebook.priceKes}`}
+                          </span>
+                          <span className="inline-flex items-center gap-2 text-gold text-xs font-body group-hover:gap-3 transition-all">
+                            Read the opening <ArrowRight size={12} />
+                          </span>
+                        </div>
+                      </div>
+                    </article>
+                  </Link>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Intellectual Work */}
-      <section className="section-pad bg-navy/95">
+      <section className="section-pad bg-navy">
         <div className="container-site">
           <SectionHeader
             eyebrow="Intellectual Work"

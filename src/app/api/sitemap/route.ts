@@ -7,7 +7,8 @@ const STATIC_PAGES = [
   { url: '/',              priority: '1.0', changefreq: 'weekly'  },
   { url: '/about',         priority: '0.9', changefreq: 'monthly' },
   { url: '/conversations', priority: '0.9', changefreq: 'daily'   },
-  { url: '/work',          priority: '0.8', changefreq: 'monthly' },
+  { url: '/portfolio',     priority: '0.8', changefreq: 'weekly'  },
+  { url: '/gallery',       priority: '0.6', changefreq: 'monthly' },
   { url: '/micdup',        priority: '0.8', changefreq: 'weekly'  },
   { url: '/contact',       priority: '0.7', changefreq: 'monthly' },
 ]
@@ -24,7 +25,17 @@ export async function GET() {
     lastmod:    p.publishedAt,
   }))
 
-  const allPages = [...STATIC_PAGES, ...postEntries]
+  const ebooks = await sanityFetch<Array<{ slug: { current: string } }>>(
+    `*[_type == "ebook" && defined(slug.current)] { slug }`
+  ).catch(() => [])
+
+  const ebookEntries = (ebooks || []).map(e => ({
+    url:        `/portfolio/${e.slug.current}`,
+    priority:   '0.8',
+    changefreq: 'monthly',
+  }))
+
+  const allPages = [...STATIC_PAGES, ...postEntries, ...ebookEntries]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
