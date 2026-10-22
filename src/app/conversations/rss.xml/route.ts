@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { sanityFetch } from '@/lib/sanity'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://siranthony.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://siranthony.online'
 
 export const revalidate = 3600
 

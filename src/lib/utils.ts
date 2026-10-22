@@ -36,3 +36,24 @@ export const CATEGORY_COLORS: Record<string, string> = {
   family:     'bg-rose-900/10 text-rose-400 border-rose-400/30',
   political:  'bg-sky-900/10 text-sky-400 border-sky-400/30',
 }
+
+// HIDDEN: Mic'd Up — Mic'd Up Initiative is hidden from the public site for now.
+// Code mentions are commented out (search for "HIDDEN: Mic'd Up"). Content that lives in
+// Sanity (impact stats, FAQs) is filtered with this switch instead, so the CMS data stays
+// intact. Set HIDE_MICDUP to false to show it all again.
+export const HIDE_MICDUP = true
+
+const MICDUP_PATTERN = /mic\s*['’]?\s*d\s*up|micdup/i
+
+/** True when the text mentions Mic'd Up Initiative and Mic'd Up is currently hidden. */
+export function isHiddenMicdup(...texts: (string | null | undefined)[]) {
+  return HIDE_MICDUP && texts.some(t => typeof t === 'string' && MICDUP_PATTERN.test(t))
+}
+
+/** Removes Mic'd Up impact stats on the server, so the data never reaches the browser while hidden. */
+export function withoutHiddenMicdupStats<T extends { impactMovements?: { label: string; value: number }[] }>(
+  data: T | null | undefined,
+): T | null | undefined {
+  if (!data || !HIDE_MICDUP) return data
+  return { ...data, impactMovements: (data.impactMovements ?? []).filter(s => !isHiddenMicdup(s.label)) }
+}

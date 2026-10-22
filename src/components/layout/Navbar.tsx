@@ -5,13 +5,14 @@ import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+// The logo already links home, so "Home" is not repeated here.
 const NAV_LINKS = [
-  { href: '/',              label: 'Home' },
   { href: '/about',         label: 'About' },
-  { href: '/portfolio',     label: 'Body of Work' },
+  { href: '/speaking',      label: 'Speaking' },
   { href: '/conversations', label: 'Conversations' },
+  { href: '/portfolio',     label: 'Body of Work' },
   { href: '/gallery',       label: 'Gallery' },
-  { href: '/micdup',        label: "Mic'd Up" },
+  // HIDDEN: Mic'd Up — { href: '/micdup',        label: "Mic'd Up" },
 ]
 
 export function Navbar() {
@@ -43,7 +44,7 @@ export function Navbar() {
             SIR ANTHONY
           </span>
           <span className="eyebrow text-[0.6rem] mt-0.5 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-            Voice of Transformation
+            Conversationalist &amp; Cultural Thinker
           </span>
         </Link>
 

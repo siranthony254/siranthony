@@ -9,10 +9,14 @@ const INQUIRY_TYPES = [
   'Cultural Training (Organization)',
   'Cultural Training (School/Church)',
   'Cultural Advisory / Consulting',
-  "Mic'd Up Initiative Partnership",
+  // HIDDEN: Mic'd Up — "Mic'd Up Initiative Partnership",
   'Book / Writing',
+  'Website or digital project',
   'General Inquiry',
 ]
+
+// Website and digital work is handled by REALWINNERS DIGITAL, not by this site.
+const STUDIO_INQUIRY = 'Website or digital project'
 
 export function ContactForm() {
   const [state, setState] = useState<FormState>('idle')
@@ -40,6 +44,8 @@ export function ContactForm() {
       setState('error')
     }
   }
+
+  const isStudioInquiry = form.inquiryType === STUDIO_INQUIRY
 
   if (state === 'success') {
     return (
@@ -123,6 +129,21 @@ export function ContactForm() {
         </select>
       </div>
 
+      {isStudioInquiry && (
+        <div className="rounded-lg border border-gold/25 bg-gold/5 px-4 py-4 font-body text-sm text-cream/75 leading-relaxed">
+          Websites and digital strategy are handled by my studio, REALWINNERS DIGITAL. They will
+          give you a proper quote and timeline.{' '}
+          <a
+            href="https://realwinners.co.ke/contact"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold hover:text-gold-light underline underline-offset-4"
+          >
+            Start your project at realwinners.co.ke →
+          </a>
+        </div>
+      )}
+
       <div>
         <label htmlFor="message" className={labelClass}>Your Message *</label>
         <textarea
@@ -141,7 +162,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        disabled={state === 'submitting'}
+        disabled={state === 'submitting' || isStudioInquiry}
         className="btn-gold w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {state === 'submitting' ? (

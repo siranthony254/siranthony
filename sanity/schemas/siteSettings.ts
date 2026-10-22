@@ -9,7 +9,7 @@ export const siteSettingsSchema = defineType({
       name: 'siteTitle',
       title: 'Site Title',
       type: 'string',
-      initialValue: 'Sir Anthony — Voice of Transformation',
+      initialValue: 'Sir Anthony — Conversationalist & Cultural Thinker',
       validation: r => r.required(),
     }),
     defineField({
@@ -31,17 +31,10 @@ export const siteSettingsSchema = defineType({
     }),
     defineField({
       name: 'contactPhone',
-      title: 'Primary Contact Phone',
+      title: 'Contact Phone',
       type: 'string',
-      description: 'Conversations & Speaking',
+      description: 'Speaking, training & bookings. The only number shown on the site.',
       initialValue: '+254 741 518 589',
-    }),
-    defineField({
-      name: 'contactPhoneAlt',
-      title: 'Secondary Contact Phone',
-      type: 'string',
-      description: 'Bookings & Partnerships',
-      initialValue: '+254 727 974 516',
     }),
     defineField({
       name: 'socialLinks',
@@ -61,16 +54,6 @@ export const siteSettingsSchema = defineType({
       title: 'Default OG Image',
       type: 'image',
       description: 'Default social sharing image (1200×630px)',
-    }),
-    defineField({
-      name: 'workHeroImage',
-      title: 'Work Page Hero Image',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        defineField({ name: 'alt', type: 'string', title: 'Alt text' })
-      ],
-      description: 'Background image for Work With Me page hero section',
     }),
     defineField({
       name: 'homepageHeroImage',

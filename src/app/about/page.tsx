@@ -5,12 +5,14 @@ import { ArrowRight } from 'lucide-react'
 import { AnimatedSection, SectionHeader, RippleCircles, GoldLine } from '@/components/ui'
 import { sanityFetch, urlFor } from '@/lib/sanity'
 import { AUTHOR_QUERY } from '@/lib/queries'
+import { Ventures } from '@/components/sections/Ventures'
 import type { Author } from '@/types'
 
 export const metadata: Metadata = {
   title: 'About Sir Anthony',
   description:
-    'I am a Kenyan conversationalist, cultural thinker, and writer, and the founder of Mic\'d Up Initiative. My work sits where culture, identity, and leadership meet — in the ideas quietly shaping how we live.',
+    // HIDDEN: Mic'd Up — original: 'Kenyan conversationalist, cultural thinker and writer. Founder of Mic\'d Up Initiative and REALWINNERS DIGITAL. My work sits where culture, identity and leadership meet.',
+    'Kenyan conversationalist, cultural thinker and writer. Founder of REALWINNERS DIGITAL. My work sits where culture, identity and leadership meet.',
 }
 
 const VALUES = [
@@ -39,10 +41,12 @@ const VALUES = [
 const MILESTONES = [
   { year: '2018', event: 'Started putting motivation and personal-development content online' },
   { year: '2020', event: 'Stopped giving advice and started asking why campus had come to mean what it meant' },
-  { year: '2022', event: "Founded Mic'd Up Initiative — finding and shaping student voices on campuses" },
+  // HIDDEN: Mic'd Up — uncomment to show this milestone again.
+  // { year: '2022', event: "Founded Mic'd Up Initiative — finding and shaping student voices on campuses" },
   { year: '2023', event: 'First organisations asked me in to look at their own culture' }, // TODO: name one
   { year: '2024', event: 'Settled on the name, and on the question I keep asking underneath it' },
   { year: '2025', event: 'Began the book — Who Made You Normal? The Cultural Conversation' },
+  { year: '2026', event: 'Founded REALWINNERS DIGITAL — a studio that makes sure a brand\'s first conversation, its website, is the right one' },
 ]
 
 export default async function AboutPage() {
@@ -64,9 +68,9 @@ export default async function AboutPage() {
                 className="font-display font-semibold text-cream leading-tight mb-6"
                 style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)' }}
               >
-                conversations that disturb the comfortable
+                The conversations that shape us
                 <br />
-                <em className="text-gold">and comfort the disturbed.</em>
+                <em className="text-gold">rarely announce themselves.</em>
               </h1>
               <p className="font-body text-cream/55 text-xl leading-relaxed max-w-lg">
                 Conversations that have range and courage — that start with observation, not instruction. 
@@ -166,17 +170,20 @@ export default async function AboutPage() {
               <h2 className="font-display text-3xl md:text-4xl font-semibold text-cream">
                 Anthony Munene
               </h2>
-              <p className="eyebrow">Sir Anthony · Conversationalist & Cultural Architect</p>
+              <p className="eyebrow">Known as Sir Anthony · Conversationalist &amp; Cultural Thinker</p>
               <div className="flex gap-2 max-w-2xl">
                 <div className="w-1 h-1 rounded-full bg-gold mt-3 flex-shrink-0" />
                 <p className="font-body text-cream text-lg md:text-xl leading-relaxed">
                   <em>I lead conversations that <strong>disturb the comfortable</strong> — and <strong>comfort the disturbed.</strong></em>
+                  <span className="block font-body not-italic text-xs text-cream/40 mt-2">
+                    To borrow a line often credited to Cesar A. Cruz.
+                  </span>
                 </p>
               </div>
             </div>
 
             <div className="flex flex-wrap gap-3 mb-12">
-              {['Cultural Thinker', 'Conversationalist', 'Cultural Trainer', 'Writer', 'Nairobi, Kenya'].map((tag) => (
+              {['Cultural Thinker', 'Conversationalist', 'Speaker', 'Writer', 'Nairobi, Kenya'].map((tag) => (
                 <span key={tag} className="px-4 py-2 rounded-full border border-gold/30 text-gold text-sm font-body">
                   {tag}
                 </span>
@@ -211,10 +218,17 @@ export default async function AboutPage() {
                 Africa — helping them see the culture they have built, develop the thinking to shape it deliberately,
                 and find the language to carry it with integrity.
               </p>
+              {/* HIDDEN: Mic'd Up — uncomment this paragraph, and change "I also founded" below back to "And I founded".
               <p className="font-body text-cream/70 text-lg leading-relaxed max-w-3xl">
                 I am also the founder of <strong className="text-cream">Mic'd Up Initiative</strong> — a campus-centred movement committed to
                 discovering voices, shaping leaders, and building responsible cultural influence among the youngest
                 and most formative generation on the continent.
+              </p>
+              */}
+              <p className="font-body text-cream/70 text-lg leading-relaxed max-w-3xl">
+                I also founded <strong className="text-cream">REALWINNERS DIGITAL</strong>, a studio built on the same
+                belief: a brand&apos;s website is the first conversation its customers have with it. The studio
+                handles websites and digital strategy, so this site can stay focused on ideas, speaking and training.
               </p>
             </div>
           </AnimatedSection>
@@ -266,6 +280,8 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      <Ventures compact />
+
       {/* CTA */}
       <section className="section-pad bg-navy border-t border-gold/10">
         <div className="container-site text-center">
@@ -279,8 +295,8 @@ export default async function AboutPage() {
               or to bring this conversation to your context — the door is open.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-gold">Get in Touch <ArrowRight size={14} /></Link>
-              <Link href="/conversations" className="btn-ghost">Read the Conversations</Link>
+              <Link href="/speaking" className="btn-gold">Speaking &amp; training <ArrowRight size={14} /></Link>
+              <Link href="/contact" className="btn-ghost">Get in touch</Link>
             </div>
           </AnimatedSection>
         </div>

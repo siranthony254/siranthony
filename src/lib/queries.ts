@@ -111,15 +111,9 @@ export const GALLERY_QUERY = `
 `
 
 // ─── Speaking / Services ─────────────────────────────────────────
-export const SERVICES_QUERY = `
-  *[_type == "service"] | order(order asc) {
-    _id, title, description, icon, features, cta
-  }
-`
-
 export const SPEAKING_TOPICS_QUERY = `
   *[_type == "speakingTopic"] | order(order asc) {
-    _id, title, description, duration, audience
+    _id, title, description, keyPoints, duration, audience, format
   }
 `
 
@@ -145,8 +139,7 @@ export const SITE_SETTINGS_QUERY = `
   *[_type == "siteSettings"][0] {
     siteTitle, tagline, description,
     socialLinks { twitter, linkedin, tiktok, youtube, instagram, facebook },
-    contactEmail, contactPhone, contactPhoneAlt,
-    workHeroImage { asset->{ _id, url }, alt },
+    contactEmail, contactPhone,
     homepageHeroImage { asset->{ _id, url }, alt }
   }
 `

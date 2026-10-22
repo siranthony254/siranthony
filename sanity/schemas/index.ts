@@ -1,6 +1,5 @@
 import { postSchema }          from './post'
 import { authorSchema }        from './author'
-import { serviceSchema }       from './service'
 import { speakingTopicSchema } from './speakingTopic'
 import { testimonialSchema }   from './testimonial'
 import { micdupEventSchema }   from './micdupEvent'
@@ -23,8 +22,7 @@ export const schemaTypes = [
   authorSchema,
   gallerySchema,
   faqSchema,
-  // Services
-  serviceSchema,
+  // Speaking & training
   speakingTopicSchema,
   // Social proof
   testimonialSchema,

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, ExternalLink, Download, Mail } from 'lucide-react'
+import { ArrowRight, ExternalLink, Download } from 'lucide-react'
 import { AnimatedSection, SectionHeader, GoldLine, BlogCount } from '@/components/ui'
 import { ImpactNumbersSection } from '@/components/sections/ImpactNumbers'
 import { sanityFetch, urlFor } from '@/lib/sanity'
+import { withoutHiddenMicdupStats } from '@/lib/utils'
 import {
   EBOOKS_QUERY,
   CASE_STUDIES_QUERY,
@@ -45,7 +46,8 @@ export default async function PortfolioPage() {
   const intellectualWork = data?.intellectualWork || []
   const siteSettings    = data?.siteSettings
   const blogCount       = data?.blogCount || 0
-  const impactNumbers   = data?.impactNumbers
+  // HIDDEN: Mic'd Up — withoutHiddenMicdupStats drops the Mic'd Up stat while it is hidden.
+  const impactNumbers   = withoutHiddenMicdupStats(data?.impactNumbers)
 
   return (
     <>
@@ -63,9 +65,9 @@ export default async function PortfolioPage() {
                 className="font-display font-semibold text-cream leading-tight mb-6"
                 style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)' }}
               >
-                The talk in
+                The talk,
                 <br />
-                <em className="text-gold">Action.</em>
+                <em className="text-gold">in action.</em>
               </h1>
               <p className="font-body text-cream/55 text-xl leading-relaxed max-w-2xl">
                 Essays, scripts, poetry, and the conversations they came from. Each piece is a different
@@ -445,29 +447,6 @@ export default async function PortfolioPage() {
         </div>
       </section>
 
-      {/* Testimonial/Review CTA */}
-      <section className="section-pad bg-navy/95 border-t border-gold/20">
-        <div className="container-site text-center">
-          <AnimatedSection>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold text-cream mb-6">
-              Share Your Experience
-            </h2>
-            <p className="font-body text-cream/55 text-lg max-w-2xl mx-auto mb-10">
-              Have you worked with me, attended a session, or been impacted by the content? 
-              Your testimonial helps others understand the value of this work.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={`mailto:${siteSettings?.contactEmail || 'officialsiranthony@gmail.com'}?subject=Testimonial%20Request`} className="btn-gold flex items-center gap-2">
-                <Mail size={16} />
-                Share Testimonial
-              </Link>
-              <Link href="/contact" className="btn-ghost">
-                Other Inquiry
-              </Link>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
     </>
   )
 }

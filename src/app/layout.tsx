@@ -21,16 +21,16 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://siranthony.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://siranthony.online'),
   title: {
     default: 'Sir Anthony — Conversationalist & Cultural Thinker',
     template: '%s | Sir Anthony',
   },
   description:
-    'I work with people, organisations, and campuses on seeing the culture they have already built — and on building the next part on purpose. Conversationalist and cultural thinker, Nairobi.',
+    'Conversationalist and cultural thinker in Nairobi. I help people, organisations and campuses see the culture they have built, and build the next part on purpose.',
   keywords: [
     'Sir Anthony', 'cultural thinker', 'conversationalist', 'Africa leadership',
-    'Who Made You Normal', "Mic'd Up Initiative", 'cultural training', 'Kenya',
+    'Who Made You Normal', /* HIDDEN: Mic'd Up — "Mic'd Up Initiative", */ 'cultural training', 'Kenya',
     'organizational culture', 'thought leadership', 'cultural intelligence',
     'responsible influence', 'campus culture', 'public speaking Africa',
   ],
@@ -97,20 +97,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   "contactPoint": [
                     {
                       "@type": "ContactPoint",
-                      "telephone": "+254727974516",
-                      "contactType": "Bookings and Partnerships"
-                    },
-                    {
-                      "@type": "ContactPoint",
                       "telephone": "+254741518589",
-                      "contactType": "Speaking and Cultural Consulting"
+                      "contactType": "Speaking, training and bookings"
                     }
                   ],
-                  "worksFor": {
-                    "@type": "Organization",
-                    "name": "Mic'd Up Initiative",
-                    "url": "https://micdupinitiative.site"
-                  }
+                  "worksFor": [
+                    // HIDDEN: Mic'd Up — uncomment to list it in search-engine data again.
+                    // {
+                    //   "@type": "Organization",
+                    //   "name": "Mic'd Up Initiative",
+                    //   "url": "https://micdupinitiative.site",
+                    //   "description": "A campus movement founded by Sir Anthony, shaping young voices and responsible cultural influence across Africa."
+                    // },
+                    {
+                      "@type": "Organization",
+                      "name": "REALWINNERS DIGITAL",
+                      "url": "https://realwinners.co.ke",
+                      "description": "A Nairobi digital studio founded by Sir Anthony, building websites and digital strategy."
+                    }
+                  ]
                 },
                 {
                   "@type": "WebSite",
@@ -160,14 +165,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         "text": "A cultural intelligence consultation involves moving past surface-level values statements on a wall to build a genuinely lived organization culture. The process includes deep team conversations, interactive workshops, and leadership advisory sessions. This framework helps teams examine their daily operational choices, align their communication strategies, and equip their members to actively shape a positive workplace culture."
                       }
                     },
-                    {
-                      "@type": "Question",
-                      "name": "How can institutions and campuses partner with the Mic’d Up Initiative?",
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Institutions, campuses, and organizations can partner with the Mic'd Up Initiative to mentor the next generation of African leaders. Partnership avenues include hosting dialogue summits, campus debates, values-based leadership training, and media production collaborations. The initiative focuses on discovering young voices and building responsible cultural influence across the continent."
-                      }
-                    }
+                    // HIDDEN: Mic'd Up — uncomment to restore this FAQ entry.
+                    // {
+                    //   "@type": "Question",
+                    //   "name": "How can institutions and campuses partner with the Mic’d Up Initiative?",
+                    //   "acceptedAnswer": {
+                    //     "@type": "Answer",
+                    //     "text": "Institutions, campuses, and organizations can partner with the Mic'd Up Initiative to mentor the next generation of African leaders. Partnership avenues include hosting dialogue summits, campus debates, values-based leadership training, and media production collaborations. The initiative focuses on discovering young voices and building responsible cultural influence across the continent."
+                    //   }
+                    // }
                   ]
                 }
               ]

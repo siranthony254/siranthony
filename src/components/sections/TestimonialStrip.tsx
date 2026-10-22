@@ -1,1 +1,1 @@
-export { TestimonialStrip, MicdupBanner, HomeCTA } from './HomeSections'
+export { TestimonialStrip, HomeCTA } from './HomeSections'

@@ -2,12 +2,15 @@ import Link from 'next/link'
 import { ArrowRight, Quote } from 'lucide-react'
 import { AnimatedSection, SectionHeader } from '@/components/ui'
 import type { Testimonial } from '@/types'
+import { isHiddenMicdup } from '@/lib/utils'
 
 // ── TestimonialStrip ─────────────────────────────────────────────
 interface TestimonialStripProps { testimonials: Testimonial[] }
 
-export function TestimonialStrip({ testimonials }: TestimonialStripProps) {
-  if (!testimonials || testimonials.length === 0) {
+export function TestimonialStrip({ testimonials: all }: TestimonialStripProps) {
+  // HIDDEN: Mic'd Up — testimonials that mention Mic'd Up are filtered out while it is hidden.
+  const testimonials = (all ?? []).filter(t => !isHiddenMicdup(t.quote, t.role, t.organization))
+  if (testimonials.length === 0) {
     return null
   }
 
@@ -37,70 +40,6 @@ export function TestimonialStrip({ testimonials }: TestimonialStripProps) {
               </div>
             </AnimatedSection>
           ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ── MicdupBanner ─────────────────────────────────────────────────
-export function MicdupBanner() {
-  return (
-    <section className="section-pad relative overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #0A2240 0%, #0D1B2A 100%)' }}>
-
-      {/* Side accent */}
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-gold to-transparent" />
-
-      <div className="container-site">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <AnimatedSection>
-            <span className="eyebrow mb-4 block">Mic&apos;d Up Initiative</span>
-            <div className="w-8 h-px bg-gradient-to-r from-gold to-transparent mb-6" />
-            <h2 className="font-display text-4xl md:text-5xl font-semibold text-cream mb-6 leading-tight">
-              Africa has the youngest
-              population on earth.
-              <em className="text-gold block mt-1">What happens on its campuses matters.</em>
-            </h2>
-            <p className="font-body text-cream/55 text-lg leading-relaxed mb-8">
-              More than 400 million people between 15 and 35 — being formed right now,
-              on campuses across the continent. Mic&apos;d Up Initiative exists to ensure
-              that formation happens with intention.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="https://micdupinitiative.site"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold"
-              >
-                Visit Mic&apos;d Up <ArrowRight size={14} />
-              </a>
-              <Link href="/micdup" className="btn-ghost">
-                Learn More
-              </Link>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection delay={200}>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { num: '400M+', label: 'African youth 15–35' },
-                { num: '54',    label: 'Countries on the continent' },
-                { num: '3',     label: 'Core pillars of formation' },
-                { num: '∞',     label: 'Conversations worth having' },
-              ].map(stat => (
-                <div key={stat.label} className="card-navy p-6 text-center">
-                  <p className="font-display text-3xl md:text-4xl font-semibold text-gold mb-2">
-                    {stat.num}
-                  </p>
-                  <p className="font-body text-xs text-cream/45 uppercase tracking-wider">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
         </div>
       </div>
     </section>

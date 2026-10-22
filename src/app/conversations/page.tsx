@@ -4,14 +4,14 @@ import { ChevronRight } from 'lucide-react'
 import { AnimatedSection, SectionHeader } from '@/components/ui'
 import { sanityFetch, urlFor } from '@/lib/sanity'
 import { ALL_POSTS_QUERY, FAQ_QUERY, VIDEO_CONVERSATIONS_QUERY } from '@/lib/queries'
-import { formatDate, CATEGORY_LABELS } from '@/lib/utils'
+import { formatDate, CATEGORY_LABELS, isHiddenMicdup } from '@/lib/utils'
 import { FaqAccordion } from '@/components/sections/FaqAccordion'
 import { VideoConversations } from '@/components/sections/VideoConversations'
 import { PostsExplorer, type PostCardData } from '@/components/sections/PostsExplorer'
 import { BlogSidebar, type SidebarSection } from '@/components/sections/BlogSidebar'
 import type { Post, Faq, VideoConversation } from '@/types'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://siranthony.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://siranthony.online'
 
 export const metadata: Metadata = {
   title: 'Conversations',
@@ -72,7 +72,8 @@ export default async function ConversationsPage({
   }>(CONVERSATIONS_COMBINED_QUERY)
 
   const posts = data?.posts || []
-  const faqs = data?.faqs || []
+  // HIDDEN: Mic'd Up — FAQs about Mic'd Up Initiative are filtered out while it is hidden.
+  const faqs = (data?.faqs || []).filter(f => !isHiddenMicdup(f.question, f.answer))
   const videos = data?.videos || []
 
   const requested = searchParams.category

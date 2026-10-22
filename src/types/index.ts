@@ -99,25 +99,16 @@ export interface Gallery {
   }
 }
 
-// ─── Service ─────────────────────────────────────────────────────
-export interface Service {
-  _id: string
-  title: string
-  description: string
-  icon: string
-  features: string[]
-  cta: string
-  order: number
-}
-
 // ─── Speaking Topic ──────────────────────────────────────────────
 export interface SpeakingTopic {
   _id: string
   title: string
   description: string
+  keyPoints?: string[]
   duration: string
   audience: string
-  order: number
+  format?: string
+  order?: number
 }
 
 // ─── Testimonial ─────────────────────────────────────────────────
@@ -160,8 +151,6 @@ export interface SiteSettings {
   }
   contactEmail: string
   contactPhone: string
-  contactPhoneAlt?: string
-  workHeroImage?: SanityImage
   homepageHeroImage?: SanityImage
 }
 

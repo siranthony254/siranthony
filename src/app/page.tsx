@@ -5,9 +5,10 @@ import { OriginStory }          from '@/components/sections/OriginStory'
 import { SignatureQuestion }    from '@/components/sections/SignatureQuestion'
 import { FeaturedPosts }        from '@/components/sections/FeaturedPosts'
 import { TestimonialStrip }     from '@/components/sections/HomeSections'
-import { MicdupBanner }         from '@/components/sections/MicdupBanner'
+import { Ventures }             from '@/components/sections/Ventures'
 import { HomeCTA }              from '@/components/sections/HomeCTA'
 import { sanityFetch }          from '@/lib/sanity'
+import { withoutHiddenMicdupStats } from '@/lib/utils'
 import {
   FEATURED_POSTS_QUERY,
   TESTIMONIALS_QUERY,
@@ -19,7 +20,7 @@ import type { Post, Testimonial, SiteSettings, ImpactNumbers } from '@/types'
 export const metadata: Metadata = {
   title: 'Sir Anthony — Conversationalist & Cultural Thinker',
   description:
-    "Who made you normal? Nobody announces a culture. It gets built quietly, out of small repeated choices, until it is simply what everyone knows to be true. I am Sir Anthony — a conversationalist and cultural thinker in Nairobi, and founder of Mic'd Up Initiative. I work with people, organisations, and campuses on seeing the culture they are already building, and building it on purpose instead.",
+    "Who made you normal? Sir Anthony is a conversationalist and cultural thinker in Nairobi, helping people, organisations and campuses build culture on purpose.",
 }
 
 export const revalidate = 60
@@ -42,7 +43,8 @@ export default async function HomePage() {
   const posts          = data?.featuredPosts || []
   const testimonials   = data?.testimonials || []
   const siteSettings   = data?.siteSettings
-  const impactNumbers  = data?.impactNumbers
+  // HIDDEN: Mic'd Up — withoutHiddenMicdupStats drops the Mic'd Up stat while it is hidden.
+  const impactNumbers  = withoutHiddenMicdupStats(data?.impactNumbers)
 
   return (
     <>
@@ -52,7 +54,7 @@ export default async function HomePage() {
       <FeaturedPosts posts={posts} />
       <ImpactNumbersSection data={impactNumbers} />
       <TestimonialStrip testimonials={testimonials} />
-      <MicdupBanner />
+      <Ventures />
       <HomeCTA />
     </>
   )

@@ -77,14 +77,14 @@ export default defineConfig({
 
             S.divider(),
 
-            // ── Work With Me ───────────────────────────────────────
+            // ── Speaking & Training ────────────────────────────────
+            // Website and digital services now live at REALWINNERS DIGITAL (realwinners.co.ke).
             S.listItem()
-              .title('Work With Me')
+              .title('Speaking & Training')
               .child(
                 S.list()
-                  .title('Work With Me')
+                  .title('Speaking & Training')
                   .items([
-                    S.documentTypeListItem('service').title('Services'),
                     S.documentTypeListItem('speakingTopic').title('Speaking Topics'),
                     S.documentTypeListItem('testimonial').title('Testimonials'),
                   ])

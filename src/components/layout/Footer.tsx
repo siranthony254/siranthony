@@ -6,11 +6,12 @@ import type { SiteSettings } from '@/types'
 
 const NAV = [
   { href: '/about',         label: 'About' },
+  { href: '/speaking',      label: 'Speaking & Training' },
   { href: '/conversations', label: 'Conversations' },
-  { href: '/gallery',       label: 'Gallery' },
   { href: '/portfolio',     label: 'Body of Work' },
-  { href: '/micdup',        label: "Mic'd Up Initiative" },
-  { href: '/contact',       label: 'Contact' },
+  { href: '/gallery',       label: 'Gallery' },
+  // HIDDEN: Mic'd Up — { href: '/micdup',        label: "Mic'd Up Initiative" },
+  { href: '/contact',       label: 'Book Sir Anthony' },
 ]
 
 // Icons are only rendered for links that actually exist in Site Settings.
@@ -32,8 +33,9 @@ export async function Footer() {
     href: settings?.socialLinks?.[s.key],
   })).filter((s): s is typeof s & { href: string } => Boolean(s.href))
 
+  // One number for the personal brand. Website and digital enquiries belong to
+  // REALWINNERS DIGITAL, which has its own line.
   const phone = settings?.contactPhone || '+254 741 518 589'
-  const phoneAlt = settings?.contactPhoneAlt
 
   return (
     <footer className="border-t border-gold/10 bg-navy">
@@ -44,7 +46,7 @@ export async function Footer() {
           <div className="space-y-4">
             <Link href="/" className="block">
               <span className="font-display text-2xl font-semibold text-cream">SIR ANTHONY</span>
-              <span className="block eyebrow mt-1">Voice of Transformation</span>
+              <span className="block eyebrow mt-1">Conversationalist &amp; Cultural Thinker</span>
             </Link>
             <p className="font-display italic text-base text-cream/50 leading-relaxed max-w-xs">
               &ldquo;Who made you normal? That&apos;s the question. That&apos;s the work.&rdquo;
@@ -69,24 +71,13 @@ export async function Footer() {
           <div className="space-y-4">
             <p className="eyebrow mb-4">Connect</p>
             <div className="space-y-2 text-sm text-cream/50 font-body">
-              <p>Conversations &amp; Speaking</p>
+              <p>Speaking, training &amp; bookings</p>
               <a
                 href={`tel:${phone.replace(/\s/g, '')}`}
                 className="block text-gold hover:text-gold-light transition-colors"
               >
                 {phone}
               </a>
-              {phoneAlt && (
-                <>
-                  <p className="mt-3">Bookings &amp; Partnerships</p>
-                  <a
-                    href={`tel:${phoneAlt.replace(/\s/g, '')}`}
-                    className="block text-gold hover:text-gold-light transition-colors"
-                  >
-                    {phoneAlt}
-                  </a>
-                </>
-              )}
               {settings?.contactEmail && (
                 <a
                   href={`mailto:${settings.contactEmail}`}
@@ -121,14 +112,27 @@ export async function Footer() {
           <p className="text-xs text-cream/30 font-body">
             © {new Date().getFullYear()} Sir Anthony. All rights reserved.
           </p>
-          <a
-            href="https://micdupinitiative.site"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-gold/60 hover:text-gold font-body transition-colors tracking-wider uppercase"
-          >
-            micdupinitiative.site →
-          </a>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-body tracking-wider uppercase">
+            <span className="text-cream/30">Founder of</span>
+            {/* HIDDEN: Mic'd Up — uncomment to show it in the footer again.
+            <a
+              href="https://micdupinitiative.site"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold/60 hover:text-gold transition-colors"
+            >
+              Mic&apos;d Up Initiative →
+            </a>
+            */}
+            <a
+              href="https://realwinners.co.ke"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold/60 hover:text-gold transition-colors"
+            >
+              REALWINNERS DIGITAL →
+            </a>
+          </div>
         </div>
       </div>
     </footer>

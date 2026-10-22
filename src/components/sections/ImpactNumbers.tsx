@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import type { ImpactNumbers } from '@/types'
+import { isHiddenMicdup } from '@/lib/utils'
 
 // ─── Animated Counter ────────────────────────────────────────────
 function AnimatedNumber({ target, duration = 1800 }: { target: number; duration?: number }) {
@@ -128,7 +129,8 @@ export function ImpactNumbersSection({ data }: { data?: ImpactNumbers | null }) 
   ].filter(s => s.value > 0)
 
   const movementStats: { label: string; value: number }[] = (data.impactMovements ?? []).filter(
-    s => s.value > 0,
+    // HIDDEN: Mic'd Up — the isHiddenMicdup check drops the Mic'd Up stat while it is hidden.
+    s => s.value > 0 && !isHiddenMicdup(s.label),
   )
 
   // If absolutely no data, render nothing

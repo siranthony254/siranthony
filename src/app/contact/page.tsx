@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { AnimatedSection } from '@/components/ui'
-import { Phone, Globe, MapPin } from 'lucide-react'
+import Link from 'next/link'
+import { Phone, Mail, MapPin, MonitorSmartphone } from 'lucide-react'
+// HIDDEN: Mic'd Up — add Globe back to the import above when restoring the Mic'd Up contact card.
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -8,24 +10,34 @@ export const metadata: Metadata = {
     'Get in touch with Sir Anthony for speaking engagements, cultural training, cultural advisory, or to bring the conversation to your context.',
 }
 
+const CONTACT_EMAIL = 'officialsiranthony@gmail.com'
+
 const CONTACT_ITEMS = [
   {
     icon: Phone,
-    label: 'Conversations & Speaking',
+    label: 'Speaking, training & bookings',
     value: '+254 741 518 589',
     href: 'tel:+254741518589',
   },
   {
-    icon: Phone,
-    label: 'Bookings & Partnerships',
-    value: '+254 727 974 516',
-    href: 'tel:+254727974516',
+    icon: Mail,
+    label: 'Email',
+    value: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
   },
+  // HIDDEN: Mic'd Up — uncomment to show this contact card again.
+  // {
+  //   icon: Globe,
+  //   label: "Mic'd Up Initiative (campus partnerships)",
+  //   value: 'micdupinitiative.site',
+  //   href: 'https://micdupinitiative.site',
+  //   external: true,
+  // },
   {
-    icon: Globe,
-    label: "Mic'd Up Initiative",
-    value: 'micdupinitiative.site',
-    href: 'https://micdupinitiative.site',
+    icon: MonitorSmartphone,
+    label: 'Websites & digital projects',
+    value: 'REALWINNERS DIGITAL →',
+    href: 'https://realwinners.co.ke/contact',
     external: true,
   },
   {
@@ -159,10 +171,46 @@ export default function ContactPage() {
               </div>
 
               <p className="font-body text-sm text-cream/40 leading-relaxed pt-2">
-                If neither fits, call or write. I read everything that comes in.
+                If neither fits, call or write. I read everything that comes in. Looking for a
+                website or digital strategy? That work is handled by my studio,{' '}
+                <a
+                  href="https://realwinners.co.ke"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gold/80 hover:text-gold transition-colors"
+                >
+                  REALWINNERS DIGITAL
+                </a>
+                .
               </p>
             </AnimatedSection>
           </div>
+        </div>
+      </section>
+
+      {/* Testimonials are asked for here, where people who have worked with me arrive. */}
+      <section className="section-pad bg-navy border-t border-gold/10">
+        <div className="container-site text-center">
+          <AnimatedSection>
+            <h2 className="font-display text-3xl md:text-4xl font-semibold text-cream mb-4">
+              Share your experience
+            </h2>
+            <p className="font-body text-cream/55 text-lg max-w-2xl mx-auto mb-8">
+              Attended a talk, a training or a conversation? A few lines about what changed for you
+              help others decide whether this work is for them.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={`mailto:${CONTACT_EMAIL}?subject=Testimonial`}
+                className="btn-gold"
+              >
+                <Mail size={16} /> Send a testimonial
+              </a>
+              <Link href="/speaking" className="btn-ghost">
+                Speaking &amp; training
+              </Link>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </>

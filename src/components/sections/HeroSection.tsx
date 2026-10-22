@@ -94,8 +94,10 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
               </p>
             </motion.div>
 
-            <motion.div {...fadeUp(0.55)} className="flex flex-col sm:flex-row gap-4 hover:gap-6 items-center">
-            
+            <motion.div {...fadeUp(0.55)} className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              <Link href="/speaking" className="btn-gold">
+                Speaking &amp; training
+              </Link>
               <Link href="/contact" className="btn-ghost">
                 Start a conversation
               </Link>
@@ -104,6 +106,7 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
             <motion.div {...fadeUp(0.7)}>
               <p className="font-body text-xs text-cream/35 uppercase tracking-widest">
                 Founder,{' '}
+                {/* HIDDEN: Mic'd Up — uncomment to show it in the founder line again.
                 <a
                   href="https://micdupinitiative.site"
                   target="_blank"
@@ -112,7 +115,16 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
                 >
                   Mic&apos;d Up Initiative
                 </a>
-                {' '}· Cultural Conversations · Campus Movements
+                {' '}&amp;{' '}
+                */}
+                <a
+                  href="https://realwinners.co.ke"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gold/60 hover:text-gold transition-colors"
+                >
+                  REALWINNERS DIGITAL
+                </a>
               </p>
             </motion.div>
           </div>

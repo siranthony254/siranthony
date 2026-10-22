@@ -55,7 +55,7 @@ NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
 SANITY_API_TOKEN=your_token
-NEXT_PUBLIC_SITE_URL=https://siranthony.com
+NEXT_PUBLIC_SITE_URL=https://siranthony.online
 STUDIO_USERNAME=admin
 STUDIO_PASSWORD=choose_a_strong_password
 ```
@@ -92,10 +92,12 @@ The Sanity Studio at `/studio` manages all content:
 - **Intellectual Work** — essays, scripts, poetry, and books
 - **Case Studies** — long-form accounts of cultural engagements
 
-### Work With Me
-- **Services** — the three service layers with icons, features, and CTAs
-- **Speaking Topics** — detailed topic descriptions for the Work page
-- **Testimonials** — mark as featured to show on the home page
+### Speaking & Training
+- **Speaking Topics** — talk topics shown on the /speaking page (title, description, key points, audience, duration, format)
+- **Testimonials** — shown on the home and /speaking pages
+
+Website and digital services are not part of this brand. They are handled by
+REALWINNERS DIGITAL (realwinners.co.ke); the old /work URL redirects there.
 
 ### Mic'd Up Initiative
 - **Events** — talks, panels, summits, workshops with photos and recaps
@@ -203,7 +205,7 @@ siranthony/
 │   │   ├── conversations/
 │   │   │   ├── page.tsx                # Post index
 │   │   │   └── [slug]/page.tsx         # Post detail
-│   │   ├── work/page.tsx
+│   │   ├── speaking/page.tsx           # Speaking & Training
 │   │   ├── micdup/page.tsx
 │   │   ├── contact/page.tsx
 │   │   ├── studio/[[...tool]]/page.tsx # Sanity Studio
@@ -218,7 +220,7 @@ siranthony/
 │   │   │   ├── HeroSection.tsx
 │   │   │   ├── SignatureQuestion.tsx
 │   │   │   ├── FeaturedPosts.tsx
-│   │   │   ├── ServicesPreview.tsx
+│   │   │   ├── Ventures.tsx            # Mic'd Up Initiative + REALWINNERS DIGITAL
 │   │   │   ├── HomeSections.tsx        # Testimonial, MicdupBanner, HomeCTA
 │   │   │   └── ContactForm.tsx
 │   │   └── ui/
@@ -254,7 +256,7 @@ siranthony/
 
 ## The Brand
 
-**Sir Anthony** — Conversationalist · Cultural Thinker · Writer · Voice of Transformation
+**Sir Anthony** — Conversationalist & Cultural Thinker
 
 The brand is a cultural one, end to end. Sir Anthony works in three layers: **Cultural
 Intelligence** (talks, panels, public conversations), **Cultural Training** (multi-session
@@ -264,4 +266,4 @@ or web-services offering in this brand.
 
 *Who made you normal? That's the question. That's the work.*
 
-Founder, [Mic'd Up Initiative](https://micdupinitiative.site)
+Founder, [Mic'd Up Initiative](https://micdupinitiative.site) and [REALWINNERS DIGITAL](https://realwinners.co.ke)
