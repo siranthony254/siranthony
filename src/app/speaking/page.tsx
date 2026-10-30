@@ -6,6 +6,8 @@ import { TestimonialStrip } from '@/components/sections/HomeSections'
 import { sanityFetch } from '@/lib/sanity'
 import { SPEAKING_TOPICS_QUERY, TESTIMONIALS_QUERY } from '@/lib/queries'
 import type { SpeakingTopic, Testimonial } from '@/types'
+import { notFound } from 'next/navigation'
+import { HIDE_SPEAKING } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Speaking & Training',
@@ -60,6 +62,9 @@ async function getData() {
 }
 
 export default async function SpeakingPage() {
+  // HIDDEN: Speaking — the page is kept intact but not served while hidden.
+  if (HIDE_SPEAKING) notFound()
+
   const { topics, testimonials } = await getData()
 
   return (

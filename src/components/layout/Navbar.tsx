@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 // The logo already links home, so "Home" is not repeated here.
 const NAV_LINKS = [
   { href: '/about',         label: 'About' },
-  { href: '/speaking',      label: 'Speaking' },
+  // HIDDEN: Speaking — { href: '/speaking',      label: 'Speaking' },
   { href: '/conversations', label: 'Conversations' },
   { href: '/portfolio',     label: 'Body of Work' },
   { href: '/gallery',       label: 'Gallery' },

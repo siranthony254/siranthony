@@ -43,6 +43,10 @@ export const CATEGORY_COLORS: Record<string, string> = {
 // intact. Set HIDE_MICDUP to false to show it all again.
 export const HIDE_MICDUP = true
 
+// HIDDEN: Speaking — the Speaking page is hidden for now: /speaking returns 404 and links to it are
+// commented out (search for "HIDDEN: Speaking"). Set HIDE_SPEAKING to false and uncomment them to restore.
+export const HIDE_SPEAKING = true
+
 const MICDUP_PATTERN = /mic\s*['’]?\s*d\s*up|micdup/i
 
 /** True when the text mentions Mic'd Up Initiative and Mic'd Up is currently hidden. */

@@ -36,14 +36,26 @@ const HEADING = {
 //   subtitle: 'Culture is built in conversations. I founded two organisations that build it on purpose: one on campuses, one online.',
 // }
 
-export function Ventures({ compact = false }: { compact?: boolean }) {
+export function Ventures({
+  compact = false,
+  eyebrow = "What I've built",
+  title = HEADING.title,
+  subtitle = HEADING.subtitle,
+  id,
+}: {
+  compact?: boolean
+  eyebrow?: string
+  title?: string
+  subtitle?: string
+  id?: string
+}) {
   return (
-    <section className="section-pad bg-navy/95 border-y border-gold/10">
+    <section id={id} className="section-pad bg-navy/95 border-y border-gold/10 scroll-mt-24">
       <div className="container-site">
         <SectionHeader
-          eyebrow="What I've built"
-          title={HEADING.title}
-          subtitle={HEADING.subtitle}
+          eyebrow={eyebrow}
+          title={title}
+          subtitle={subtitle}
           className={compact ? 'mb-10' : 'mb-14'}
         />
 

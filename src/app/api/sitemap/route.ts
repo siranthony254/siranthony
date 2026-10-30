@@ -6,7 +6,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://siranthony.online'
 const STATIC_PAGES = [
   { url: '/',              priority: '1.0', changefreq: 'weekly'  },
   { url: '/about',         priority: '0.9', changefreq: 'monthly' },
-  { url: '/speaking',      priority: '0.9', changefreq: 'monthly' },
+  // HIDDEN: Speaking — { url: '/speaking',      priority: '0.9', changefreq: 'monthly' },
   { url: '/conversations', priority: '0.9', changefreq: 'daily'   },
   { url: '/portfolio',     priority: '0.8', changefreq: 'weekly'  },
   { url: '/gallery',       priority: '0.6', changefreq: 'monthly' },

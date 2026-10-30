@@ -295,8 +295,9 @@ export default async function AboutPage() {
               or to bring this conversation to your context — the door is open.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/speaking" className="btn-gold">Speaking &amp; training <ArrowRight size={14} /></Link>
-              <Link href="/contact" className="btn-ghost">Get in touch</Link>
+              {/* HIDDEN: Speaking — <Link href="/speaking" className="btn-gold">Speaking &amp; training <ArrowRight size={14} /></Link> */}
+              <Link href="/contact" className="btn-gold">Get in touch <ArrowRight size={14} /></Link>
+              <Link href="/conversations" className="btn-ghost">Read the conversations</Link>
             </div>
           </AnimatedSection>
         </div>

@@ -107,7 +107,7 @@ export function SectionHeader({
           {title}
         </h2>
         {subtitle && (
-          <p className="font-body text-cream/60 text-lg max-w-2xl leading-relaxed">
+          <p className={cn("font-body text-cream/60 text-lg max-w-2xl leading-relaxed", centered && "mx-auto")}>
             {subtitle}
           </p>
         )}

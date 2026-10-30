@@ -6,7 +6,7 @@ import type { SiteSettings } from '@/types'
 
 const NAV = [
   { href: '/about',         label: 'About' },
-  { href: '/speaking',      label: 'Speaking & Training' },
+  // HIDDEN: Speaking — { href: '/speaking',      label: 'Speaking & Training' },
   { href: '/conversations', label: 'Conversations' },
   { href: '/portfolio',     label: 'Body of Work' },
   { href: '/gallery',       label: 'Gallery' },

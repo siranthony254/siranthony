@@ -95,11 +95,12 @@ export function HeroSection({ siteSettings }: { siteSettings?: SiteSettings | nu
             </motion.div>
 
             <motion.div {...fadeUp(0.55)} className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <Link href="/speaking" className="btn-gold">
-                Speaking &amp; training
-              </Link>
-              <Link href="/contact" className="btn-ghost">
+              {/* HIDDEN: Speaking — <Link href="/speaking" className="btn-gold">Speaking &amp; training</Link> */}
+              <Link href="/contact" className="btn-gold">
                 Start a conversation
+              </Link>
+              <Link href="/conversations" className="btn-ghost">
+                Read the conversations
               </Link>
             </motion.div>
 

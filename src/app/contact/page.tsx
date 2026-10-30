@@ -206,9 +206,7 @@ export default function ContactPage() {
               >
                 <Mail size={16} /> Send a testimonial
               </a>
-              <Link href="/speaking" className="btn-ghost">
-                Speaking &amp; training
-              </Link>
+              {/* HIDDEN: Speaking — <Link href="/speaking" className="btn-ghost">Speaking &amp; training</Link> */}
             </div>
           </AnimatedSection>
         </div>
