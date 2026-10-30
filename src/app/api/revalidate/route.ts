@@ -68,6 +68,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // A post change must also refresh the post pages themselves, not just the listing.
+    if (documentType === 'post' || documentType === 'videoConversation') {
+      try {
+        revalidatePath('/conversations/[slug]', 'page')
+      } catch (error) {
+        console.warn('Failed to revalidate post pages:', error)
+      }
+    }
+
     // Also revalidate by tag if using tag-based revalidation
     if (documentType) {
       try {
