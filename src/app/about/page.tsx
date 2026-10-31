@@ -34,21 +34,6 @@ const VALUES = [
   },
 ]
 
-// TODO (Anthony): these are true but still general. Each one marked below gets
-// much stronger with a single real detail — name the campus, the organisation,
-// the room, the person. "Cultural training engagements begin" is a category;
-// "Two days with the leadership team at <organisation>" is a memory.
-const MILESTONES = [
-  { year: '2018', event: 'Started putting motivation and personal-development content online' },
-  { year: '2020', event: 'Stopped giving advice and started asking why campus had come to mean what it meant' },
-  // HIDDEN: Mic'd Up — uncomment to show this milestone again.
-  // { year: '2022', event: "Founded Mic'd Up Initiative — finding and shaping student voices on campuses" },
-  { year: '2023', event: 'First organisations asked me in to look at their own culture' }, // TODO: name one
-  { year: '2024', event: 'Settled on the name, and on the question I keep asking underneath it' },
-  { year: '2025', event: 'Began the book — Who Made You Normal? The Cultural Conversation' },
-  { year: '2026', event: 'Founded REALWINNERS DIGITAL — a studio that makes sure a brand\'s first conversation, its website, is the right one' },
-]
-
 export default async function AboutPage() {
   const author = await sanityFetch<Author>(AUTHOR_QUERY)
 
@@ -244,26 +229,6 @@ export default async function AboutPage() {
                       {value.title}
                     </h3>
                     <p className="font-body text-cream/60 leading-relaxed">{value.body}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Timeline — typographic and quiet, not a card wall */}
-          <AnimatedSection delay={200} direction="in">
-            <div className="mb-4">
-              <p className="eyebrow mb-8">How it went</p>
-              <div className="max-w-3xl">
-                {MILESTONES.map(m => (
-                  <div
-                    key={m.year}
-                    className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-8 py-4 border-b border-gold/10 last:border-0"
-                  >
-                    <span className="font-display text-xl text-gold/70 tabular-nums shrink-0 w-16">
-                      {m.year}
-                    </span>
-                    <span className="font-body text-cream/65 leading-relaxed">{m.event}</span>
                   </div>
                 ))}
               </div>
